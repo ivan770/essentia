@@ -2,6 +2,8 @@
 
 let
   cfg = config.essentia.programs.vscode;
+
+  utils = pkgs.callPackage ../../../utils { };
 in
 with lib; {
   options.essentia.programs.vscode = {
@@ -17,16 +19,8 @@ with lib; {
         package = pkgs.vscode;
       }
       (mkIf cfg.installConfig {
-        # Since vscode.json contains comments, we have to filter them out before building up JSON value.
-        userSettings =
-          let
-            lines = strings.splitString "\n" (builtins.readFile ./vscode.json);
-          in
-          builtins.fromJSON (strings.concatStrings (filter
-            (line: !hasPrefix "//" (
-              strings.concatStrings (filter (line: line != " ") (strings.stringToCharacters line))
-            ))
-            lines));
+        userSettings = utils.fromJSONWithComments (builtins.readFile ./settings.json);
+        keybindings = utils.fromJSONWithComments (builtins.readFile ./keybindings.json);
       })
       (mkIf cfg.installExtensions {
         mutableExtensionsDir = false;

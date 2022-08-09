@@ -1,0 +1,261 @@
+{
+    // ==== GIT ====
+
+    // Remove git blame on current line
+    "gitlens.currentLine.enabled": false,
+
+    // Show git stuff when hovering over line
+    "gitlens.hovers.currentLine.over": "line",
+
+    // Remove code lens from git data
+    "gitlens.codeLens.enabled": false,
+
+    // Don't confirm git fetch via VS Code
+    "git.confirmSync": false,
+
+    // Auto-stage everything if stage is empty
+    "git.enableSmartCommit": true,
+
+    // Enable Git commit signing with PGP
+    "git.enableCommitSigning": true,
+
+    // Always use SSH to clone stuff from GitHub
+    "github.gitProtocol": "ssh",
+
+    // ==== OVERALL THEMING ====
+
+    // Make sidebar stay on right side of window
+    "workbench.sideBar.location": "right",
+
+    // Disable layout control button at the window top
+    "workbench.layoutControl.enabled": false,
+
+    // Make menu bar a burger menu inside side bar
+    "window.menuBarVisibility": "compact",
+
+    // <3 Blackboard
+    "workbench.colorTheme": "Blackboard",
+    "workbench.preferredDarkColorTheme": "Blackboard",
+
+    // Match the editor colors to the theme ones
+    "workbench.colorCustomizations": {
+        "[Blackboard]": {
+            // Tabs and tab container
+            "tab.inactiveBackground": "#000000",
+            "editorGroupHeader.tabsBackground": "#000000",
+
+            // Side bar, sidebar lists and activity bar
+            // Side bar = activity bar selected item
+            "sideBar.background": "#000000",
+            "sideBarSectionHeader.background": "#000000",
+            "activityBar.background": "#000000",
+
+            // Title bar
+            "titleBar.activeBackground": "#000000",
+
+            // Status bar
+            "statusBar.background": "#000000",
+            "statusBarItem.remoteBackground": "#000000",
+
+            // Buttons
+            "button.secondaryBackground": "#ffffff1f",
+
+            // Menus and lists
+
+            // Generic menu (like the one that pops up when you click on gear icon)
+            "menu.background": "#000000",
+
+             // Generic dropdown list
+            "dropdown.background": "#000000",
+
+            // Command Palette and menus like it
+            "quickInput.background": "#000000",
+
+            "list.hoverBackground": "#ffffff1f",
+            "list.inactiveSelectionBackground": "#ffffff2f",
+            "list.activeSelectionBackground": "#ffffff3f",
+
+            // Text editors
+            "editor.background": "#000000",
+
+             // Generic text input background color
+            "input.background": "#000000",
+
+            // Main text editor hover widgets color
+            "editorWidget.background": "#000000"
+        }
+    },
+
+    // Use VS Code styled title bar instead of a native one
+    "window.titleBarStyle": "custom",
+
+    // Show VS Code styled file dialog instead of a native one
+    "files.simpleDialog.enable": true,
+
+    // Show VS Code styled alert windows instead of native ones
+    "window.dialogStyle": "custom",
+
+    // Hide bottom bar in a suggestion menu (the one that hints about extended diagnostics)
+    "editor.suggest.showStatusBar": false,
+
+    // Make resize border smaller, so that it's easier to scroll without accidentally resizing panel
+    "workbench.sash.size": 1,
+
+    // ==== FILES / FILE EXPLORER ====
+
+    // Make file explorer tree a bit wider
+    "workbench.tree.indent": 18,
+
+    // Auto-save files
+    "files.autoSave": "afterDelay",
+
+    // Remove confirmations
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+
+    // Don't flatten directory structure
+    "explorer.compactFolders": false,
+
+    // Remove file previews on one-click
+    "workbench.editor.enablePreview": false,
+
+    // ==== TEXT EDITING ====
+
+    // Font settings
+    "editor.fontFamily": "'JetBrains Mono', 'Consolas', 'Droid Sans Mono', 'monospace', monospace",
+    "editor.fontLigatures": true,
+
+    // Mimic IDEA-based line height
+    "editor.lineHeight": 20,
+
+    // Disable useless minimap
+    "editor.minimap.enabled": false,
+
+    // Show NL at file end in diffs
+    "diffEditor.ignoreTrimWhitespace": false,
+
+    // Remove independent spaces in tabulation
+    "editor.stickyTabStops": true,
+
+    // Show normal LSP suggestions first, moving snippets to the end of a suggestion list
+    "editor.snippetSuggestions": "bottom",
+
+    // Disable top menu actions with alt-button down (Alt-F for File for example)
+    "window.enableMenuBarMnemonics": false,
+
+    // Disable alt-menu totally (helps with phantom triggers on lang switch)
+    "window.customMenuBarAltFocus": false,
+    
+    // Start without editor if there is nothing to restore
+    "workbench.startupEditor": "none",
+
+    // Disable tips on empty page
+    "workbench.tips.enabled": false,
+
+    // Provide autocompletion in snippets
+    // For example, when writing vec.pu<|> after pressing Enter,
+    // you'll receive vec.push(<|>) with autocompletions for variables and stuff
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+
+    // Color all brackets without any additional plugins
+    "editor.bracketPairColorization.enabled": true,
+
+    // ==== HEX EDITOR ====
+
+    // Show more bytes per row
+    "hexeditor.columnWidth": 24,
+
+    // Show ASCII decoded text
+    "hexeditor.showDecodedText": true,
+
+    // Most of the time we work with little-endian stuff
+    "hexeditor.defaultEndianness": "little",
+
+    // Show useful description stuff at the side of a view
+    "hexeditor.inspectorType": "aside",
+
+    // ==== RUST ====
+
+    // Enable proc-macro analysis
+    "rust-analyzer.procMacro.enable": true,
+
+    // Fix bug with errorneous Cargo.toml
+    "crates.useLocalCargoIndex": false,
+
+    // ==== NIX ====
+
+    // Enable Nix LSP
+    "nix.enableLanguageServer": true,
+
+    // ==== MARKDOWN ====
+
+    // Increase default font size
+    "markdown.preview.fontSize": 18,
+
+    // ==== TERMINAL ====
+
+    // Copy text on selection in terminal (similar to Google Cloud Shell behaviour)
+    "terminal.integrated.copyOnSelection": true,
+
+    // ==== OTHER ====
+
+    // Remote useless tutorials
+    "gitlens.showWelcomeOnInstall": false,
+
+    // Remove online telemetry stuff
+    "extensions.ignoreRecommendations": true,
+    "workbench.enableExperiments": false,
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "telemetry.telemetryLevel": "off",
+
+    // Disable noisy "trust" feature
+    "security.workspace.trust.enabled": false,
+
+    // Keybindings for https://marketplace.visualstudio.com/items?itemName=haberdashPI.vscode-modal-keys
+    // While the extension is deleted right now, those keybindings may be reused later when
+    // the extension gets Ctrl key support.
+    "modalkeys.keybindings": {
+        "w": {
+            "cursorMove": {
+                "to": "up",
+                "value": "__count"
+            }
+        },
+        "a": {
+            "cursorMove": {
+                "to": "left",
+                "value": "__count"
+            }
+        },
+        "s": {
+            "cursorMove": {
+                "to": "down",
+                "value": "__count"
+            }
+        },
+        "d": {
+            "cursorMove": {
+                "to": "right",
+                "value": "__count"
+            }
+        },
+        "W": {
+            "editorScroll": {
+                "to": "up",
+                "by": "halfPage",
+                "value": "__count",
+                "revealCursor": true
+            }
+        },
+        "A": "cursorWordLeft",
+        "S": {
+            "editorScroll": {
+                "to": "down",
+                "by": "halfPage",
+                "value": "__count",
+                "revealCursor": true
+            }
+        },
+        "D": "cursorWordRight"
+    }
+}

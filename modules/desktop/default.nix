@@ -8,7 +8,7 @@ with lib; {
     enable = mkEnableOption "Enable the desktop configuration";
     users = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
-      default = {};
+      default = { };
       description = "Users and their corresponding profiles.";
     };
   };

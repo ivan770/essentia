@@ -38,15 +38,7 @@
             name = x;
             value = import (./modules/${x});
           })
-          (builtins.attrNames (builtins.readDir ./modules)))
-
-      //
-
-      {
-        home-manager = { config, pkgs, lib, ... }: {
-          imports = [ ./home-manager ];
-        };
-      };
+          (builtins.attrNames (builtins.readDir ./modules)));
 
       nixosConfigurations =
         builtins.listToAttrs (builtins.map

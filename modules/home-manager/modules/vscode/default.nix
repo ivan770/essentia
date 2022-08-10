@@ -3,7 +3,7 @@
 let
   cfg = config.essentia.programs.vscode;
 
-  utils = pkgs.callPackage ../../../utils { };
+  utils = pkgs.callPackage ../../../../utils { };
 in
 with lib; {
   options.essentia.programs.vscode = {

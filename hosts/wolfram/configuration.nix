@@ -1,13 +1,6 @@
 { config, nixos-hardware, pkgs, ... }:
 
 {
-  nix = {
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
-
   imports = [
     ./hardware-configuration.nix
     nixos-hardware.nixosModules.common-cpu-amd

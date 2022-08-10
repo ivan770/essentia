@@ -1,14 +1,12 @@
 { lib, config, pkgs, ... }:
 
 let
-  cfg = config.essentia.user.ivan770;
+  enabled = config.essentia.user.ivan770;
 in
 with lib; {
-  options.essentia.user.ivan770 = {
-    enable = mkEnableOption "Activate user ivan770";
-  };
+  options.essentia.user.ivan770 = mkEnableOption "Activate user ivan770";
 
-  config = mkIf cfg.enable {
+  config = mkIf enabled {
     users.users.ivan770 = {
       isNormalUser = true;
       home = "/home/ivan770";

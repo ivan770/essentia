@@ -22,13 +22,14 @@
     programs = {
       vscode = {
         enable = true;
+        settings = builtins.readFile ./vscode/settings.json;
+        keybindings = builtins.readFile ./vscode/keybindings.json;
         installExtensions = true;
-        installConfig = true;
         wayland = true;
       };
       qbittorrent = {
         enable = true;
-        installConfig = true;
+        settings = builtins.readFile ./qbittorrent/settings.conf;
       };
       firefox = {
         enable = true;

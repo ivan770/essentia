@@ -10,6 +10,7 @@ with lib; {
     enable = mkEnableOption "Enable VS Code";
     installConfig = mkEnableOption "Install VS Code configuration";
     installExtensions = mkEnableOption "Install VS Code extensions";
+    wayland = mkEnableOption "Enable VS Code Wayland support";
   };
 
   config = mkIf cfg.enable {
@@ -94,5 +95,9 @@ with lib; {
         ];
       })
     ];
+
+    systemd.user.sessionVariables = mkIf cfg.wayland {
+      NIXOS_OZONE_WL = 1;
+    };
   };
 }

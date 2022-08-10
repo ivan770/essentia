@@ -11,11 +11,22 @@ with lib; {
   config = mkIf cfg.enable {
     services.xserver.videoDrivers = [ "nvidia" ];
 
-    hardware.opengl = {
-      enable = true;
-      extraPackages = with pkgs; [
-        vaapiVdpau
-      ];
+    environment.variables.VDPAU_DRIVER = "nvidia";
+
+    hardware = {
+      nvidia = {
+        modesetting.enable = true;
+        powerManagement.enable = true;
+      };
+      opengl = {
+        enable = true;
+        driSupport = true;
+        extraPackages = with pkgs; [
+          nvidia-vaapi-driver
+          vaapiVdpau
+          libvdpau-va-gl
+        ];
+      };
     };
   };
 }

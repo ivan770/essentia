@@ -8,7 +8,16 @@ in
 with lib; {
   options.essentia.programs.vscode = {
     enable = mkEnableOption "Enable VS Code";
-    installConfig = mkEnableOption "Install VS Code configuration";
+    settings = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      description = "VS Code settings.json file contents";
+    };
+    keybindings = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      description = "VS Code keybindings.json file contents";
+    };
     installExtensions = mkEnableOption "Install VS Code extensions";
     wayland = mkEnableOption "Enable VS Code Wayland support";
   };
@@ -19,9 +28,11 @@ with lib; {
         enable = true;
         package = pkgs.vscode;
       }
-      (mkIf cfg.installConfig {
-        userSettings = utils.fromJSONWithComments (builtins.readFile ./settings.json);
-        keybindings = utils.fromJSONWithComments (builtins.readFile ./keybindings.json);
+      (mkIf (isString cfg.settings) {
+        userSettings = utils.fromJSONWithComments cfg.settings;
+      })
+      (mkIf (isString cfg.keybindings) {
+        keybindings = utils.fromJSONWithComments cfg.keybindings;
       })
       (mkIf cfg.installExtensions {
         mutableExtensionsDir = false;

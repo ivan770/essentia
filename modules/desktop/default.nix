@@ -6,17 +6,17 @@ in
 with lib; {
   options.essentia.desktop = {
     enable = mkEnableOption "Enable the desktop configuration";
-    home-manager = mkEnableOption "Activate home-manager";
+    users = lib.mkOption {
+      type = lib.types.attrsOf lib.types.str;
+      default = {};
+      description = "Users and their corresponding profiles.";
+    };
   };
 
   config = mkIf cfg.enable {
     essentia = {
       common.enable = true;
-      user.ivan770.enable = true;
-      home-manager = mkIf cfg.home-manager {
-        enable = true;
-        profile = "battlestation";
-      };
+      home-manager.users = cfg.users;
       locale.enable = true;
       gnome.enable = true;
     };

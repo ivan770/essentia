@@ -9,6 +9,11 @@ with lib; {
   };
 
   config = mkIf cfg.enable {
+    # GNOME requires networking and sound anyway
+    essentia = {
+      networking.enable = true;
+      sound.enable = true;
+    };
     services = {
       gnome.core-utilities.enable = false;
       xserver = {

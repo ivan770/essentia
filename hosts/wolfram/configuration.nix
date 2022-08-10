@@ -17,16 +17,16 @@
   essentia = {
     desktop = {
       enable = true;
-      home-manager = true;
+      users = {
+        ivan770 = "battlestation";
+      };
     };
     grub-efi = {
       enable = true;
       gfxmode = "1920x1080";
     };
-    networking.enable = true;
     nvidia.enable = true;
     printing.enable = true;
-    sound.enable = true;
   };
 
   networking = {

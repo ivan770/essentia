@@ -6,15 +6,19 @@ in
 with lib; {
   options.essentia.programs.qbittorrent = {
     enable = mkEnableOption "Enable qBittorrent";
-    installConfig = mkEnableOption "Install qBittorrent configuration";
+    settings = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      description = "qBittorrent settings file contents";
+    };
   };
 
   config = mkMerge [
     (mkIf cfg.enable {
       home.packages = [ pkgs.qbittorrent ];
     })
-    (mkIf cfg.installConfig {
-      xdg.configFile."qBittorrent/qBittorrent.conf".text = builtins.readFile ./config.conf;
+    (mkIf (isString cfg.settings) {
+      xdg.configFile."qBittorrent/qBittorrent.conf".text = cfg.settings;
     })
   ];
 }

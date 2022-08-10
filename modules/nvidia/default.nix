@@ -6,15 +6,24 @@ in
 with lib; {
   options.essentia.nvidia = {
     enable = mkEnableOption "Activate Nvidia support for single-card systems";
+    vdpau = mkEnableOption "Activate (extremely limited) VDPAU support";
   };
 
   config = mkIf cfg.enable {
     services.xserver.videoDrivers = [ "nvidia" ];
 
-    environment.variables.VDPAU_DRIVER = "nvidia";
+    environment.variables = mkMerge [
+      {
+        LIBVA_DRIVER_NAME = "nvidia";
+      }
+      (mkIf cfg.vdpau {
+        VDPAU_DRIVER = "va_gl";
+      })
+    ];
 
     hardware = {
       nvidia = {
+        nvidiaSettings = false;
         modesetting.enable = true;
         powerManagement.enable = true;
       };
@@ -23,9 +32,7 @@ with lib; {
         driSupport = true;
         extraPackages = with pkgs; [
           nvidia-vaapi-driver
-          vaapiVdpau
-          libvdpau-va-gl
-        ];
+        ] ++ optionals cfg.vdpau [ libvdpau-va-gl ];
       };
     };
   };

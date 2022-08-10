@@ -4,12 +4,11 @@
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
+    git
     vim
-    firefox
     tdesktop
     dconf2nix
     discord
-    qbittorrent
     rnix-lsp
     gnome-console
     gnome.gnome-system-monitor
@@ -25,6 +24,15 @@
         enable = true;
         installExtensions = true;
         installConfig = true;
+        wayland = true;
+      };
+      qbittorrent = {
+        enable = true;
+        installConfig = true;
+      };
+      firefox = {
+        enable = true;
+        wayland = true;
       };
     };
   };

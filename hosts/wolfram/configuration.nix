@@ -19,7 +19,10 @@
       enable = true;
       home-manager = true;
     };
-    grub-efi.enable = true;
+    grub-efi = {
+      enable = true;
+      gfxmode = "1920x1080";
+    };
     networking.enable = true;
     nvidia.enable = true;
     printing.enable = true;

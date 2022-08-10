@@ -79,7 +79,7 @@
 
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
-            git
+            statix
           ];
         };
       }

@@ -13,6 +13,13 @@ with lib; {
       description = "Bootloader mountpoint";
       example = "/boot";
     };
+
+    gfxmode = mkOption {
+      type = types.str;
+      default = "1024x768";
+      description = "gfxmode value to pass to GRUB";
+      example = "1920x1080";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -27,6 +34,7 @@ with lib; {
         device = "nodev";
         efiSupport = true;
         useOSProber = true;
+        gfxmodeEfi = cfg.gfxmode;
       };
     };
   };

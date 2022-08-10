@@ -5,14 +5,14 @@ let
 
   modules = map (x: import ./modules/${x}) (builtins.attrNames (builtins.readDir ./modules));
   users = map (x: import ./users/${x}) (builtins.attrNames (builtins.readDir ./users));
-  
+
   activatedUsers = lib.listToAttrs (map (name: { inherit name; value = true; }) (builtins.attrNames cfg.users));
 in
 {
   options.essentia.home-manager = {
     users = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
-      default = {};
+      default = { };
       description = "Users and their corresponding profiles.";
     };
   };
@@ -25,11 +25,13 @@ in
     essentia.user = activatedUsers;
     home-manager = {
       useUserPackages = true;
-      users = lib.mapAttrs (user: profile: {
-        imports = [
-          ./users/${user}/${profile}.nix
-        ] ++ modules;
-      }) cfg.users;
+      users = lib.mapAttrs
+        (user: profile: {
+          imports = [
+            ./users/${user}/${profile}.nix
+          ] ++ modules;
+        })
+        cfg.users;
     };
   };
 }

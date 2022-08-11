@@ -38,6 +38,8 @@
     };
   };
 
+  hardware.enableRedistributableFirmware = true;
+
   boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
   system.stateVersion = "22.05";

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, home-manager, ... }:
+{ config, pkgs, lib, flake-self, home-manager, ... }:
 
 let
   cfg = config.essentia.home-manager;
@@ -28,6 +28,7 @@ in
       users = lib.mapAttrs
         (user: profile: {
           imports = [
+            { nixpkgs.overlays = [ flake-self.overlays.default ]; }
             ./users/${user}/${profile}.nix
           ] ++ modules;
         })

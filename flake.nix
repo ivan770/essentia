@@ -32,6 +32,8 @@
 
   outputs = { self, nixpkgs, flake-utils, ... } @ inputs:
     {
+      overlays.default = final: prev: (import ./overlays inputs) final prev;
+
       nixosModules = builtins.listToAttrs
         (map
           (x: {

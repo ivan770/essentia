@@ -16,6 +16,10 @@
     };
     # Required to enable Lunar Client via Flatpak.
     # Nixpkgs' version of Lunar is extremely outdated and isn't working properly
+    #
+    # In case if you want to disable Flatpak, ensure to completely remove leftover files
+    # via flatpak uninstall --all
+    # https://discourse.flathub.org/t/how-to-completely-uninstall-any-flatpak-app-on-ubuntu/709
     flatpak.enable = true;
     grub-efi = {
       enable = true;

@@ -19,6 +19,7 @@ with lib; {
       home-manager.users = cfg.users;
       locale.enable = true;
       gnome.enable = true;
+      plymouth.enable = true;
     };
   };
 }

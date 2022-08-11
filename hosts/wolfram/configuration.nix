@@ -14,6 +14,9 @@
         ivan770 = "battlestation";
       };
     };
+    # Required to enable Lunar Client via Flatpak.
+    # Nixpkgs' version of Lunar is extremely outdated and isn't working properly
+    flatpak.enable = true;
     grub-efi = {
       enable = true;
       gfxmode = "1920x1080";

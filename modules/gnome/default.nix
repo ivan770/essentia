@@ -6,6 +6,7 @@ in
 with lib; {
   options.essentia.gnome = {
     enable = mkEnableOption "Enable GNOME desktop";
+    keyringServices = mkEnableOption "Enable GNOME keyring and its related services";
   };
 
   config = mkIf cfg.enable {
@@ -15,7 +16,15 @@ with lib; {
       sound.enable = true;
     };
     services = {
-      gnome.core-utilities.enable = false;
+      gnome = mkMerge [
+        {
+          core-utilities.enable = false;
+        }
+        (mkIf (!cfg.keyringServices) {
+          gnome-online-accounts.enable = mkForce false;
+          gnome-keyring.enable = mkForce false;
+        })
+      ];
       xserver = {
         enable = true;
         layout = "us";

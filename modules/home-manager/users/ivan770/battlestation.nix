@@ -16,10 +16,17 @@
     gnome.file-roller
     gnome.gnome-disk-utility
     gnome.gnome-tweaks
+    gnome.seahorse
   ];
 
   essentia = {
     programs = {
+      gpg = {
+        enable = true;
+        sshKeys = [
+          "B0E258EAD4123779C4CFA077DBD8328FD08BADF5"
+        ];
+      };
       vscode = {
         enable = true;
         settings = builtins.readFile ./vscode/settings.json;
@@ -38,7 +45,10 @@
     };
   };
 
-  programs.home-manager.enable = true;
+  programs = {
+    bash.enable = true;
+    home-manager.enable = true;
+  };
 
   home.stateVersion = "22.05";
 }

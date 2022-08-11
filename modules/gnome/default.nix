@@ -20,6 +20,8 @@ with lib; {
         {
           core-utilities.enable = false;
         }
+        # Remove capability to disable keyring as soon as https://github.com/NixOS/nixpkgs/issues/166887
+        # gets resolved.
         (mkIf (!cfg.keyringServices) {
           gnome-online-accounts.enable = mkForce false;
           gnome-keyring.enable = mkForce false;

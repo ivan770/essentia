@@ -27,6 +27,7 @@
     };
     nvidia.enable = true;
     printing.enable = true;
+    steam.enable = true;
   };
 
   networking = {
@@ -40,7 +41,7 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_xanmod;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
   system.stateVersion = "22.05";
 }

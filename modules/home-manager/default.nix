@@ -6,7 +6,7 @@ let
   modules = map (x: import ./modules/${x}) (builtins.attrNames (builtins.readDir ./modules));
   users = map (x: import ./users/${x}) (builtins.attrNames (builtins.readDir ./users));
 
-  activatedUsers = lib.listToAttrs (map (name: { inherit name; value = true; }) (builtins.attrNames cfg.users));
+  activatedUsers = lib.mapAttrs (name: value: true) cfg.users;
 in
 {
   options.essentia.home-manager = {

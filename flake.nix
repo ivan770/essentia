@@ -30,33 +30,15 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... } @ inputs:
+  outputs = { nixpkgs, flake-utils, ... } @ inputs:
+    let
+      inherit (inputs.nixpkgs) lib;
+      utils = import ./utils.nix { inherit inputs lib; };
+    in
     {
-      overlays.default = final: prev: (import ./overlays inputs) final prev;
-
-      nixosModules = builtins.listToAttrs
-        (map
-          (x: {
-            name = x;
-            value = import (./modules/${x});
-          })
-          (builtins.attrNames (builtins.readDir ./modules)));
-
-      nixosConfigurations =
-        builtins.listToAttrs (builtins.map
-          (name: {
-            inherit name;
-            value = nixpkgs.lib.nixosSystem {
-              system = "x86_64-linux";
-              specialArgs = { flake-self = self; } // inputs;
-              modules = [
-                ./hosts/${name}/configuration.nix
-                { networking.hostName = name; }
-                { imports = builtins.attrValues self.nixosModules; }
-              ];
-            };
-          })
-          (builtins.attrNames (builtins.readDir ./hosts)));
+      nixosModules = utils.mkAttrsTree ./modules;
+      overlays = utils.mkOverlayTree ./overlays;
+      nixosConfigurations = utils.mkNixosConfigs ./hosts;
     }
 
     //

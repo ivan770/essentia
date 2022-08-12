@@ -1,10 +1,10 @@
-{ config, pkgs, lib, flake-self, home-manager, ... }:
+{ config, pkgs, lib, home-manager, mkAttrsTree, fromJSONWithComments, ... }:
 
 let
   cfg = config.essentia.home-manager;
 
-  modules = map (x: import ./modules/${x}) (builtins.attrNames (builtins.readDir ./modules));
-  users = map (x: import ./users/${x}) (builtins.attrNames (builtins.readDir ./users));
+  modules = builtins.attrValues (mkAttrsTree ./modules);
+  users = builtins.attrValues (mkAttrsTree ./users);
 
   activatedUsers = lib.mapAttrs (name: value: true) cfg.users;
 in
@@ -24,11 +24,11 @@ in
   config = {
     essentia.user = activatedUsers;
     home-manager = {
+      extraSpecialArgs = { inherit mkAttrsTree fromJSONWithComments; };
       useUserPackages = true;
       users = lib.mapAttrs
         (user: profile: {
           imports = [
-            { nixpkgs.overlays = [ flake-self.overlays.default ]; }
             ./users/${user}/${profile}.nix
           ] ++ modules;
         })

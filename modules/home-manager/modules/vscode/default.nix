@@ -1,9 +1,7 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, fromJSONWithComments, ... }:
 
 let
   cfg = config.essentia.programs.vscode;
-
-  utils = pkgs.callPackage ../../../../utils { };
 in
 with lib; {
   options.essentia.programs.vscode = {
@@ -29,10 +27,10 @@ with lib; {
         package = pkgs.vscode;
       }
       (mkIf (isString cfg.settings) {
-        userSettings = utils.fromJSONWithComments cfg.settings;
+        userSettings = fromJSONWithComments cfg.settings;
       })
       (mkIf (isString cfg.keybindings) {
-        keybindings = utils.fromJSONWithComments cfg.keybindings;
+        keybindings = fromJSONWithComments cfg.keybindings;
       })
       (mkIf cfg.installExtensions {
         mutableExtensionsDir = false;

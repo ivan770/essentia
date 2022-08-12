@@ -27,6 +27,7 @@
           "B0E258EAD4123779C4CFA077DBD8328FD08BADF5"
         ];
       };
+      fonts.enable = true;
       vscode = {
         enable = true;
         settings = builtins.readFile ./vscode/settings.json;

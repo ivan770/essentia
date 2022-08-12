@@ -45,6 +45,10 @@
     };
   };
 
+  imports = [
+    ./dconf.nix
+  ];
+
   programs = {
     bash.enable = true;
     home-manager.enable = true;

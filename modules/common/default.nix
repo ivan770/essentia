@@ -1,4 +1,4 @@
-{ lib, config, pkgs, flake-self, nixpkgs, ... }:
+{ lib, config, pkgs, nixpkgs, ... }:
 
 let
   cfg = config.essentia.common;
@@ -17,9 +17,6 @@ with lib; {
       registry.nixpkgs.flake = nixpkgs;
     };
 
-    nixpkgs = {
-      config.allowUnfree = true;
-      overlays = [ flake-self.overlays.default ];
-    };
+    nixpkgs.config.allowUnfree = true;
   };
 }

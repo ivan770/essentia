@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 
 let
   cfg = config.essentia.printing;
@@ -12,6 +12,10 @@ with lib; {
     services.printing = {
       enable = true;
       webInterface = false;
+      drivers = with pkgs; [
+        gutenprint
+        gutenprintBin
+      ];
     };
   };
 }

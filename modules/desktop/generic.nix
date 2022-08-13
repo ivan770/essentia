@@ -5,8 +5,10 @@ let
 in
 with lib; {
   options.essentia.desktop = {
-    users = lib.mkOption {
-      type = lib.types.attrsOf lib.types.str;
+    wayland = mkEnableOption "Enable Wayland support";
+
+    users = mkOption {
+      type = types.attrsOf types.str;
       default = { };
       description = "Users and their corresponding profiles.";
     };
@@ -21,5 +23,8 @@ with lib; {
     nixosModules.desktop.plymouth
   ];
 
-  config.essentia.home-manager.users = cfg.users;
+  config.essentia = {
+    home-manager.users = cfg.users;
+    gnome.wayland = cfg.wayland;
+  };
 }

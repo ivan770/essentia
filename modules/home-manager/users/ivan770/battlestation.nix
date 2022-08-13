@@ -28,6 +28,11 @@
         ];
       };
       fonts.enable = true;
+      locale = {
+        enable = true;
+        base = "en_US.UTF-8";
+        units = "en_US.UTF-8";
+      };
       vscode = {
         enable = true;
         settings = builtins.readFile ./vscode/settings.json;

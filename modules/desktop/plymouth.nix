@@ -1,11 +1,10 @@
-{ lib, config, pkgs, self-overlay, ... }:
+{ lib, config, pkgs, ... }:
 
 let
   cfg = config.essentia.plymouth;
 in
 with lib; {
   options.essentia.plymouth = {
-    enable = mkEnableOption "Activate Plymouth boot screen";
     theme = mkOption {
       type = types.str;
       default = "bgrt";
@@ -14,10 +13,8 @@ with lib; {
     };
   };
 
-  config = mkIf cfg.enable {
-    boot.plymouth = {
-      enable = true;
-      theme = cfg.theme;
-    };
+  config.boot.plymouth = {
+    enable = true;
+    theme = cfg.theme;
   };
 }

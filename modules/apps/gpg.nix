@@ -5,8 +5,6 @@ let
 in
 with lib; {
   options.essentia.programs.gpg = {
-    enable = mkEnableOption "Enable GPG";
-
     pinentryFlavor = mkOption {
       type = types.nullOr (types.enum pkgs.pinentry.flavors);
       default = "gnome3";
@@ -23,7 +21,7 @@ with lib; {
     };
   };
 
-  config = mkIf (cfg.enable) {
+  config = {
     programs.gpg.enable = true;
     services.gpg-agent = mkMerge [
       {

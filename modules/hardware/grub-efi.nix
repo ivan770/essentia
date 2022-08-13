@@ -5,8 +5,6 @@ let
 in
 with lib; {
   options.essentia.grub-efi = {
-    enable = mkEnableOption "Activate GRUB2 support";
-
     mountpoint = mkOption {
       type = types.str;
       default = "/boot/efi";
@@ -22,20 +20,18 @@ with lib; {
     };
   };
 
-  config = mkIf cfg.enable {
-    boot.loader = {
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = cfg.mountpoint;
-      };
-      grub = {
-        enable = true;
-        version = 2;
-        device = "nodev";
-        efiSupport = true;
-        useOSProber = true;
-        gfxmodeEfi = cfg.gfxmode;
-      };
+  config.boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = cfg.mountpoint;
+    };
+    grub = {
+      enable = true;
+      version = 2;
+      device = "nodev";
+      efiSupport = true;
+      useOSProber = true;
+      gfxmodeEfi = cfg.gfxmode;
     };
   };
 }

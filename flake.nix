@@ -30,7 +30,7 @@
     };
   };
 
-  outputs = { nixpkgs, flake-utils, ... } @ inputs:
+  outputs = inputs:
     let
       inherit (inputs.nixpkgs) lib;
       utils = import ./utils.nix { inherit inputs lib; };
@@ -39,25 +39,5 @@
       nixosModules = utils.mkAttrsTree ./modules;
       overlays = utils.mkOverlayTree ./overlays;
       nixosConfigurations = utils.mkNixosConfigs ./hosts;
-    }
-
-    //
-
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-      in
-      {
-        formatter = pkgs.nixpkgs-fmt;
-
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            statix
-          ];
-        };
-      }
-    );
+    };
 }

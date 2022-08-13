@@ -1,20 +1,20 @@
-{ lib, pkgs, config, ... }:
+{ lib, pkgs, config, nixosModules, ... }:
 
 let
   cfg = config.essentia.gnome;
 in
 with lib; {
   options.essentia.gnome = {
-    enable = mkEnableOption "Enable GNOME desktop";
     keyringServices = mkEnableOption "Enable GNOME keyring and its related services";
   };
 
-  config = mkIf cfg.enable {
-    # GNOME requires networking and sound anyway
-    essentia = {
-      networking.enable = true;
-      sound.enable = true;
-    };
+  # GNOME requires networking and sound anyway
+  imports = with nixosModules; [
+    hardware.networking
+    hardware.sound
+  ];
+
+  config = {
     services = {
       gnome = mkMerge [
         {

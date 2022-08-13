@@ -3,12 +3,12 @@
 let
   cfg = config.essentia.home-manager;
 
-  users = builtins.attrValues (mkAttrsTree ../../users);
-  activatedUsers = lib.mapAttrs (name: value: true) cfg.users;
+  profiles = builtins.attrValues (mkAttrsTree ../../profiles);
+  activatedProfiles = lib.mapAttrs (name: value: true) cfg.profiles;
 in
 {
   options.essentia.home-manager = {
-    users = lib.mkOption {
+    profiles = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
       default = { };
       description = "Users and their corresponding profiles.";
@@ -17,20 +17,19 @@ in
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
-  ] ++ users;
+  ];
 
   config = {
-    essentia.user = activatedUsers;
     home-manager = {
       extraSpecialArgs = { inherit pkgs inputs nixosModules mkAttrsTree fromJSONWithComments; };
       useUserPackages = true;
       users = lib.mapAttrs
         (user: profile: {
           imports = [
-            ../../users/${user}/${profile}.nix
+            ../../profiles/${user}/${profile}.nix
           ];
         })
-        cfg.users;
+        cfg.profiles;
     };
   };
 }

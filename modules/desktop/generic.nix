@@ -7,7 +7,7 @@ with lib; {
   options.essentia.desktop = {
     wayland = mkEnableOption "Enable Wayland support";
 
-    users = mkOption {
+    profiles = mkOption {
       type = types.attrsOf types.str;
       default = { };
       description = "Users and their corresponding profiles.";
@@ -24,7 +24,7 @@ with lib; {
   ];
 
   config.essentia = {
-    home-manager.users = cfg.users;
+    home-manager.profiles = cfg.profiles;
     gnome.wayland = cfg.wayland;
   };
 }

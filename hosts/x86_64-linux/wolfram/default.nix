@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-pc-hdd
+    nixosModules.users.ivan770
     nixosModules.desktop.generic
     nixosModules.hardware.grub-efi
     nixosModules.hardware.nvidia
@@ -22,7 +23,7 @@
   config = {
     essentia = {
       desktop = {
-        users = {
+        profiles = {
           ivan770 = "battlestation";
         };
       };

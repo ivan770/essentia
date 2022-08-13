@@ -5,6 +5,7 @@ let
 in
 with lib; {
   options.essentia.gnome = {
+    wayland = mkEnableOption "Enable Wayland support";
     keyringServices = mkEnableOption "Enable GNOME keyring and its related services";
   };
 
@@ -32,7 +33,7 @@ with lib; {
         layout = "us";
         displayManager.gdm = {
           enable = true;
-          wayland = true;
+          wayland = cfg.wayland;
         };
         desktopManager.gnome.enable = true;
       };
@@ -43,7 +44,7 @@ with lib; {
 
     programs = {
       dconf.enable = true;
-      xwayland.enable = true;
+      xwayland.enable = cfg.wayland;
     };
 
     environment.systemPackages = with pkgs; [

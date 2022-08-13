@@ -36,10 +36,8 @@
         settings = builtins.readFile ./vscode/settings.json;
         keybindings = builtins.readFile ./vscode/keybindings.json;
         installExtensions = true;
-        wayland = true;
       };
       qbittorrent.settings = builtins.readFile ./qbittorrent/settings.conf;
-      firefox.wayland = true;
     };
     programs = {
       bash.enable = true;

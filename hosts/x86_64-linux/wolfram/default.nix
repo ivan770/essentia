@@ -18,6 +18,7 @@
     # https://discourse.flathub.org/t/how-to-completely-uninstall-any-flatpak-app-on-ubuntu/709
     nixosModules.apps.flatpak
     nixosModules.apps.steam
+    nixosModules.apps.gamemode
   ];
 
   config = {

@@ -39,5 +39,18 @@
       nixosModules = utils.mkAttrsTree ./modules;
       overlays = utils.mkOverlayTree ./overlays;
       nixosConfigurations = utils.mkNixosConfigs ./hosts;
-    };
+    }
+
+    //
+
+    inputs.flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+        };
+      in
+      {
+        formatter = pkgs.nixpkgs-fmt;
+      }
+    );
 }

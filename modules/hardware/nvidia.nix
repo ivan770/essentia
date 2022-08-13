@@ -5,11 +5,10 @@ let
 in
 with lib; {
   options.essentia.nvidia = {
-    enable = mkEnableOption "Activate Nvidia support for single-card systems";
     vdpau = mkEnableOption "Activate (extremely limited) VDPAU support";
   };
 
-  config = mkIf cfg.enable {
+  config = {
     services.xserver.videoDrivers = [ "nvidia" ];
 
     environment.variables = mkMerge [

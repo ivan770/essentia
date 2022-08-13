@@ -5,7 +5,6 @@ let
 in
 with lib; {
   options.essentia.programs.vscode = {
-    enable = mkEnableOption "Enable VS Code";
     settings = mkOption {
       type = types.nullOr types.str;
       default = null;
@@ -20,7 +19,7 @@ with lib; {
     wayland = mkEnableOption "Enable VS Code Wayland support";
   };
 
-  config = mkIf cfg.enable {
+  config = {
     programs.vscode = mkMerge [
       {
         enable = true;

@@ -31,14 +31,15 @@ with lib; rec {
       inherit system;
 
       modules = [{
-        imports = builtins.attrValues inputs.self.nixosModules;
         networking.hostName = name;
         nixpkgs.overlays = mkIf (inputs.self ? overlays) (
           collect (a: !isAttrs a) inputs.self.overlays
         );
       }] ++ listNixFilesRecursive path;
 
-      specialArgs = inputs // { inherit fromJSONWithComments mkAttrsTree; };
+      specialArgs = optionalAttrs (inputs.self ? nixosModules) {
+        inherit (inputs.self) nixosModules;
+      } // { inherit inputs fromJSONWithComments mkAttrsTree; };
     };
 
   mkNixosConfigs = dir:

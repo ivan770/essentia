@@ -1,14 +1,7 @@
 { lib, config, ... }:
 
-let
-  cfg = config.essentia.sound;
-in
-with lib; {
-  options.essentia.sound = {
-    enable = mkEnableOption "Activate sound support";
-  };
-
-  config = mkIf cfg.enable {
+{
+  config = {
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {

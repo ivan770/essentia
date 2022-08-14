@@ -44,7 +44,7 @@ with lib; rec {
       specialArgs = optionalAttrs (inputs.self ? nixosModules)
         {
           inherit (inputs.self) nixosModules;
-        } // { inherit inputs fromJSONWithComments mkAttrsTree; };
+        } // { inherit inputs fromJSONWithComments; };
     };
 
   mkNixosConfigs = dir:

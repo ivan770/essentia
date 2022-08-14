@@ -1,10 +1,7 @@
-{ config, pkgs, lib, inputs, nixosModules, mkAttrsTree, fromJSONWithComments, ... }:
+{ config, pkgs, lib, inputs, nixosModules, fromJSONWithComments, ... }:
 
 let
   cfg = config.essentia.home-manager;
-
-  profiles = builtins.attrValues (mkAttrsTree ../../profiles);
-  activatedProfiles = lib.mapAttrs (name: value: true) cfg.profiles;
 in
 {
   options.essentia.home-manager = {
@@ -21,12 +18,12 @@ in
 
   config = {
     home-manager = {
-      extraSpecialArgs = { inherit pkgs inputs nixosModules mkAttrsTree fromJSONWithComments; };
+      extraSpecialArgs = { inherit pkgs inputs nixosModules fromJSONWithComments; };
       useUserPackages = true;
       users = lib.mapAttrs
         (user: profile: {
           imports = [
-            ../../profiles/${user}/${profile}.nix
+            nixosModules.profiles.${user}.${profile}
           ];
         })
         cfg.profiles;

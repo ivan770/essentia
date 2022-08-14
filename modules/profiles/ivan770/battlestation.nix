@@ -38,7 +38,7 @@
       vscode = {
         settings = builtins.readFile ./vscode/settings.json;
         keybindings = builtins.readFile ./vscode/keybindings.json;
-        installExtensions = true;
+        extensions = (import ./vscode/extensions.nix pkgs).extensions;
       };
     };
     programs = {

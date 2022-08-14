@@ -6,7 +6,7 @@
     nixosModules.apps.gpg
     nixosModules.apps.qbittorrent
     nixosModules.apps.vscode
-    ./dconf.nix
+    ./dconf/battlestation.nix
   ];
 
   config = {

@@ -15,12 +15,13 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/control-center" = {
-      last-panel = "power";
-      window-state = mkTuple [ 980 823 ];
+      last-panel = "mouse";
+      window-state = mkTuple [ 980 820 ];
     };
 
     "org/gnome/desktop/input-sources" = {
       per-window = false;
+      show-all-sources = false;
       sources = [ (mkTuple [ "xkb" "us" ]) (mkTuple [ "xkb" "ru" ]) (mkTuple [ "xkb" "ua" ]) ];
       xkb-options = [ "terminate:ctrl_alt_bksp" "grp:alt_shift_toggle" ];
     };
@@ -38,7 +39,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/notifications" = {
-      application-children = [ "org-gnome-console" "telegramdesktop" "firefox" "org-qbittorrent-qbittorrent" "gnome-system-monitor" "org-gnome-nautilus" "org-gnome-fileroller" "steam" ];
+      application-children = [ "org-gnome-console" "telegramdesktop" "firefox" "org-qbittorrent-qbittorrent" "gnome-system-monitor" "org-gnome-nautilus" "org-gnome-fileroller" "steam" "org-gnome-tweaks" ];
     };
 
     "org/gnome/desktop/notifications/application/firefox" = {
@@ -61,6 +62,10 @@ with lib.hm.gvariant;
       application-id = "org.gnome.Nautilus.desktop";
     };
 
+    "org/gnome/desktop/notifications/application/org-gnome-tweaks" = {
+      application-id = "org.gnome.tweaks.desktop";
+    };
+
     "org/gnome/desktop/notifications/application/org-qbittorrent-qbittorrent" = {
       application-id = "org.qbittorrent.qBittorrent.desktop";
     };
@@ -74,7 +79,8 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/peripherals/mouse" = {
-      speed = -0.61435;
+      accel-profile = "flat";
+      speed = -0.13901345291479816;
     };
 
     "org/gnome/desktop/peripherals/touchpad" = {
@@ -181,6 +187,11 @@ with lib.hm.gvariant;
       maximized = false;
     };
 
+    "org/gnome/nm-applet/eap/4aa265f4-aea5-4eda-a5a7-a8b7577a947b" = {
+      ignore-ca-cert = false;
+      ignore-phase2-ca-cert = false;
+    };
+
     "org/gnome/settings-daemon/plugins/power" = {
       power-button-action = "nothing";
       sleep-inactive-ac-type = "nothing";
@@ -214,6 +225,20 @@ with lib.hm.gvariant;
 
     "org/gnome/tweaks" = {
       show-extensions-notice = false;
+    };
+
+    "org/gtk/gtk4/settings/file-chooser" = {
+      date-format = "regular";
+      location-mode = "path-bar";
+      show-hidden = false;
+      show-size-column = true;
+      show-type-column = true;
+      sidebar-width = 169;
+      sort-column = "name";
+      sort-directories-first = false;
+      sort-order = "ascending";
+      type-format = "category";
+      window-size = mkTuple [ 888 327 ];
     };
 
     "org/gtk/settings/color-chooser" = {

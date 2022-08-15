@@ -32,11 +32,12 @@ with lib; {
 
           # Disable sync for those items, that are managed
           # by extensions or Nix
-          "services.sync.declinedEngines" = "passwords,creditcards,addons,prefs";
+          "services.sync.declinedEngines" = "passwords,creditcards,prefs,addons";
           "services.sync.engine.passwords" = false;
           "services.sync.engine.creditcards" = false;
           "services.sync.engine.addons" = false;
           "services.sync.engine.prefs" = false;
+          "services.sync.engine.prefs.modified" = false;
 
           # https://github.com/elFarto/nvidia-vaapi-driver/#firefox
           "media.ffmpeg.vaapi.enabled" = true;

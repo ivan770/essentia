@@ -43,6 +43,9 @@
           "browser.theme.content-theme" = 0;
           "browser.theme.toolbar-theme" = 0;
           "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
+          "browser.toolbars.bookmarks.visibility" = "never";
+          "browser.newtabpage.activity-stream.feeds.topsites" = false;
+          "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
 
           # Privacy stuff
           "dom.security.https_only_mode" = true;

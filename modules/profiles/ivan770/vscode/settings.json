@@ -197,6 +197,17 @@
     // Copy text on selection in terminal (similar to Google Cloud Shell behaviour)
     "terminal.integrated.copyOnSelection": true,
 
+    // Enforce bash with login shell to correctly load home-manager profile.
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash",
+            "args": [
+                "--login"
+            ]
+        }
+    },
+
     // ==== OTHER ====
 
     // Remote useless tutorials

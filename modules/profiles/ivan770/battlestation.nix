@@ -38,6 +38,7 @@
       firefox = import ./firefox/config.nix {inherit nur;};
       gnome-terminal.settings = {
         audibleBell = false;
+        loginShell = true;
       };
       gpg.sshKeys = [
         "B0E258EAD4123779C4CFA077DBD8328FD08BADF5"

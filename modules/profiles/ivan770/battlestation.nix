@@ -2,12 +2,13 @@
 
 {
   imports = [
-    nixosModules.apps.discord
-    nixosModules.apps.firefox
-    nixosModules.apps.gpg
-    nixosModules.apps.helix
-    nixosModules.apps.qbittorrent
-    nixosModules.apps.vscode
+    nixosModules.apps.editors.helix
+    nixosModules.apps.editors.vscode
+    nixosModules.apps.social.firefox
+    nixosModules.apps.social.discord
+    nixosModules.apps.utilities.gnome-terminal
+    nixosModules.apps.utilities.gpg
+    nixosModules.apps.utilities.qbittorrent
     ./dconf/battlestation.nix
   ];
 
@@ -18,7 +19,6 @@
         tdesktop
         dconf2nix
         rnix-lsp
-        gnome-console
         gnome.gnome-system-monitor
         gnome.nautilus
         gnome.file-roller
@@ -31,6 +31,9 @@
     essentia.programs = {
       discord.settings = builtins.readFile ./discord/settings.json;
       firefox = import ./firefox/config.nix { inherit nur; };
+      gnome-terminal.settings = {
+        audibleBell = false;
+      };
       gpg.sshKeys = [
         "B0E258EAD4123779C4CFA077DBD8328FD08BADF5"
       ];

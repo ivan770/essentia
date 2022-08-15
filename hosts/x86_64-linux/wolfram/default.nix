@@ -16,9 +16,9 @@
     # In case if you want to disable Flatpak, ensure to completely remove leftover files
     # via flatpak uninstall --all
     # https://discourse.flathub.org/t/how-to-completely-uninstall-any-flatpak-app-on-ubuntu/709
-    nixosModules.apps.flatpak
-    nixosModules.apps.steam
-    nixosModules.apps.gamemode
+    nixosModules.apps.games.flatpak
+    nixosModules.apps.games.gamemode
+    nixosModules.apps.games.steam
   ];
 
   config = {

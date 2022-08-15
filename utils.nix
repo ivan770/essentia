@@ -1,28 +1,35 @@
-{ lib, inputs }:
-
+{
+  lib,
+  inputs,
+}:
 with lib; rec {
-  fromJSONWithComments = input: builtins.fromJSON (strings.concatStrings (filter
-    (line: !hasPrefix "//" (
-      strings.concatStrings (filter (line: line != " ") (strings.stringToCharacters line))
-    ))
-    (strings.splitString "\n" input)));
+  fromJSONWithComments = input:
+    builtins.fromJSON (strings.concatStrings (filter
+      (line:
+        !hasPrefix "//" (
+          strings.concatStrings (filter (line: line != " ") (strings.stringToCharacters line))
+        ))
+      (strings.splitString "\n" input)));
 
   mkAttrsTree = dir:
     mapAttrs'
-      (name: type:
-        if type == "directory" then
+    (
+      name: type:
+        if type == "directory"
+        then
           if pathExists /${dir}/${name}/default.nix
           then nameValuePair name /${dir}/${name}/default.nix
           else nameValuePair name (mkAttrsTree /${dir}/${name})
         else nameValuePair (removeSuffix ".nix" name) /${dir}/${name}
-      )
+    )
+    (
+      filterAttrs
       (
-        filterAttrs
-          (name: type:
-            type == "directory" || hasSuffix ".nix" name
-          )
-          (builtins.readDir dir)
-      );
+        name: type:
+          type == "directory" || hasSuffix ".nix" name
+      )
+      (builtins.readDir dir)
+    );
 
   mkOverlayTree = path:
     lib.mapAttrsRecursive (_: ovl: import ovl inputs) (mkAttrsTree path);
@@ -34,32 +41,38 @@ with lib; rec {
     makeOverridable nixosSystem {
       inherit system;
 
-      modules = [
-        {
-          networking.hostName = name;
-          nixpkgs.overlays = mkIf (inputs.self ? overlays) (
-            collect (a: !isAttrs a) inputs.self.overlays
-          );
-        }
-        inputs.nur.nixosModules.nur
-      ] ++ listNixFilesRecursive path;
+      modules =
+        [
+          {
+            networking.hostName = name;
+            nixpkgs.overlays = mkIf (inputs.self ? overlays) (
+              collect (a: !isAttrs a) inputs.self.overlays
+            );
+          }
+          inputs.nur.nixosModules.nur
+        ]
+        ++ listNixFilesRecursive path;
 
-      specialArgs = optionalAttrs (inputs.self ? nixosModules)
+      specialArgs =
+        optionalAttrs (inputs.self ? nixosModules)
         {
           inherit (inputs.self) nixosModules;
-        } // { inherit inputs fromJSONWithComments; };
+        }
+        // {inherit inputs fromJSONWithComments;};
     };
 
   mkNixosConfigs = dir:
-    foldAttrs (confs: conf: confs // conf) { } (
+    foldAttrs (confs: conf: confs // conf) {} (
       map
-        (arch:
+      (
+        arch:
           mapAttrs
-            (host: type:
+          (
+            host: type:
               mkNixosConfig /${dir}/${arch}/${host} arch host
-            )
-            (builtins.readDir /${dir}/${arch})
-        )
-        (attrNames (builtins.readDir dir))
+          )
+          (builtins.readDir /${dir}/${arch})
+      )
+      (attrNames (builtins.readDir dir))
     );
 }

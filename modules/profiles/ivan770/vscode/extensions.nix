@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
     {
       name = "gitlens";

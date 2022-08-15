@@ -1,13 +1,18 @@
-{ config, pkgs, lib, inputs, nixosModules, fromJSONWithComments, ... }:
-
-let
-  cfg = config.essentia.home-manager;
-in
 {
+  config,
+  pkgs,
+  lib,
+  inputs,
+  nixosModules,
+  fromJSONWithComments,
+  ...
+}: let
+  cfg = config.essentia.home-manager;
+in {
   options.essentia.home-manager = {
     profiles = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
-      default = { };
+      default = {};
       description = "Users and their corresponding profiles.";
     };
   };
@@ -18,9 +23,13 @@ in
 
   config = {
     home-manager = {
-      extraSpecialArgs = { inherit pkgs inputs nixosModules fromJSONWithComments; nur = config.nur; };
+      extraSpecialArgs = {
+        inherit pkgs inputs nixosModules fromJSONWithComments;
+        nur = config.nur;
+      };
       useUserPackages = true;
-      users = lib.mapAttrs
+      users =
+        lib.mapAttrs
         (user: profile: {
           imports = [
             nixosModules.profiles.${user}.${profile}

@@ -19,6 +19,10 @@ with lib.hm.gvariant;
       window-state = mkTuple [ 980 820 ];
     };
 
+    "org/gnome/desktop/app-folders" = {
+      folder-children = [ "" ];
+    };
+
     "org/gnome/desktop/input-sources" = {
       per-window = false;
       show-all-sources = false;
@@ -80,7 +84,7 @@ with lib.hm.gvariant;
 
     "org/gnome/desktop/peripherals/mouse" = {
       accel-profile = "flat";
-      speed = -0.13901345291479816;
+      speed = -0.139013;
     };
 
     "org/gnome/desktop/peripherals/touchpad" = {
@@ -198,7 +202,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell" = {
-      app-picker-layout = "[{'discord.desktop': <{'position': <0>}>, 'org.gnome.Extensions.desktop': <{'position': <1>}>, 'nixos-manual.desktop': <{'position': <2>}>, 'nvidia-settings.desktop': <{'position': <3>}>, 'org.qbittorrent.qBittorrent.desktop': <{'position': <4>}>, 'telegramdesktop.desktop': <{'position': <5>}>, 'org.gnome.Tour.desktop': <{'position': <6>}>, 'code.desktop': <{'position': <7>}>, 'xterm.desktop': <{'position': <8>}>, 'org.gnome.Settings.desktop': <{'position': <9>}>, 'gnome-system-monitor.desktop': <{'position': <10>}>, 'Utilities': <{'position': <11>}>, 'cups.desktop': <{'position': <12>}>}]";
+      app-picker-layout = "[{'org.gnome.Settings.desktop': <{'position': <0>}>, 'gnome-system-monitor.desktop': <{'position': <1>}>, 'org.gnome.Terminal.desktop': <{'position': <2>}>, 'Utilities': <{'position': <3>}>, 'discord.desktop': <{'position': <4>}>, 'org.gnome.Extensions.desktop': <{'position': <5>}>, "Garry's Mod.desktop": <{'position': <6>}>, 'LEGO Star Wars The Skywalker Saga.desktop': <{'position': <7>}>, 'com.lunarclient.LunarClient.desktop': <{'position': <8>}>, 'cups.desktop': <{'position': <9>}>, 'nixos-manual.desktop': <{'position': <10>}>, 'org.qbittorrent.qBittorrent.desktop': <{'position': <11>}>, 'steam.desktop': <{'position': <12>}>, 'telegramdesktop.desktop': <{'position': <13>}>, 'org.gnome.Tour.desktop': <{'position': <14>}>, 'code.desktop': <{'position': <15>}>, 'xterm.desktop': <{'position': <16>}>}]";
       enabled-extensions = [ "appindicatorsupport@rgcjonas.gmail.com" "dash-to-dock@micxgx.gmail.com" ];
       favorite-apps = [ "firefox.desktop" "org.gnome.Nautilus.desktop" ];
       welcome-dialog-last-shown-version = "42.3.1";

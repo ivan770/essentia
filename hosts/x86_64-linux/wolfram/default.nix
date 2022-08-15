@@ -37,14 +37,8 @@
       };
     };
 
-    networking = {
-      useDHCP = false;
-      interfaces = {
-        enp9s0 = {
-          useDHCP = true;
-        };
-      };
-    };
+    # Network is expected to be managed by NetworkManager anyway.
+    networking.useDHCP = false;
 
     security.tpm2.enable = true;
 

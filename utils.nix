@@ -34,12 +34,15 @@ with lib; rec {
     makeOverridable nixosSystem {
       inherit system;
 
-      modules = [{
-        networking.hostName = name;
-        nixpkgs.overlays = mkIf (inputs.self ? overlays) (
-          collect (a: !isAttrs a) inputs.self.overlays
-        );
-      }] ++ listNixFilesRecursive path;
+      modules = [
+        {
+          networking.hostName = name;
+          nixpkgs.overlays = mkIf (inputs.self ? overlays) (
+            collect (a: !isAttrs a) inputs.self.overlays
+          );
+        }
+        inputs.nur.nixosModules.nur
+      ] ++ listNixFilesRecursive path;
 
       specialArgs = optionalAttrs (inputs.self ? nixosModules)
         {

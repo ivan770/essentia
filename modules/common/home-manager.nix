@@ -18,7 +18,7 @@ in
 
   config = {
     home-manager = {
-      extraSpecialArgs = { inherit pkgs inputs nixosModules fromJSONWithComments; };
+      extraSpecialArgs = { inherit pkgs inputs nixosModules fromJSONWithComments; nur = config.nur; };
       useUserPackages = true;
       users = lib.mapAttrs
         (user: profile: {

@@ -6,14 +6,14 @@
   nixosModules,
   ...
 }: {
-  imports = [
-    nixosModules.apps.editors.helix
-    nixosModules.apps.editors.vscode
-    nixosModules.apps.social.firefox
-    nixosModules.apps.social.discord
-    nixosModules.apps.utilities.gnome-terminal
-    nixosModules.apps.utilities.gpg
-    nixosModules.apps.utilities.qbittorrent
+  imports = with nixosModules; [
+    apps.editors.helix
+    apps.editors.vscode
+    apps.social.firefox
+    apps.social.discord
+    apps.utilities.gnome-terminal
+    apps.utilities.gpg
+    apps.utilities.qbittorrent
     ./dconf/battlestation.nix
   ];
 

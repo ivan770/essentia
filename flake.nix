@@ -15,6 +15,7 @@
       repo = "home-manager";
       ref = "master";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "flake-utils";
     };
 
     nur = {

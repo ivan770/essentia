@@ -42,6 +42,8 @@
       };
     };
 
+    security.tpm2.enable = true;
+
     hardware.enableRedistributableFirmware = true;
 
     boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;

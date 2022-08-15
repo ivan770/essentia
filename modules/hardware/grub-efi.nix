@@ -32,7 +32,6 @@ in
         version = 2;
         device = "nodev";
         efiSupport = true;
-        useOSProber = true;
         gfxmodeEfi = cfg.gfxmode;
       };
     };

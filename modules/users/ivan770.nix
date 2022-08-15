@@ -1,18 +1,13 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 {
-  config = {
-    users.users.ivan770 = {
-      isNormalUser = true;
-      home = "/home/ivan770";
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-        "tss"
-      ];
-      shell = pkgs.bash;
-    };
-
-    nix.settings.allowed-users = [ "ivan770" ];
+  config.users.users.ivan770 = {
+    isNormalUser = true;
+    home = "/home/ivan770";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "tss"
+    ];
   };
 }

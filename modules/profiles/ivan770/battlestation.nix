@@ -43,7 +43,10 @@
       };
     };
     programs = {
-      bash.enable = true;
+      bash = {
+        enable = true;
+        enableVteIntegration = true;
+      };
       home-manager.enable = true;
     };
   };

@@ -17,6 +17,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nur = {
+      type = "github";
+      owner = "nix-community";
+      repo = "NUR";
+      ref = "master";
+    };
+
     nixos-hardware = {
       type = "github";
       owner = "NixOS";

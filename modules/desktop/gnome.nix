@@ -20,6 +20,7 @@ with lib; {
       gnome = mkMerge [
         {
           core-utilities.enable = false;
+          chrome-gnome-shell.enable = true;
         }
         # Remove capability to disable keyring as soon as https://github.com/NixOS/nixpkgs/issues/166887
         # gets resolved.

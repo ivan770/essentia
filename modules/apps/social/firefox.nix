@@ -38,6 +38,9 @@ in
               "browser.discovery.enabled" = false;
               "datareporting.healthreport.uploadEnabled" = false;
 
+              # Bloatware removal
+              "extensions.pocket.enabled" = false;
+
               # Disable sync for those items, that are managed
               # by extensions or Nix
               "services.sync.declinedEngines" = "passwords,creditcards,prefs,addons";

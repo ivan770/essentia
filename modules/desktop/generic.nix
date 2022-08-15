@@ -1,8 +1,6 @@
 {
   lib,
-  pkgs,
   config,
-  inputs,
   nixosModules,
   ...
 }: let
@@ -19,13 +17,13 @@ in
       };
     };
 
-    imports = [
-      nixosModules.common.home-manager
-      nixosModules.common.locale
-      nixosModules.common.nix
-      nixosModules.desktop.fonts
-      nixosModules.desktop.gnome
-      nixosModules.desktop.plymouth
+    imports = with nixosModules; [
+      common.home-manager
+      common.locale
+      common.nix
+      desktop.fonts
+      desktop.gnome
+      desktop.plymouth
     ];
 
     config.essentia = {

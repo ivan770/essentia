@@ -1,8 +1,4 @@
-{
-  lib,
-  config,
-  ...
-}: {
+{config, ...}: {
   config = {
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;

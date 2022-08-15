@@ -15,7 +15,7 @@ with lib; {
   config.programs.gnome-terminal = {
     enable = true;
     profile = {
-      main = cfg.settings // {
+      "312e3564-525a-4321-bb69-6cf8f9c2bd84" = cfg.settings // {
         default = true;
         visibleName = "Main profile";
       };

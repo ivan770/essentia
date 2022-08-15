@@ -202,7 +202,6 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell" = {
-      app-picker-layout = "[{'org.gnome.Settings.desktop': <{'position': <0>}>, 'gnome-system-monitor.desktop': <{'position': <1>}>, 'org.gnome.Terminal.desktop': <{'position': <2>}>, 'Utilities': <{'position': <3>}>, 'discord.desktop': <{'position': <4>}>, 'org.gnome.Extensions.desktop': <{'position': <5>}>, "Garry's Mod.desktop": <{'position': <6>}>, 'LEGO Star Wars The Skywalker Saga.desktop': <{'position': <7>}>, 'com.lunarclient.LunarClient.desktop': <{'position': <8>}>, 'cups.desktop': <{'position': <9>}>, 'nixos-manual.desktop': <{'position': <10>}>, 'org.qbittorrent.qBittorrent.desktop': <{'position': <11>}>, 'steam.desktop': <{'position': <12>}>, 'telegramdesktop.desktop': <{'position': <13>}>, 'org.gnome.Tour.desktop': <{'position': <14>}>, 'code.desktop': <{'position': <15>}>, 'xterm.desktop': <{'position': <16>}>}]";
       enabled-extensions = [ "appindicatorsupport@rgcjonas.gmail.com" "dash-to-dock@micxgx.gmail.com" ];
       favorite-apps = [ "firefox.desktop" "org.gnome.Nautilus.desktop" ];
       welcome-dialog-last-shown-version = "42.3.1";

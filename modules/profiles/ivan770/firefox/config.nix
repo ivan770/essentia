@@ -1,6 +1,4 @@
-{ nur, ... }:
-
-{
+{nur, ...}: {
   extensions = with nur.repos.rycee.firefox-addons; [
     bitwarden
     gnome-shell-integration

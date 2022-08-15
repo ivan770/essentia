@@ -1,6 +1,4 @@
-inputs:
-
-let
+inputs: let
   inherit inputs;
 in
-self: super: { }
+  self: super: {}

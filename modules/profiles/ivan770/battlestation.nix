@@ -1,6 +1,11 @@
-{ config, pkgs, lib, nur, nixosModules, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  nur,
+  nixosModules,
+  ...
+}: {
   imports = [
     nixosModules.apps.editors.helix
     nixosModules.apps.editors.vscode
@@ -30,7 +35,7 @@
     };
     essentia.programs = {
       discord.settings = builtins.readFile ./discord/settings.json;
-      firefox = import ./firefox/config.nix { inherit nur; };
+      firefox = import ./firefox/config.nix {inherit nur;};
       gnome-terminal.settings = {
         audibleBell = false;
       };

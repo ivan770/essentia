@@ -1,6 +1,10 @@
-{ config, inputs, nixosModules, pkgs, ... }:
-
 {
+  config,
+  inputs,
+  nixosModules,
+  pkgs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.common-cpu-amd

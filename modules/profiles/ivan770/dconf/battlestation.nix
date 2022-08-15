@@ -1,12 +1,9 @@
 # Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
-{ lib, ... }:
-
-with lib.hm.gvariant;
-
-{
+{lib, ...}:
+with lib.hm.gvariant; {
   dconf.settings = {
     "apps/seahorse/listing" = {
-      keyrings-selected = [ "gnupg://" ];
+      keyrings-selected = ["gnupg://"];
     };
 
     "apps/seahorse/windows/key-manager" = {
@@ -16,18 +13,18 @@ with lib.hm.gvariant;
 
     "org/gnome/control-center" = {
       last-panel = "mouse";
-      window-state = mkTuple [ 980 820 ];
+      window-state = mkTuple [980 820];
     };
 
     "org/gnome/desktop/app-folders" = {
-      folder-children = [ "" ];
+      folder-children = [""];
     };
 
     "org/gnome/desktop/input-sources" = {
       per-window = false;
       show-all-sources = false;
-      sources = [ (mkTuple [ "xkb" "us" ]) (mkTuple [ "xkb" "ru" ]) (mkTuple [ "xkb" "ua" ]) ];
-      xkb-options = [ "terminate:ctrl_alt_bksp" "grp:alt_shift_toggle" ];
+      sources = [(mkTuple ["xkb" "us"]) (mkTuple ["xkb" "ru"]) (mkTuple ["xkb" "ua"])];
+      xkb-options = ["terminate:ctrl_alt_bksp" "grp:alt_shift_toggle"];
     };
 
     "org/gnome/desktop/interface" = {
@@ -43,7 +40,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/notifications" = {
-      application-children = [ "org-gnome-console" "telegramdesktop" "firefox" "org-qbittorrent-qbittorrent" "gnome-system-monitor" "org-gnome-nautilus" "org-gnome-fileroller" "steam" "org-gnome-tweaks" ];
+      application-children = ["org-gnome-console" "telegramdesktop" "firefox" "org-qbittorrent-qbittorrent" "gnome-system-monitor" "org-gnome-nautilus" "org-gnome-fileroller" "steam" "org-gnome-tweaks"];
     };
 
     "org/gnome/desktop/notifications/application/firefox" = {
@@ -105,7 +102,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/search-providers" = {
-      sort-order = [ "org.gnome.Contacts.desktop" "org.gnome.Documents.desktop" "org.gnome.Nautilus.desktop" ];
+      sort-order = ["org.gnome.Contacts.desktop" "org.gnome.Documents.desktop" "org.gnome.Nautilus.desktop"];
     };
 
     "org/gnome/desktop/session" = {
@@ -150,7 +147,7 @@ with lib.hm.gvariant;
       network-total-in-bits = false;
       show-dependencies = false;
       show-whose-processes = "user";
-      window-state = mkTuple [ 700 500 ];
+      window-state = mkTuple [700 500];
     };
 
     "org/gnome/gnome-system-monitor/disktreenew" = {
@@ -159,7 +156,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/gnome-system-monitor/proctree" = {
-      columns-order = [ 0 1 2 3 4 6 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 ];
+      columns-order = [0 1 2 3 4 6 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26];
       sort-col = 8;
       sort-order = 0;
     };
@@ -187,7 +184,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/nautilus/window-state" = {
-      initial-size = mkTuple [ 890 550 ];
+      initial-size = mkTuple [890 550];
       maximized = false;
     };
 
@@ -202,8 +199,8 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell" = {
-      enabled-extensions = [ "appindicatorsupport@rgcjonas.gmail.com" "dash-to-dock@micxgx.gmail.com" ];
-      favorite-apps = [ "firefox.desktop" "org.gnome.Nautilus.desktop" ];
+      enabled-extensions = ["appindicatorsupport@rgcjonas.gmail.com" "dash-to-dock@micxgx.gmail.com"];
+      favorite-apps = ["firefox.desktop" "org.gnome.Nautilus.desktop"];
       welcome-dialog-last-shown-version = "42.3.1";
     };
 
@@ -241,11 +238,11 @@ with lib.hm.gvariant;
       sort-directories-first = false;
       sort-order = "ascending";
       type-format = "category";
-      window-size = mkTuple [ 888 327 ];
+      window-size = mkTuple [888 327];
     };
 
     "org/gtk/settings/color-chooser" = {
-      selected-color = mkTuple [ true 1.0 ];
+      selected-color = mkTuple [true 1.0];
     };
 
     "org/gtk/settings/file-chooser" = {
@@ -259,13 +256,12 @@ with lib.hm.gvariant;
       sort-directories-first = false;
       sort-order = "ascending";
       type-format = "category";
-      window-position = mkTuple [ 26 23 ];
-      window-size = mkTuple [ 1203 902 ];
+      window-position = mkTuple [26 23];
+      window-size = mkTuple [1203 902];
     };
 
     "system/proxy" = {
       mode = "none";
     };
-
   };
 }

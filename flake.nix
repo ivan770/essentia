@@ -37,27 +37,22 @@
     };
   };
 
-  outputs = inputs:
-    let
-      inherit (inputs.nixpkgs) lib;
-      utils = import ./utils.nix { inherit inputs lib; };
-    in
+  outputs = inputs: let
+    inherit (inputs.nixpkgs) lib;
+    utils = import ./utils.nix {inherit inputs lib;};
+  in
     {
       nixosModules = utils.mkAttrsTree ./modules;
       overlays = utils.mkOverlayTree ./overlays;
       nixosConfigurations = utils.mkNixosConfigs ./hosts;
     }
-
-    //
-
-    inputs.flake-utils.lib.eachDefaultSystem (system:
-      let
+    // inputs.flake-utils.lib.eachDefaultSystem (
+      system: let
         pkgs = import inputs.nixpkgs {
           inherit system;
         };
-      in
-      {
-        formatter = pkgs.nixpkgs-fmt;
+      in {
+        formatter = pkgs.alejandra;
       }
     );
 }

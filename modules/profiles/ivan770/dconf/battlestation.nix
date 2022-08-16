@@ -17,7 +17,7 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/desktop/app-folders" = {
-      folder-children = ["" "0c4f3931-521e-4951-8d18-beef06aed854" "52ab9df1-abdc-4d60-8ea4-838768e5002d" "f61696a4-9056-4e56-9dbd-6d732283a8cb"];
+      folder-children = ["0c4f3931-521e-4951-8d18-beef06aed854" "52ab9df1-abdc-4d60-8ea4-838768e5002d" "f61696a4-9056-4e56-9dbd-6d732283a8cb"];
     };
 
     "org/gnome/desktop/app-folders/folders/0c4f3931-521e-4951-8d18-beef06aed854" = {
@@ -216,7 +216,7 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/shell" = {
-      app-picker-layout = "[{'f61696a4-9056-4e56-9dbd-6d732283a8cb': <{'position': <0>}>, '52ab9df1-abdc-4d60-8ea4-838768e5002d': <{'position': <1>}>, 'org.gnome.Terminal.desktop': <{'position': <2>}>, 'org.gnome.FileRoller.desktop': <{'position': <3>}>, 'discord.desktop': <{'position': <4>}>, 'org.gnome.seahorse.Application.desktop': <{'position': <5>}>, 'org.qbittorrent.qBittorrent.desktop': <{'position': <6>}>, 'telegramdesktop.desktop': <{'position': <7>}>, 'code.desktop': <{'position': <8>}>, '0c4f3931-521e-4951-8d18-beef06aed854': <{'position': <9>}>}]";
+      app-picker-layout = "[{'f61696a4-9056-4e56-9dbd-6d732283a8cb': <{'position': <0>}>, '52ab9df1-abdc-4d60-8ea4-838768e5002d': <{'position': <1>}>, 'org.gnome.Terminal.desktop': <{'position': <2>}>, 'discord.desktop': <{'position': <3>}>, 'org.qbittorrent.qBittorrent.desktop': <{'position': <4>}>, 'telegramdesktop.desktop': <{'position': <5>}>, 'code.desktop': <{'position': <6>}>, 'org.gnome.FileRoller.desktop': <{'position': <7>}>, '0c4f3931-521e-4951-8d18-beef06aed854': <{'position': <8>}>, 'org.gnome.seahorse.Application.desktop': <{'position': <9>}>}]";
       enabled-extensions = ["appindicatorsupport@rgcjonas.gmail.com" "dash-to-dock@micxgx.gmail.com"];
       favorite-apps = ["firefox.desktop" "org.gnome.Nautilus.desktop"];
       welcome-dialog-last-shown-version = "42.3.1";

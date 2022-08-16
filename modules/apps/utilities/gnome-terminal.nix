@@ -8,7 +8,7 @@ in
   with lib; {
     options.essentia.programs.gnome-terminal = {
       settings = mkOption {
-        type = with types; attrsOf (either bool (either int (either str submodule)));
+        type = types.attrs;
         default = {};
         description = "Preferred GNOME terminal settings";
       };

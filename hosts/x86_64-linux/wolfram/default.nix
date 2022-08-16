@@ -27,13 +27,16 @@
 
   config = {
     essentia = {
-      desktop = {
-        profiles = {
-          ivan770 = "battlestation";
-        };
+      home-manager.profiles = {
+        ivan770 = "battlestation";
       };
       grub-efi = {
         gfxmode = "1920x1080";
+      };
+      locale = {
+        base = "en_US.UTF-8";
+        units = "uk_UA.UTF-8";
+        timeZone = "Europe/Kiev";
       };
     };
 

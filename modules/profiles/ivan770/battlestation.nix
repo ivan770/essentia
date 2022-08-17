@@ -69,11 +69,7 @@
       ];
       helix.settings = builtins.readFile ./helix/config.toml;
       qbittorrent.settings = builtins.readFile ./qbittorrent/settings.conf;
-      vscode = {
-        settings = builtins.readFile ./vscode/settings.json;
-        keybindings = builtins.readFile ./vscode/keybindings.json;
-        extensions = (import ./vscode/extensions.nix pkgs).extensions;
-      };
+      vscode = import ./vscode/config.nix {inherit pkgs;};
     };
     programs = {
       bash = {

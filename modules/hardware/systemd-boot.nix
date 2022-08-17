@@ -20,7 +20,6 @@ in
         canTouchEfiVariables = true;
         efiSysMountPoint = cfg.mountpoint;
       };
-      grub.enable = false;
       systemd-boot = {
         enable = true;
         editor = false;

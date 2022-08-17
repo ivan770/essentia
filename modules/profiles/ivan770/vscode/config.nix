@@ -1,4 +1,6 @@
 {pkgs, ...}: {
+  settings = builtins.readFile ./settings.json;
+  keybindings = builtins.readFile ./keybindings.json;
   extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
     {
       name = "gitlens";

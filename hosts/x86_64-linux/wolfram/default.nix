@@ -11,9 +11,9 @@
     inputs.nixos-hardware.nixosModules.common-pc-hdd
     nixosModules.users.ivan770
     nixosModules.desktop.generic
-    nixosModules.hardware.grub-efi
     nixosModules.hardware.nvidia
     nixosModules.hardware.printing
+    nixosModules.hardware.systemd-boot
     # Required to enable Lunar Client via Flatpak.
     # Nixpkgs' version of Lunar is extremely outdated and isn't working properly
     #
@@ -29,9 +29,6 @@
     essentia = {
       home-manager.profiles = {
         ivan770 = "battlestation";
-      };
-      grub-efi = {
-        gfxmode = "1920x1080";
       };
       locale = {
         base = "en_US.UTF-8";

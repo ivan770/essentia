@@ -3,22 +3,15 @@
   config,
   ...
 }: let
-  cfg = config.essentia.grub-efi;
+  cfg = config.essentia.systemd-boot;
 in
   with lib; {
-    options.essentia.grub-efi = {
+    options.essentia.systemd-boot = {
       mountpoint = mkOption {
         type = types.str;
         default = "/boot/efi";
         description = "Bootloader mountpoint";
         example = "/boot";
-      };
-
-      gfxmode = mkOption {
-        type = types.str;
-        default = "1024x768";
-        description = "gfxmode value to pass to GRUB";
-        example = "1920x1080";
       };
     };
 
@@ -27,12 +20,13 @@ in
         canTouchEfiVariables = true;
         efiSysMountPoint = cfg.mountpoint;
       };
-      grub = {
+      grub.enable = false;
+      systemd-boot = {
         enable = true;
-        version = 2;
-        device = "nodev";
-        efiSupport = true;
-        gfxmodeEfi = cfg.gfxmode;
+        editor = false;
+        configurationLimit = 5;
+        consoleMode = "max";
       };
+      timeout = 2;
     };
   }

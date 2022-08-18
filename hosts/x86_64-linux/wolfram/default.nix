@@ -37,8 +37,11 @@
       };
     };
 
-    # Network is expected to be managed by NetworkManager anyway.
-    networking.useDHCP = false;
+    networking = {
+      # Network is expected to be managed by NetworkManager anyway.
+      useDHCP = false;
+      wireless.enable = false;
+    };
 
     security.tpm2.enable = true;
 

@@ -36,7 +36,10 @@
     };
     essentia.programs = {
       discord.settings = builtins.readFile ./discord/settings.json;
-      firefox = import ./firefox/config.nix {inherit nur;};
+      firefox = import ./firefox/config.nix {
+        inherit lib nur;
+        enableGnomeShell = true;
+      };
       gnome-terminal.settings = import ./gnome-terminal/config.nix {};
       gpg.sshKeys = [
         "B0E258EAD4123779C4CFA077DBD8328FD08BADF5"

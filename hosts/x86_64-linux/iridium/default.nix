@@ -16,6 +16,7 @@
     nixosModules.users.ivan770
     nixosModules.desktop.generic
     nixosModules.desktop.sway
+    nixosModules.hardware.sound
     nixosModules.hardware.systemd-boot
   ];
 

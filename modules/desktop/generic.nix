@@ -4,7 +4,7 @@
     common.locale
     common.nix
     desktop.fonts
-    desktop.gnome
     desktop.plymouth
+    hardware.sound
   ];
 }

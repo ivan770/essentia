@@ -5,6 +5,5 @@
     common.nix
     desktop.fonts
     desktop.plymouth
-    hardware.sound
   ];
 }

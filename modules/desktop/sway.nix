@@ -11,21 +11,7 @@
         xdg-desktop-portal-gtk
       ];
     };
-    programs.sway = {
-      enable = true;
-      wrapperFeatures = {
-        base = true;
-        gtk = true;
-      };
-      extraPackages = with pkgs; [
-        xwayland
-      ];
-      extraSessionCommands = ''
-        export SDL_VIDEODRIVER=wayland
-        export QT_QPA_PLATFORM=wayland
-        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-      '';
-    };
+    programs.sway.enable = true;
     services = {
       dbus.enable = true;
       greetd = {

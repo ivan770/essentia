@@ -49,53 +49,21 @@
       home-manager.enable = true;
       waybar = {
         enable = true;
-        settings = {
-          mainBar = {
-            layer = "top";
-            modules-left = [
-              "network"
-            ];
-            modules-right = [
-              "battery"
-              "clock"
-            ];
-
-            network = {
-              tooltip = false;
-              format-wifi = "SSID: {essid}";
-              format-ethernet = "";
-            };
-
-            battery = {
-              states = {
-                good = 95;
-                warning = 30;
-                critical = 20;
-              };
-              format = "{icon} {capacity}%";
-              format-charging = "Charging";
-              format-plugged = "Plugged";
-              format-alt = "{time} {icon}";
-              format-icons = [
-                "1"
-                "2"
-                "3"
-                "4"
-                "5"
-              ];
-            };
-
-            clock = {
-              format = "%I:%M %p";
-            };
-          };
-        };
-        style = builtins.readFile ./waybar/style.css;
+        settings = import ./sway/waybar/bars.nix {};
+        style = builtins.readFile ./sway/waybar/style.css;
       };
     };
     wayland.windowManager.sway = {
       enable = true;
-      package = null;
+      wrapperFeatures = {
+        base = true;
+        gtk = true;
+      };
+      extraSessionCommands = ''
+        export SDL_VIDEODRIVER=wayland
+        export QT_QPA_PLATFORM=wayland
+        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+      '';
       config = {
         terminal = "alacritty";
         bars = [

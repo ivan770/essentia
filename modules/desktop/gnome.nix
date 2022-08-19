@@ -13,10 +13,9 @@ in
       keyringServices = mkEnableOption "Enable GNOME keyring and its related services";
     };
 
-    # GNOME requires NetworkManager and sound anyway
+    # GNOME requires NetworkManager anyway
     imports = with nixosModules; [
       hardware.network-manager
-      hardware.sound
     ];
 
     config = {

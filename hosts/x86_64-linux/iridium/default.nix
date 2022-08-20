@@ -16,8 +16,11 @@
     nixosModules.users.ivan770
     nixosModules.desktop.generic
     nixosModules.desktop.sway
+    nixosModules.hardware.backlight
+    nixosModules.hardware.network-manager
     nixosModules.hardware.sound
     nixosModules.hardware.systemd-boot
+    nixosModules.hardware.tpm
   ];
 
   config = {
@@ -31,15 +34,6 @@
         timeZone = "Europe/Kiev";
       };
     };
-
-    networking = {
-      useDHCP = false;
-      networkmanager.enable = true;
-    };
-    
-    programs.light.enable = true;
-
-    security.tpm2.enable = true;
 
     hardware.enableRedistributableFirmware = true;
 

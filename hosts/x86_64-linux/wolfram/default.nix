@@ -16,6 +16,7 @@
     nixosModules.hardware.printing
     nixosModules.hardware.sound
     nixosModules.hardware.systemd-boot
+    nixosModules.hardware.tpm
     # Required to enable Lunar Client via Flatpak.
     # Nixpkgs' version of Lunar is extremely outdated and isn't working properly
     #
@@ -38,14 +39,6 @@
         timeZone = "Europe/Kiev";
       };
     };
-
-    networking = {
-      # Network is expected to be managed by NetworkManager anyway.
-      useDHCP = false;
-      wireless.enable = false;
-    };
-
-    security.tpm2.enable = true;
 
     hardware.enableRedistributableFirmware = true;
 

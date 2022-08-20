@@ -1,4 +1,8 @@
-{lib, pkgs,...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   terminal = "foot";
   menu = "bemenu-run --list 10 -c -W 0.5 -f";
   bars = [];

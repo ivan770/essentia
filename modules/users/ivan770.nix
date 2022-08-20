@@ -4,6 +4,7 @@
     home = "/home/ivan770";
     extraGroups = [
       "networkmanager"
+      "video"
       "wheel"
       "tss"
     ];

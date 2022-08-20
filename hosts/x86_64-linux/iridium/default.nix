@@ -36,6 +36,8 @@
       useDHCP = false;
       networkmanager.enable = true;
     };
+    
+    programs.light.enable = true;
 
     security.tpm2.enable = true;
 

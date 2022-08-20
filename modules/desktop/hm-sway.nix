@@ -29,9 +29,12 @@ in
 
     config = {
       home.packages = with pkgs; [
+        bemenu
+        foot
         swaylock
         wl-clipboard
-        alacritty
+        grim
+        slurp
       ];
       programs.waybar = mkMerge [
         {
@@ -44,7 +47,7 @@ in
         (mkIf (isAttrs cfg.waybarSettings) {
           settings = cfg.waybarSettings;
         })
-        (mkIf (isAttrs cfg.waybarStyle) {
+        (mkIf (isString cfg.waybarStyle) {
           style = cfg.waybarStyle;
         })
       ];
@@ -61,8 +64,8 @@ in
             export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
           '';
         }
-        (mkIf (isAtrrs cfg.settings) {
-          config = cfg.settings;
+        (mkIf (isAttrs cfg.swaySettings) {
+          config = cfg.swaySettings;
         })
       ];
     };

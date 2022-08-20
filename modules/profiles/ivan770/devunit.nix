@@ -44,7 +44,7 @@
           };
       };
       sway = {
-        swaySettings = import ./sway/sway.nix {inherit pkgs;};
+        swaySettings = import ./sway/sway.nix {inherit lib pkgs;};
         waybarSettings = import ./sway/waybar/bars.nix {};
         waybarStyle = builtins.readFile ./sway/waybar/style.css;
       };

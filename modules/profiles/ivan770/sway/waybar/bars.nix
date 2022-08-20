@@ -1,20 +1,84 @@
 {...}: {
   mainBar = {
     layer = "top";
+    position = "top";
     modules-left = [
-      "network"
+      "sway/workspaces"
+      "custom/right-arrow-dark"
+    ];
+    modules-center = [
+      "custom/left-arrow-dark"
+      "clock#1"
+      "custom/left-arrow-light"
+      "custom/left-arrow-dark"
+      "clock#2"
+      "custom/right-arrow-dark"
+      "custom/right-arrow-light"
+      "clock#3"
+      "custom/right-arrow-dark"
     ];
     modules-right = [
+      "custom/left-arrow-dark"
       "battery"
-      "clock"
+      "custom/left-arrow-light"
+      "custom/left-arrow-dark"
+      "tray"
     ];
-
-    network = {
+    
+    "custom/left-arrow-dark" = {
+      format = "";
       tooltip = false;
-      format-wifi = "SSID: {essid}";
-      format-ethernet = "";
     };
-
+    
+    "custom/left-arrow-light" = {
+      format = "";
+      tooltip = false;
+    };
+    
+    "custom/right-arrow-dark" = {
+      format = "";
+      tooltip = false;
+    };
+    
+    "custom/right-arrow-light" = {
+      format = "";
+      tooltip = false;
+    };
+    
+    "sway/workspaces" = {
+      disable-scroll = true;
+      format = "{name}";
+    };
+    
+    "clock#1" = {
+      format = "{:%a}";
+      tooltip = false;
+    };
+      
+    "clock#2" = {
+      format = "{:%H:%M}";
+      tooltip = false;
+    };
+    
+    "clock#3" = {
+      format = "{:%d-%m}";
+      tooltip = false;
+    };
+    
+    memory = {
+      interval = 5;
+      format = "Mem {}%";
+    };
+      
+    cpu = {
+      interval = 5;
+      format = "CPU {usage:2}%";
+    };
+    
+    tray = {
+      icon-size = 15;
+    };
+    
     battery = {
       states = {
         good = 95;
@@ -22,20 +86,21 @@
         critical = 20;
       };
       format = "{icon} {capacity}%";
-      format-charging = "Charging";
-      format-plugged = "Plugged";
-      format-alt = "{time} {icon}";
+      format-charging = " {capacity}%";
+      format-plugged = " {capacity}%";
+      format-alt = "{icon} {time}";
       format-icons = [
-        "1"
-        "2"
-        "3"
-        "4"
-        "5"
+        "" "" "" "" ""
       ];
     };
-
-    clock = {
-      format = "%I:%M %p";
+    
+    network = {
+      format = "{ifname}";
+      format-wifi = " {essid}";
+      format-ethernet = " {ifname}";
+      format-disconnected = "";
+      tooltip-format-wifi = "{signalStrength}%";
+      max-length = 20;
     };
   };
 }

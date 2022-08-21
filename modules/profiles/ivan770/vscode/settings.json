@@ -210,7 +210,7 @@
 
     // ==== OTHER ====
 
-    // Remote useless tutorials
+    // Remove useless tutorials
     "gitlens.showWelcomeOnInstall": false,
 
     // Remove online telemetry stuff
@@ -218,6 +218,10 @@
     "workbench.enableExperiments": false,
     "workbench.settings.enableNaturalLanguageSearch": false,
     "telemetry.telemetryLevel": "off",
+
+    // Remove auto-updates
+    "update.mode": "none",
+    "extensions.autoUpdate": false,
 
     // Disable noisy "trust" feature
     "security.workspace.trust.enabled": false,

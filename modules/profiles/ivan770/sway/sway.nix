@@ -15,6 +15,11 @@
     natural_scroll = "enabled";
     scroll_method = "two_finger";
   };
+  seat = {
+    "*" = {
+      xcursor_theme = "${config.gtk.cursorTheme.name} ${config.gtk.cursorTheme.size}";
+    };
+  };
   keybindings = lib.mkOptionDefault {
     Print = "exec grim -g \"$(slurp -d)\" - | wl-copy -t image/png";
   };

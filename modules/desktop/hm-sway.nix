@@ -51,6 +51,13 @@ in
           style = cfg.waybarStyle;
         })
       ];
+      gtk = {
+        enable = true;
+        cursorTheme = {
+          name = "Adwaita";
+          size = 48;
+        };
+      };
       wayland.windowManager.sway = mkMerge [
         {
           enable = true;

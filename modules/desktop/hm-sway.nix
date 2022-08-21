@@ -34,7 +34,6 @@ in
         swaylock
         wl-clipboard
         grim
-        slurp
       ];
       programs.waybar = mkMerge [
         {

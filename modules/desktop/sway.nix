@@ -13,7 +13,10 @@
     };
     programs.sway.enable = true;
     services = {
-      dbus.enable = true;
+      dbus = {
+        enable = true;
+        packages = [pkgs.gcr];
+      };
       greetd = {
         enable = true;
         settings = {

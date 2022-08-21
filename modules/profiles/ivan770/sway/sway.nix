@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   ...
@@ -17,7 +18,7 @@
   };
   seat = {
     "*" = {
-      xcursor_theme = "${config.gtk.cursorTheme.name} ${config.gtk.cursorTheme.size}";
+      xcursor_theme = "${config.gtk.cursorTheme.name} ${builtins.toString config.gtk.cursorTheme.size}";
     };
   };
   keybindings = lib.mkOptionDefault {

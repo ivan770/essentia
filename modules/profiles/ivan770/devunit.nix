@@ -55,6 +55,10 @@
         enableVteIntegration = true;
       };
       home-manager.enable = true;
+      foot = {
+        enable = true;
+        settings = import ./foot/config.nix {};
+      };
     };
   };
 }

@@ -31,7 +31,6 @@ in
       home.packages = with pkgs; [
         bemenu
         pinentry-gnome
-        foot
         swaylock
         wl-clipboard
         grim

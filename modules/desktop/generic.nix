@@ -5,5 +5,6 @@
     common.nix
     desktop.fonts
     desktop.plymouth
+    desktop.silent-boot
   ];
 }

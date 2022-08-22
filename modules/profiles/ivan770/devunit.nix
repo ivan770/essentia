@@ -26,7 +26,7 @@
     essentia = {
       programs = {
         firefox =
-          import ./firefox/config.nix {
+          import ./configs/firefox.nix {
             inherit lib nur;
             enableGnomeShell = false;
           }
@@ -36,7 +36,7 @@
         gpg.sshKeys = [
           "B0E258EAD4123779C4CFA077DBD8328FD08BADF5"
         ];
-        helix.settings = builtins.readFile ./helix/config.toml;
+        helix.settings = builtins.readFile ./configs/helix.toml;
         vscode =
           import ./vscode/config.nix {inherit pkgs;}
           // {
@@ -57,7 +57,7 @@
       home-manager.enable = true;
       foot = {
         enable = true;
-        settings = import ./foot/config.nix {};
+        settings = import ./configs/foot.nix {};
       };
     };
   };

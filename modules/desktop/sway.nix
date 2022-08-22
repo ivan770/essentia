@@ -6,21 +6,17 @@
   config = {
     # FIXME: Move this to hm-sway if possible
     environment.systemPackages = with pkgs; [
-      slurp
-      jq
+      bemenu
     ];
     xdg.portal = {
       enable = true;
-      gtkUsePortal = true;
       wlr = {
         enable = true;
         settings = {
           screencast = {
             max_fps = 30;
-            chooser_type = "simple";
-            chooser_cmd = ''
-              ${pkgs.sway}/bin/swaymsg -t get_tree | ${pkgs.jq}/bin/jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | ${pkgs.slurp}/bin/slurp
-            '';
+            chooser_type = "dmenu";
+            chooser_cmd = "${pkgs.bemenu}/bin/bemenu --list 10 -c -W 0.5 -f";
           };
         };
       };

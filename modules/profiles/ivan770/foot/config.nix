@@ -1,6 +1,6 @@
 {...}: {
   main = {
-    font = "JetBrains Mono:size=12";
+    font = "JetBrains Mono:size=10";
   };
 
   cursor = {
@@ -8,8 +8,8 @@
   };
 
   colors = {
-    foreground = "000000";
-    background = "FFFFFF";
+    foreground = "FFFFFF";
+    background = "000000";
 
     regular0 = "000000";
     regular1 = "CD0000";

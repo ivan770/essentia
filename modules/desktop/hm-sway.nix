@@ -29,11 +29,11 @@ in
 
     config = {
       home.packages = with pkgs; [
-        bemenu
         pinentry-gnome
         swaylock
         wl-clipboard
         grim
+        slurp
       ];
       programs.waybar = mkMerge [
         {

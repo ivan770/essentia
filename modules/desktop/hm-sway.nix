@@ -31,6 +31,7 @@ in
       home.packages = with pkgs; [
         pinentry-gnome
         swaylock
+        wlogout
         wl-clipboard
         grim
         slurp

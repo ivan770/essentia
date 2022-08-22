@@ -35,17 +35,17 @@
       stateVersion = "22.05";
     };
     essentia.programs = {
-      discord.settings = builtins.readFile ./discord/settings.json;
-      firefox = import ./firefox/config.nix {
+      discord.settings = builtins.readFile ./configs/discord.json;
+      firefox = import ./configs/firefox.nix {
         inherit lib nur;
         enableGnomeShell = true;
       };
-      gnome-terminal.settings = import ./gnome-terminal/config.nix {};
+      gnome-terminal.settings = import ./configs/gnome-terminal.nix {};
       gpg.sshKeys = [
         "B0E258EAD4123779C4CFA077DBD8328FD08BADF5"
       ];
-      helix.settings = builtins.readFile ./helix/config.toml;
-      qbittorrent.settings = builtins.readFile ./qbittorrent/settings.conf;
+      helix.settings = builtins.readFile ./configs/helix.toml;
+      qbittorrent.settings = builtins.readFile ./configs/qbittorrent.conf;
       vscode = import ./vscode/config.nix {inherit pkgs;};
     };
     programs = {

@@ -1,72 +1,29 @@
 {pkgs, ...}: {
   settings = builtins.readFile ./settings.json;
   keybindings = builtins.readFile ./keybindings.json;
-  extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-    {
-      name = "gitlens";
-      publisher = "eamodio";
-      version = "12.1.2";
-      sha256 = "qclBbZeGH7ODYAruhTi7X5FTRcai29nGTpSbeF129XI=";
-    }
-    {
-      name = "theme-blackboard";
-      publisher = "gerane";
-      version = "0.0.5";
-      sha256 = "SjWdM+hcDzHl7UclxjYPGY7wesduzyUksEnZmm89Y7M=";
-    }
-    {
-      name = "go";
-      publisher = "golang";
-      version = "0.33.1";
-      sha256 = "LyQHaTJ39meZ4R0QzzFVsJelO/S5EPdXCxyyRoDuUjc=";
-    }
-    {
-      name = "rust-analyzer";
-      publisher = "rust-lang";
-      version = "0.4.1177";
-      sha256 = "vbT3MpKTa3QmuQw/Fg6+TFb2kC41yyW6NNKdMr7fj/o=";
-    }
-    {
-      name = "remote-ssh";
-      publisher = "ms-vscode-remote";
-      version = "0.68.0";
-      sha256 = "FAX/P7QJuRqe1obkP/K0Ho1tlADw4yAnkU9dI7xrHlY=";
-    }
-    {
-      name = "remote-ssh-edit";
-      publisher = "ms-vscode-remote";
-      version = "0.68.0";
-      sha256 = "FwykWD1WVNTgeaKAxR7HKOugjdJHBoNOB1aZ9auS4Fc=";
-    }
-    {
-      name = "hexeditor";
-      publisher = "ms-vscode";
-      version = "1.8.2";
-      sha256 = "UwDX7ErNfpEM1FWH7UwtSwPLzzk5t2qpY1g+5h4g04A=";
-    }
-    {
-      name = "crates";
-      publisher = "serayuzgur";
-      version = "0.5.10";
-      sha256 = "bY/dphiEPPgTg1zMjvxx4b0Ska2XggRucnZxtbppcLU=";
-    }
-    {
-      name = "even-better-toml";
-      publisher = "tamasfe";
-      version = "0.14.2";
-      sha256 = "lE2t+KUfClD/xjpvexTJlEr7Kufo+22DUM9Ju4Tisp0=";
-    }
-    {
-      name = "errorlens";
-      publisher = "usernamehw";
-      version = "3.4.1";
-      sha256 = "cJ1/jfCU+Agiyi1Qdd0AfyOTzwxOEfox4vLSJ0/UKNc=";
-    }
-    {
-      name = "nix-ide";
-      publisher = "jnoortheen";
-      version = "0.1.20";
-      sha256 = "Q6X41I68m0jaCXaQGEFOoAbSUrr/wFhfCH5KrduOtZo=";
-    }
-  ];
+  extensions = with pkgs.vscode-extensions;
+    [
+      eamodio.gitlens
+      golang.go
+      matklad.rust-analyzer
+      serayuzgur.crates
+      tamasfe.even-better-toml
+      usernamehw.errorlens
+      jnoortheen.nix-ide
+      arrterian.nix-env-selector
+    ]
+    ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      {
+        name = "theme-blackboard";
+        publisher = "gerane";
+        version = "0.0.5";
+        sha256 = "SjWdM+hcDzHl7UclxjYPGY7wesduzyUksEnZmm89Y7M=";
+      }
+      {
+        name = "hexeditor";
+        publisher = "ms-vscode";
+        version = "1.8.2";
+        sha256 = "UwDX7ErNfpEM1FWH7UwtSwPLzzk5t2qpY1g+5h4g04A=";
+      }
+    ];
 }

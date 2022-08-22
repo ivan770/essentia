@@ -41,6 +41,15 @@ in
               # Bloatware removal
               "extensions.pocket.enabled" = false;
 
+              # Remove disk-based caching
+              "browser.cache.disk.enable" = false;
+              "browser.cache.disk.smart_size.enabled" = false;
+              "browser.cache.disk_cache_ssl" = false;
+              "browser.cache.offline.enable" = false;
+
+              # Tune memory-based caching a bit
+              "browser.cache.memory.capacity" = 1024000;
+
               # Disable sync for those items, that are managed
               # by extensions or Nix
               "services.sync.declinedEngines" = "passwords,creditcards,prefs,addons";

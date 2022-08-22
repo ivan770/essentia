@@ -23,8 +23,8 @@
     {
       name = "rust-analyzer";
       publisher = "rust-lang";
-      version = "0.4.1161";
-      sha256 = "7WwWRf19UxenH1xNUZqt2uasjo2DfUZvtD7Fw1T8IjQ=";
+      version = "0.4.1177";
+      sha256 = "vbT3MpKTa3QmuQw/Fg6+TFb2kC41yyW6NNKdMr7fj/o=";
     }
     {
       name = "remote-ssh";

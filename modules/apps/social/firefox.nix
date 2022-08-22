@@ -40,6 +40,7 @@ in
 
               # Bloatware removal
               "extensions.pocket.enabled" = false;
+              "reader.parse-on-load.enabled" = false;
 
               # Remove disk-based caching
               "browser.cache.disk.enable" = false;

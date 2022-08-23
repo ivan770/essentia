@@ -4,6 +4,7 @@
     common.locale
     common.nix
     desktop.fonts
+    desktop.kmscon
     desktop.plymouth
     desktop.silent-boot
   ];

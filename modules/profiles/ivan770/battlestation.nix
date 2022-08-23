@@ -13,6 +13,7 @@
     apps.social.discord
     apps.utilities.gnome-terminal
     apps.utilities.gpg
+    apps.utilities.mpv
     apps.utilities.qbittorrent
     ./dconf/battlestation.nix
   ];
@@ -45,6 +46,14 @@
         "B0E258EAD4123779C4CFA077DBD8328FD08BADF5"
       ];
       helix.settings = builtins.readFile ./configs/helix.toml;
+      mpv = {
+        userProfile = import ./configs/mpv.nix;
+        activatedProfiles = [
+          "audio-normalization"
+          "large-cache-buffer"
+          "nvidia"
+        ];
+      };
       qbittorrent.settings = builtins.readFile ./configs/qbittorrent.conf;
       vscode = import ./vscode/config.nix {inherit pkgs;};
     };

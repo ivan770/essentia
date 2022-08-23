@@ -1,0 +1,3 @@
+{
+  save-position-on-quit = "yes";
+}

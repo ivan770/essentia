@@ -3,8 +3,8 @@
     common.home-manager
     common.locale
     common.nix
+    desktop.console
     desktop.fonts
-    desktop.kmscon
     desktop.plymouth
     desktop.silent-boot
   ];

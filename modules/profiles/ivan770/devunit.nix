@@ -54,11 +54,11 @@
         enable = true;
         enableVteIntegration = true;
       };
-      home-manager.enable = true;
       foot = {
         enable = true;
         settings = import ./configs/foot.nix {};
       };
+      home-manager.enable = true;
     };
   };
 }

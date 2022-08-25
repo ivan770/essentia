@@ -3,108 +3,84 @@
     layer = "top";
     position = "top";
     modules-left = [
-      "sway/workspaces"
-      "custom/right-arrow-dark"
+      "clock"
+      "battery"
+      "custom/cap-left"
     ];
     modules-center = [
-      "custom/left-arrow-dark"
-      "clock#1"
-      "custom/left-arrow-light"
-      "custom/left-arrow-dark"
-      "clock#2"
-      "custom/right-arrow-dark"
-      "custom/right-arrow-light"
-      "clock#3"
-      "custom/right-arrow-dark"
+      "sway/workspaces"
     ];
     modules-right = [
-      "custom/left-arrow-dark"
-      "battery"
-      "custom/left-arrow-light"
-      "custom/left-arrow-dark"
+      "custom/cap-right"
+      "sway/language"
+      "network"
       "tray"
+      "custom/offswitch"
     ];
-
-    "custom/left-arrow-dark" = {
-      format = "";
-      tooltip = false;
-    };
-
-    "custom/left-arrow-light" = {
-      format = "";
-      tooltip = false;
-    };
-
-    "custom/right-arrow-dark" = {
-      format = "";
-      tooltip = false;
-    };
-
-    "custom/right-arrow-light" = {
-      format = "";
-      tooltip = false;
-    };
-
-    "sway/workspaces" = {
-      disable-scroll = true;
-      format = "{name}";
-    };
-
-    "clock#1" = {
-      format = "{:%a}";
-      tooltip = false;
-    };
-
-    "clock#2" = {
-      format = "{:%H:%M}";
-      tooltip = false;
-    };
-
-    "clock#3" = {
-      format = "{:%d-%m}";
-      tooltip = false;
-    };
-
-    memory = {
-      interval = 5;
-      format = "Mem {}%";
-    };
-
-    cpu = {
-      interval = 5;
-      format = "CPU {usage:2}%";
-    };
-
-    tray = {
-      icon-size = 15;
-    };
 
     battery = {
       states = {
-        good = 95;
+        full = 90;
         warning = 30;
-        critical = 20;
+        critical = 15;
       };
+      tooltip = false;
+      full-at = 95;
+      format-plugged = "{icon} {capacity}%";
+      format-charging = "{icon} {capacity}%";
       format = "{icon} {capacity}%";
-      format-charging = " {capacity}%";
-      format-plugged = " {capacity}%";
-      format-alt = "{icon} {time}";
       format-icons = [
-        ""
-        ""
-        ""
-        ""
-        ""
+        ""
+        ""
+        ""
+        ""
+        ""
+        ""
+        ""
+        ""
+        ""
+        ""
       ];
     };
 
+    clock = {
+      format = "{:%a %b %d %H:%M}";
+      tooltip = false;
+    };
+
     network = {
-      format = "{ifname}";
+      interval = 10;
       format-wifi = " {essid}";
-      format-ethernet = " {ifname}";
-      format-disconnected = "";
-      tooltip-format-wifi = "{signalStrength}%";
+      format-ethernet = " {ipaddr}";
+      format-disconnected = " Disconnected";
+      tooltip = false;
       max-length = 20;
+    };
+
+    "sway/workspaces" = {
+      tooltip = false;
+      disable-scroll = true;
+    };
+
+    "sway/language" = {
+      tooltip = false;
+    };
+
+    "custom/offswitch" = {
+      tooltip = false;
+      format = "";
+      interval = "once";
+      on-click = "wlogout";
+    };
+
+    "custom/cap-left" = {
+      tooltip = false;
+      format = "";
+    };
+
+    "custom/cap-right" = {
+      tooltip = false;
+      format = "";
     };
   };
 }

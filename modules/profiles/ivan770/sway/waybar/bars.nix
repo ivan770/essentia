@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   mainBar = {
     layer = "top";
     position = "top";
@@ -70,7 +70,7 @@
       tooltip = false;
       format = "";
       interval = "once";
-      on-click = "wlogout";
+      on-click = "${pkgs.wlogout}/bin/wlogout";
     };
 
     "custom/cap-left" = {

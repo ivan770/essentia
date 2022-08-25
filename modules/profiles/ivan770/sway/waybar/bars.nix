@@ -50,9 +50,9 @@
 
     network = {
       interval = 10;
-      format-wifi = " {essid}";
-      format-ethernet = " {ipaddr}";
-      format-disconnected = " Disconnected";
+      format-wifi = "直 {essid}";
+      format-ethernet = " {ipaddr}";
+      format-disconnected = " Disconnected";
       tooltip = false;
       max-length = 20;
     };

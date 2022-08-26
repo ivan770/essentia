@@ -32,6 +32,7 @@
         gnome.gnome-disk-utility
         gnome.gnome-tweaks
         gnome.seahorse
+        gnome.simple-scan
       ];
       stateVersion = "22.05";
     };

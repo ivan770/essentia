@@ -13,6 +13,7 @@ with lib; {
         "wheel"
       ]
       ++ optionals config.networking.networkmanager.enable ["networkmanager"]
-      ++ optionals config.security.tpm2.enable [config.security.tpm2.tssGroup];
+      ++ optionals config.security.tpm2.enable [config.security.tpm2.tssGroup]
+      ++ optionals config.hardware.sane.enable ["scanner" "lp"];
   };
 }

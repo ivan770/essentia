@@ -1,6 +1,7 @@
 {config, ...}: let
   networkConfig = {
     DHCP = "yes";
+    DNSOverTLS = "yes";
   };
 in {
   config = {

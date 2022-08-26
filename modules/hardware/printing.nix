@@ -3,12 +3,15 @@
   pkgs,
   ...
 }: {
-  config.services.printing = {
-    enable = true;
-    webInterface = false;
-    drivers = with pkgs; [
-      gutenprint
-      gutenprintBin
-    ];
+  config = {
+    hardware.sane.enable = true;
+    services.printing = {
+      enable = true;
+      webInterface = false;
+      drivers = with pkgs; [
+        gutenprint
+        gutenprintBin
+      ];
+    };
   };
 }

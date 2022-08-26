@@ -62,7 +62,8 @@
 #clock, 
 #network,
 #tray,
-#language {
+#language,
+#pulseaudio {
 	background: @bgcolor;
 	padding-left: 10px;
 	padding-right: 10px;

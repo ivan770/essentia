@@ -13,11 +13,6 @@ in
       keyringServices = mkEnableOption "Enable GNOME keyring and its related services";
     };
 
-    # GNOME requires NetworkManager anyway
-    imports = with nixosModules; [
-      hardware.network-manager
-    ];
-
     config = {
       services = {
         gnome = mkMerge [

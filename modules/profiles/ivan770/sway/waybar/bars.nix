@@ -5,6 +5,8 @@
     modules-left = [
       "clock"
       "battery"
+      "pulseaudio#sink"
+      "pulseaudio#source"
       "custom/cap-left"
     ];
     modules-center = [
@@ -61,6 +63,33 @@
       ];
       tooltip = false;
       max-length = 20;
+    };
+
+    "pulseaudio#sink" = {
+      tooltip = false;
+      min-length = 5;
+      format = "{icon} {volume}%";
+      format-bluetooth = "{icon}󰂰 {volume}%";
+      format-muted = "󰖁";
+      format-icons = {
+        headphone = "󰋋";
+        speaker = "󰓃";
+        hdmi = "󰡁";
+        headset = "󰋎";
+        default = "󰕾";
+      };
+      on-click = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_SINK@ toggle";
+      on-scroll-up = "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 1%+";
+      on-scroll-down = "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 1%-";
+    };
+
+    "pulseaudio#source" = {
+      format = "{format_source}";
+      format-source = "󰍬 {volume}%";
+      format-source-muted = "󰍭";
+      on-click = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_SOURCE@ toggle";
+      on-scroll-up = "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SOURCE@ 1%+";
+      on-scroll-down = "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SOURCE@ 1%-";
     };
 
     "sway/workspaces" = {

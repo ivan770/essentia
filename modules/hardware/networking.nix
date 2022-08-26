@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.essentia.networking;
   networkConfig = {
     DHCP = "yes";
@@ -19,7 +23,7 @@ in
         resolvconf.enable = false;
         useDHCP = false;
         useNetworkd = true;
-        wireless = cfg.wireless;
+        wireless.enable = cfg.wireless;
       };
       services.resolved.enable = true;
       systemd.network.networks = mkMerge [

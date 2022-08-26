@@ -30,16 +30,16 @@
       format-charging = "{icon} {capacity}%";
       format = "{icon} {capacity}%";
       format-icons = [
-        ""
-        ""
-        ""
-        ""
-        ""
-        ""
-        ""
-        ""
-        ""
-        ""
+        "󰁺"
+        "󰁻"
+        "󰁼"
+        "󰁽"
+        "󰁾"
+        "󰁿"
+        "󰂀"
+        "󰂁"
+        "󰂂"
+        "󰁹"
       ];
     };
 
@@ -50,9 +50,15 @@
 
     network = {
       interval = 10;
-      format-wifi = "直 {essid}";
-      format-ethernet = " {ipaddr}";
-      format-disconnected = " Disconnected";
+      format-wifi = "{icon} {essid}";
+      format-ethernet = "󰈀 {ipaddr}";
+      format-disconnected = "󰅤 Disconnected";
+      format-icons = [
+        "󰤟"
+        "󰤢"
+        "󰤥"
+        "󰤨"
+      ];
       tooltip = false;
       max-length = 20;
     };
@@ -68,7 +74,7 @@
 
     "custom/offswitch" = {
       tooltip = false;
-      format = "";
+      format = "󰍃";
       interval = "once";
       on-click = "${pkgs.wlogout}/bin/wlogout";
     };

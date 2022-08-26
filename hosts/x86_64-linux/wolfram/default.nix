@@ -31,14 +31,13 @@
 
   config = {
     essentia = {
-      home-manager.profiles = {
-        ivan770 = "battlestation";
-      };
+      home-manager.profiles.ivan770 = "battlestation";
       locale = {
         base = "en_US.UTF-8";
         units = "uk_UA.UTF-8";
         timeZone = "Europe/Kiev";
       };
+      networking.wired = true;
     };
 
     hardware.enableRedistributableFirmware = true;

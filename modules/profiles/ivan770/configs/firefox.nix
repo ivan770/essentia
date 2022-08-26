@@ -1,11 +1,18 @@
-{nur, ...}: {
-  extensions = with nur.repos.rycee.firefox-addons; [
-    bitwarden
-    gnome-shell-integration
-    multi-account-containers
-    steam-database
-    ublock-origin
-  ];
+{
+  lib,
+  nur,
+  enableGnomeShell,
+  ...
+}:
+with lib; {
+  extensions = with nur.repos.rycee.firefox-addons;
+    [
+      bitwarden
+      multi-account-containers
+      steam-database
+      ublock-origin
+    ]
+    ++ optionals enableGnomeShell [gnome-shell-integration];
   settings = {
     # Appearance stuff
     "browser.theme.content-theme" = 0;

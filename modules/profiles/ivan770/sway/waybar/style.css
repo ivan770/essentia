@@ -1,0 +1,127 @@
+/* Derived from https://github.com/tim3dman/.dotfiles/blob/main/.config/waybar/style.css */
+
+@define-color bgcolor #7097f1;	/* background color */
+@define-color fgcolor #000000;  /* foreground color */
+@define-color charging #07fb05; /* battery charging color */
+@define-color plugged #acfcad;  /* ac plugged color */
+@define-color critical #ff0000; /* critical color */
+@define-color warning #f3f809;  /* warning color */
+@define-color hover #94a6e3;    /* mouse hover over workspace color */ 
+@define-color bgfocus #5e5873;  /* unfocused workspace color background */
+@define-color fgfocus #a2baef; /* unfocused workspace color foreground */
+
+/* Reset all styles */
+* {
+	border: none;
+	border-radius: 0;
+	min-height: 0;
+	margin: 0;
+	padding: 0;
+}
+
+#waybar {
+	background: transparent;
+	font-family: JetBrainsMono;
+	font-size: medium;
+	color: @fgcolor;
+}
+
+#workspaces button {
+	padding-left: 10px;
+	padding-right: 10px;
+  	background: @bgfocus;
+	color: @fgfocus;
+}
+
+#workspaces button.focused {
+	background: @bgcolor;
+	color: @fgcolor;
+}
+
+#workspaces button:hover {
+	background: @hover;
+	color: @fgcolor;
+	transition: none;
+	box-shadow: inherit;
+	text-shadow: inherit;
+}
+
+#custom-cap-left, #custom-cap-right {
+	color: @bgcolor;
+	font-size: 18px;
+}
+
+#custom-offswitch {
+	background: @bgcolor;
+	padding-right: 20px;
+	padding-left: 10px;
+	font-size: 18px;
+}
+
+#battery, 
+#clock, 
+#network,
+#tray,
+#language,
+#pulseaudio {
+	background: @bgcolor;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+@keyframes blink1 {                                                                
+	to {
+		color: @plugged;
+	}
+}
+
+#battery.plugged {
+	background-color: @bgcolor;
+	animation-name: blink1;                                                          
+	animation-duration: 0.5s;                                                       
+	animation-timing-function: linear;                                              
+	animation-iteration-count: infinite;                                            
+	animation-direction: alternate;
+}
+
+@keyframes blink2 {
+	to {
+		background-color: @charging;
+	}
+}
+
+#battery.charging {
+	animation-name: blink2;                                                          
+	animation-duration: 2.0s;                                                       
+	animation-timing-function: ease-in-out;                                              
+	animation-iteration-count: infinite;                                            
+	animation-direction: alternate;
+}
+
+@keyframes blink3 {
+	to {
+		background-color: @warning;
+	}
+}
+
+#battery.warning:not(.charging) {
+  	animation-name: blink3;
+  	animation-duration: 0.7s;
+  	animation-timing-function: ease-in-out;
+  	animation-iteration-count: infinite;
+  	animation-direction: alternate;
+}
+
+@keyframes blink4 {
+	to {
+		background-color: @critical;
+	}
+}
+
+#battery.critical:not(.charging) {
+  	animation-name: blink4;
+  	animation-duration: 0.8s;
+  	animation-timing-function: ease-in-out;
+  	animation-iteration-count: infinite;
+  	animation-direction: alternate;
+}

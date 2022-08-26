@@ -12,6 +12,7 @@
     nixosModules.users.ivan770
     nixosModules.desktop.generic
     nixosModules.desktop.gnome
+    nixosModules.hardware.networking
     nixosModules.hardware.nvidia
     nixosModules.hardware.printing
     nixosModules.hardware.sound

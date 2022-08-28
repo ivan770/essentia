@@ -18,6 +18,7 @@
       systemd-boot.mountpoint = "/boot";
     };
 
+    security.sudo.wheelNeedsPassword = false;
     environment.systemPackages = with pkgs; [
       gnupg
     ];

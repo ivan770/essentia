@@ -12,7 +12,10 @@
   ];
 
   config = {
-    essentia.networking.wired = true;
+    essentia = {
+      networking.wired = true;
+      systemd-boot.mountpoint = "/boot";
+    };
 
     boot.cleanTmpDir = true;
     zramSwap.enable = true;

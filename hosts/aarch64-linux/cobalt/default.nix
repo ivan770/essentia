@@ -18,8 +18,6 @@
       systemd-boot.mountpoint = "/boot";
     };
 
-    security.sudo.wheelNeedsPassword = false;
-
     boot.cleanTmpDir = true;
     zramSwap.enable = true;
 

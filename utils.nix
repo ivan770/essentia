@@ -50,6 +50,7 @@ with lib; rec {
             );
           }
           inputs.nur.nixosModules.nur
+          inputs.sops-nix.nixosModules.sops
         ]
         ++ listNixFilesRecursive path;
 

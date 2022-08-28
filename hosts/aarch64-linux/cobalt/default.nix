@@ -9,6 +9,7 @@
     nixosModules.users.ivan770
     nixosModules.hardware.networking
     nixosModules.hardware.systemd-boot
+    nixosModules.server.generic
   ];
 
   config = {
@@ -19,7 +20,6 @@
 
     boot.cleanTmpDir = true;
     zramSwap.enable = true;
-    services.openssh.enable = true;
 
     hardware.enableRedistributableFirmware = true;
 

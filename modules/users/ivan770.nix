@@ -5,13 +5,13 @@
 }:
 with lib; {
   config = {
-    sops.secrets."users/ivan770/password".neededForUsers = true;
+    sops.secrets.ivan770Password.neededForUsers = true;
     users.mutableUsers = false;
 
     users.users.ivan770 = {
       isNormalUser = true;
       home = "/home/ivan770";
-      passwordFile = config.sops.secrets."users/ivan770/password".path;
+      passwordFile = config.sops.secrets.ivan770Password.path;
       extraGroups =
         [
           "video"

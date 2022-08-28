@@ -1,6 +1,6 @@
 keys:
   - &admin_ivan770 ba77c0b64e91ecd7523642bb5705d5d0b62a3b0a
-  - &server_cobalt 28ab5f15a5c5d69543582a01f40f4d403d4f20f0
+  - &server_cobalt fb68baf4e35bab8750fae647f0e5d81e50c5aa0c
 creation_rules:
   - path_regex: hosts.*/secrets\.yaml$
     key_groups:

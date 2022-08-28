@@ -18,6 +18,12 @@
       systemd-boot.mountpoint = "/boot";
     };
 
+    environment.systemPackages = with pkgs; [
+      gnupg
+    ];
+    sops.gnupg.home = "/var/lib/sops";
+    sops.gnupg.sshKeyPaths = [];
+
     boot.cleanTmpDir = true;
     zramSwap.enable = true;
 

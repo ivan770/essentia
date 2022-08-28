@@ -6,7 +6,7 @@
   cfg = config.essentia.networking;
   networkConfig = {
     DHCP = "yes";
-    DNSOverTLS = "yes";
+    # DNSOverTLS = "yes";
   };
 in
   with lib; {

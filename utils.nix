@@ -48,6 +48,7 @@ with lib; rec {
             nixpkgs.overlays = mkIf (inputs.self ? overlays) (
               collect (a: !isAttrs a) inputs.self.overlays
             );
+            sops.defaultSopsFile = ${path} /secrets.yaml;
           }
           inputs.nur.nixosModules.nur
           inputs.sops-nix.nixosModules.sops

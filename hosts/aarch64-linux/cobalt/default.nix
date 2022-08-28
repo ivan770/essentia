@@ -1,4 +1,9 @@
-{ ... }: {
+{
+  config,
+  nixosModules,
+  pkgs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     nixosModules.users.ivan770

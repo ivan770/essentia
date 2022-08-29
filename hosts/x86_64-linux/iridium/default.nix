@@ -37,7 +37,7 @@
         wireless = [
           "default_5g"
         ];
-        fetchDNSFromSecrets = true;
+        dnsOverTls = true;
       };
     };
 

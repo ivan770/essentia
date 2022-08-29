@@ -7,7 +7,7 @@
   networkConfig = {
     DHCP = "yes";
     DNSOverTLS =
-      if cfg.fetchDNSFromSecrets
+      if cfg.dnsOverTls
       then "yes"
       else "no";
   };
@@ -20,7 +20,7 @@ in
         default = null;
         description = "Known wireless networks. If null is provided, wireless networking capabilities will be disabled";
       };
-      fetchDNSFromSecrets = mkEnableOption "fetching of DNS servers from secrets.yaml, while also activating DOT";
+      dnsOverTls = mkEnableOption "global DNS-over-TLS";
     };
 
     config = {

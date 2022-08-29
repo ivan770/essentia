@@ -39,7 +39,7 @@
       };
       networking = {
         wired = true;
-        fetchDNSFromSecrets = true;
+        dnsOverTls = true;
       };
     };
 

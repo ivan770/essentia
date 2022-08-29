@@ -1,0 +1,14 @@
+keys:
+  - &admin_ivan770 ba77c0b64e91ecd7523642bb5705d5d0b62a3b0a
+  - &server_cobalt age1rqunush2hefaymv0gp8qy6dlph9a7lk33u62la0sqe24aprzw4kqyrtkjq
+  - &server_iridium age1um846f44xc8ty2fees4hyxny3ma4skweaky7stdx24v32szs09rstqsaay
+  - &server_wolfram age1cv2gscnyxy7h534up7m3mrlwqgctflxu8l34ukga5l5fcq590c5sa5ygq2
+creation_rules:
+  - path_regex: ^secrets.yaml$
+    key_groups:
+    - pgp:
+      - *admin_ivan770
+      age:
+      - *server_cobalt
+      - *server_iridium
+      - *server_wolfram

@@ -7,6 +7,7 @@
     common.home-manager
     common.locale
     common.nix
+    common.secrets
     common.ssh
     common.user-management
     desktop.console

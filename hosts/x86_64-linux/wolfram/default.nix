@@ -37,7 +37,10 @@
         units = "uk_UA.UTF-8";
         timeZone = "Europe/Kiev";
       };
-      networking.wired = true;
+      networking = {
+        wired = true;
+        fetchDNSFromSecrets = true;
+      };
     };
 
     hardware.enableRedistributableFirmware = true;

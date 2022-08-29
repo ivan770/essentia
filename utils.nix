@@ -11,23 +11,6 @@ with lib; rec {
         ))
       (strings.splitString "\n" input)));
 
-  mkUser = {
-    config,
-    name,
-    groups,
-    sshKey,
-  }: {
-    sops.secrets."users/${name}/password".neededForUsers = true;
-
-    users.users.${name} = {
-      isNormalUser = true;
-      home = "/home/${name}";
-      passwordFile = config.sops.secrets."users/${name}/password".path;
-      extraGroups = groups;
-      openssh.authorizedKeys.keys = [sshKey];
-    };
-  };
-
   mkAttrsTree = dir:
     mapAttrs'
     (
@@ -65,7 +48,6 @@ with lib; rec {
             nixpkgs.overlays = mkIf (inputs.self ? overlays) (
               collect (a: !isAttrs a) inputs.self.overlays
             );
-            sops.defaultSopsFile = ./secrets.yaml;
           }
           inputs.nur.nixosModules.nur
           inputs.sops-nix.nixosModules.sops
@@ -77,7 +59,7 @@ with lib; rec {
         {
           inherit (inputs.self) nixosModules;
         }
-        // {inherit inputs fromJSONWithComments mkUser;};
+        // {inherit inputs fromJSONWithComments;};
     };
 
   mkNixosConfigs = dir:

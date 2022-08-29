@@ -4,5 +4,6 @@
     passwordAuthentication = false;
     permitRootLogin = "no";
     kbdInteractiveAuthentication = false;
+    startWhenNeeded = true;
   };
 }

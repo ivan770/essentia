@@ -22,7 +22,7 @@ in
       };
       systemd-boot = {
         enable = true;
-        editor = true; # Temp
+        editor = false;
         configurationLimit = 5;
         consoleMode = "max";
       };

@@ -1,6 +1,7 @@
 {nixosModules, ...}: {
   imports = with nixosModules; [
     common.nix
-    server.ssh
+    common.user-management
+    common.ssh
   ];
 }

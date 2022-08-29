@@ -11,6 +11,23 @@ with lib; rec {
         ))
       (strings.splitString "\n" input)));
 
+  mkUser = {
+    config,
+    name,
+    groups,
+    sshKey,
+  }: {
+    sops.secrets."users/${name}/password".neededForUsers = true;
+
+    users.users.${name} = {
+      isNormalUser = true;
+      home = "/home/${name}";
+      passwordFile = config.sops.secrets."users/${name}/password".path;
+      extraGroups = groups;
+      openssh.authorizedKeys.keys = [sshKey];
+    };
+  };
+
   mkAttrsTree = dir:
     mapAttrs'
     (
@@ -60,7 +77,7 @@ with lib; rec {
         {
           inherit (inputs.self) nixosModules;
         }
-        // {inherit inputs fromJSONWithComments;};
+        // {inherit inputs fromJSONWithComments mkUser;};
     };
 
   mkNixosConfigs = dir:

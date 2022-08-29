@@ -17,7 +17,7 @@
     nixosModules.desktop.generic
     nixosModules.desktop.sway
     nixosModules.hardware.backlight
-    nixosModules.hardware.network-manager
+    nixosModules.hardware.networking
     nixosModules.hardware.sound
     nixosModules.hardware.systemd-boot
     nixosModules.hardware.tpm
@@ -32,6 +32,12 @@
         base = "en_US.UTF-8";
         units = "uk_UA.UTF-8";
         timeZone = "Europe/Kiev";
+      };
+      networking = {
+        wireless = [
+          "default_5g"
+        ];
+        fetchDNSFromSecrets = true;
       };
     };
 

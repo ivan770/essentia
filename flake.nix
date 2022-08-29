@@ -31,6 +31,13 @@
       repo = "nixos-hardware";
     };
 
+    sops-nix = {
+      type = "github";
+      owner = "Mic92";
+      repo = "sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     flake-utils = {
       type = "github";
       owner = "numtide";

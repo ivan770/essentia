@@ -218,10 +218,12 @@
     "workbench.enableExperiments": false,
     "workbench.settings.enableNaturalLanguageSearch": false,
     "telemetry.telemetryLevel": "off",
+    "go.survey.prompt": false,
 
     // Remove auto-updates
     "update.mode": "none",
     "extensions.autoUpdate": false,
+    "go.toolsManagement.checkForUpdates": "off",
 
     // Disable noisy "trust" feature
     "security.workspace.trust.enabled": false,

@@ -1,8 +1,4 @@
-{
-  config,
-  nixosModules,
-  ...
-}: {
+{nixosModules, ...}: {
   imports = with nixosModules; [
     common.home-manager
     common.locale

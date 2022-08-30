@@ -34,8 +34,8 @@ in
         wireless = mkIf (isList cfg.wireless) {
           enable = true;
           environmentFile = config.sops.secrets.networks.path;
-          networks = builtins.listToAttrs (map (ssid: {
-              name = ssid;
+          networks = builtins.listToAttrs (map (name: {
+              inherit name;
               value = {
                 pskRaw = "@${strings.toUpper ssid}@";
               };

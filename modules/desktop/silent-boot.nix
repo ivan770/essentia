@@ -1,6 +1,6 @@
-{config, ...}: {
+{...}: {
   # https://discourse.nixos.org/t/removing-persistent-boot-messages-for-a-silent-boot/14835/10
-  config.boot = {
+  boot = {
     consoleLogLevel = 0;
     initrd.verbose = false;
     kernelParams = [

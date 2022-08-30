@@ -1,9 +1,5 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
-  config.fonts = {
+{pkgs, ...}: {
+  fonts = {
     fonts = with pkgs; [
       corefonts
       noto-fonts

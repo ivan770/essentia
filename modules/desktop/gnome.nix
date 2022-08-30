@@ -2,7 +2,6 @@
   lib,
   pkgs,
   config,
-  nixosModules,
   ...
 }: let
   cfg = config.essentia.gnome;

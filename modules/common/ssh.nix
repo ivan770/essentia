@@ -1,5 +1,5 @@
-{config, ...}: {
-  config.services.openssh = {
+{...}: {
+  services.openssh = {
     enable = true;
     passwordAuthentication = false;
     permitRootLogin = "no";

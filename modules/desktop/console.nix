@@ -1,7 +1,3 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
-  config.console.earlySetup = true;
+{...}: {
+  console.earlySetup = true;
 }

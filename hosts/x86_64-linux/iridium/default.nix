@@ -17,6 +17,7 @@
     nixosModules.desktop.generic
     nixosModules.desktop.sway
     nixosModules.hardware.backlight
+    nixosModules.hardware.bluetooth
     nixosModules.hardware.networking
     nixosModules.hardware.sound
     nixosModules.hardware.systemd-boot

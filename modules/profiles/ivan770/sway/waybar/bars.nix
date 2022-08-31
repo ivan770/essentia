@@ -5,6 +5,7 @@
     modules-left = [
       "clock"
       "battery"
+      "bluetooth"
       "pulseaudio#sink"
       "pulseaudio#source"
       "custom/cap-left"
@@ -63,6 +64,17 @@
       ];
       tooltip = false;
       max-length = 20;
+    };
+
+    bluetooth = {
+      tooltip = false;
+      max-length = 5;
+      format = "󰂯 {status}";
+      format-disabled = "󰂲";
+      format-off = "󰂲";
+      format-on = "󰂯";
+      format-connected = "󰂱";
+      format-connected-battery = "󰂱 {device_battery_percentage}%";
     };
 
     "pulseaudio#sink" = {

@@ -37,6 +37,16 @@ with lib.hm.gvariant; {
       name = "Games";
     };
 
+    "org/gnome/desktop/background" = {
+      color-shading-type = "solid";
+      picture-options = "zoom";
+      # Original artwork: https://www.deviantart.com/rmradev/art/Mountains-877397825
+      picture-uri = "${../backgrounds/mountain.png}";
+      picture-uri-dark = "${../backgrounds/mountain.png}";
+      primary-color = "#000000000000";
+      secondary-color = "#000000000000";
+    };
+
     "org/gnome/desktop/input-sources" = {
       per-window = false;
       show-all-sources = false;

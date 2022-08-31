@@ -1,8 +1,4 @@
 {pkgs, ...}: {
-  # FIXME: Move this to hm-sway if possible
-  environment.systemPackages = with pkgs; [
-    bemenu
-  ];
   xdg.portal = {
     enable = true;
     wlr = {

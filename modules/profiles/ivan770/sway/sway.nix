@@ -8,9 +8,9 @@
   modifier = cfg.modifier;
 in {
   terminal = "${pkgs.foot}/bin/foot";
-  menu = "${pkgs.bemenu}/bin/bemenu-run --list 10 -c -W 0.5 -f";
+  menu = "${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop --dmenu=\"${pkgs.bemenu}/bin/bemenu --list 10 -c -W 0.5 -f -i\" --term=\"${pkgs.foot}/bin/foot\" --no-generic";
   bars = [];
-  input."1:1:AT_Translated_Set_2_keyboard" = {
+  input."type:keyboard" = {
     xkb_layout = "us,ru,ua";
     xkb_options = "grp:lalt_lshift_toggle";
   };
@@ -19,6 +19,7 @@ in {
     natural_scroll = "enabled";
     scroll_method = "two_finger";
   };
+  output."*".bg = "${../backgrounds/mountain.png} fill";
   seat = {
     "*" = {
       xcursor_theme = "${config.gtk.cursorTheme.name} ${builtins.toString config.gtk.cursorTheme.size}";

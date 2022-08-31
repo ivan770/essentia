@@ -3,12 +3,10 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.wayland.windowManager.sway.config;
   modifier = cfg.modifier;
-in
-{
+in {
   terminal = "${pkgs.foot}/bin/foot";
   menu = "${pkgs.bemenu}/bin/bemenu-run --list 10 -c -W 0.5 -f";
   bars = [];

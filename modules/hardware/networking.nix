@@ -37,7 +37,7 @@ in
           networks = builtins.listToAttrs (map (name: {
               inherit name;
               value = {
-                pskRaw = "@${strings.toUpper ssid}@";
+                pskRaw = "@${strings.toUpper name}@";
               };
             })
             cfg.wireless);

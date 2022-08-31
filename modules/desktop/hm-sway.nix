@@ -32,12 +32,6 @@ in
     config = {
       home.packages = with pkgs;
         [
-          pinentry-gnome
-          swaylock
-          wlogout
-          wl-clipboard
-          grim
-          slurp
         ]
         ++ optionals cfg.nvidia [
           vulkan-validation-layers

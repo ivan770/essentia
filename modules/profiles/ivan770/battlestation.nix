@@ -20,7 +20,6 @@
   home = {
     packages = with pkgs; [
       git
-      vlc
       tdesktop
       dconf2nix
       rnix-lsp

@@ -30,12 +30,6 @@ in
     };
 
     config = {
-      home.packages = with pkgs;
-        [
-        ]
-        ++ optionals cfg.nvidia [
-          vulkan-validation-layers
-        ];
       programs.waybar = mkMerge [
         {
           enable = true;

@@ -10,7 +10,7 @@ in {
   terminal = "${pkgs.foot}/bin/foot";
   menu = "${pkgs.bemenu}/bin/bemenu-run --list 10 -c -W 0.5 -f";
   bars = [];
-  input."*" = {
+  input."1:1:AT_Translated_Set_2_keyboard" = {
     xkb_layout = "us,ru,ua";
     xkb_options = "grp:lalt_lshift_toggle";
   };
@@ -24,6 +24,7 @@ in {
       xcursor_theme = "${config.gtk.cursorTheme.name} ${builtins.toString config.gtk.cursorTheme.size}";
     };
   };
+  defaultWorkspace = "workspace number 1";
   up = "w";
   left = "a";
   down = "s";
@@ -65,9 +66,13 @@ in {
     "${modifier}+Shift+9" = "move container to workspace number 9";
     "${modifier}+Shift+0" = "move container to workspace number 10";
 
-    "${modifier}+f" = "fullscreen";
     "${modifier}+r" = "floating toggle";
+    "${modifier}+f" = "fullscreen";
     "${modifier}+c" = "mode \"resize\"";
+
+    XF86AudioMute = "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_SINK@ toggle";
+    XF86AudioLowerVolume = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%-";
+    XF86AudioRaiseVolume = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%+";
 
     Print = "exec ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp -d)\" - | ${pkgs.wl-clipboard}/bin/wl-copy -t image/png";
   };

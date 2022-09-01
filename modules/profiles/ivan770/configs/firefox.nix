@@ -22,6 +22,11 @@ with lib; {
     "browser.newtabpage.activity-stream.feeds.topsites" = false;
     "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
 
+    # Fonts
+    "font.name.monospace.x-western" = "JetBrains Mono";
+    "font.name.sans-serif.x-western" = "Noto Sans";
+    "font.name.serif.x-western" = "Noto Serif";
+
     # Privacy stuff
     "dom.security.https_only_mode" = true;
     "dom.security.https_only_mode_ever_enabled" = true;

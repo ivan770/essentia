@@ -9,6 +9,7 @@
     nixosModules.hardware.networking
     nixosModules.hardware.systemd-boot
     nixosModules.server.generic
+    nixosModules.server.postgresql
   ];
 
   config = {

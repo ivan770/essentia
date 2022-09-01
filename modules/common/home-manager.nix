@@ -24,8 +24,10 @@ in {
   config = {
     home-manager = {
       extraSpecialArgs = {
+        # FIXME: Pls remove this mess.
         inherit pkgs inputs nixosModules fromJSONWithComments;
         nur = config.nur;
+        sops = config.sops;
       };
       useUserPackages = true;
       users =

@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: let
   cfg = config.essentia.programs.psql;
@@ -22,9 +21,9 @@ in
       };
     };
 
-    config.home.file = {
-      ".postgresql/root.crt".source = cfg.rootCert;
-      ".postgresql/postgresql.crt".source = cfg.cert;
-      ".postgresql/postgresql.key".source = cfg.key;
-    };
+    config.systemd.user.tmpfiles.rules = [
+      "L ${config.home.homeDirectory}/.postgresql/root.crt - - - - ${cfg.rootCert}"
+      "L ${config.home.homeDirectory}/.postgresql/postgresql.crt - - - - ${cfg.cert}"
+      "L ${config.home.homeDirectory}/.postgresql/postgresql.key - - - - ${cfg.key}"
+    ];
   }

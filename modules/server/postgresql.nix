@@ -8,7 +8,7 @@
       ssl_key_file = config.sops.secrets."postgresql/ssl/server/key".path;
       ssl_ca_file = config.sops.secrets."postgresql/ssl/root".path;
     };
-    authentication = lib.mkForce ''
+    authentication = ''
       hostssl all all 0.0.0.0/0 cert clientcert=verify-full
     '';
   };

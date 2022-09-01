@@ -34,6 +34,7 @@
         max_parallel_workers = 4;
         max_parallel_maintenance_workers = 2;
       };
+      secrets.postgresqlSecrets = true;
       systemd-boot.mountpoint = "/boot";
     };
 

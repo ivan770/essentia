@@ -1,8 +1,10 @@
 {
+  config,
   pkgs,
   lib,
   nur,
   nixosModules,
+  sops,
   ...
 }: {
   imports = with nixosModules; [
@@ -13,6 +15,7 @@
     apps.utilities.gnome-terminal
     apps.utilities.gpg
     apps.utilities.mpv
+    apps.utilities.psql
     apps.utilities.qbittorrent
     ./dconf/battlestation.nix
   ];
@@ -51,6 +54,12 @@
         "large-cache-buffer"
         "nvidia"
       ];
+    };
+    psql = {
+      # FIXME: This puts secrets inside of a Nix store.
+      rootCert = config.lib.file.mkOutOfStoreSymlink sops.secrets."postgresql/ssl/root".path;
+      cert = config.lib.file.mkOutOfStoreSymlink sops.secrets."users/ivan770/postgresql/cert".path;
+      key = config.lib.file.mkOutOfStoreSymlink sops.secrets."users/ivan770/postgresql/key".path;
     };
     qbittorrent.settings = builtins.readFile ./configs/qbittorrent.conf;
     vscode = import ./vscode/config.nix {inherit pkgs;};

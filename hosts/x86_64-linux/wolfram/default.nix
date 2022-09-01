@@ -41,6 +41,7 @@
         wired = true;
         dnsOverTls = true;
       };
+      secrets.psqlSecrets = true;
     };
 
     hardware.enableRedistributableFirmware = true;

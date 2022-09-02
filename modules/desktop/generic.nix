@@ -4,6 +4,7 @@
     common.locale
     common.nix
     common.secrets
+    common.security
     common.ssh
     common.user-management
     desktop.console

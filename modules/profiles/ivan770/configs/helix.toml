@@ -4,6 +4,8 @@ theme = "dark_plus"
 line-number = "absolute"
 mouse = false
 true-color = true
+cursorline = true
+color-modes = true
 
 [editor.lsp]
 display-messages = true

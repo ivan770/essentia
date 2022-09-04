@@ -38,7 +38,7 @@
         wireless = [
           "default_5g"
         ];
-        dnsOverTls = true;
+        desktopDns = true;
       };
     };
 

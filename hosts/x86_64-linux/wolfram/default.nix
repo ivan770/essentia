@@ -39,7 +39,7 @@
       };
       networking = {
         wired = true;
-        dnsOverTls = true;
+        desktopDns = true;
       };
       secrets.psqlSecrets = true;
     };

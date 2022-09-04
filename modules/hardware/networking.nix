@@ -57,6 +57,8 @@ in {
     services.resolved = {
       enable = true;
       llmnr = "false";
+      # DNSSEC is expected to be enforced by upstream server, not a client.
+      dnssec = mkIf cfg.desktopDns "false";
       extraConfig = mkIf cfg.desktopDns ''
         DNSOverTLS=true
       '';

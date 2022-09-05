@@ -1,0 +1,27 @@
+{
+  config,
+  lib,
+  ...
+}: let
+  cfg = config.essentia.programs.git;
+in
+  with lib; {
+    options.essentia.programs.git = {
+      credentials = mkOption {
+        type = types.path;
+        description = "Path to Git credentials, provided as an additional configuration";
+      };
+    };
+
+    config.programs.git = {
+      enable = true;
+      signing = {
+        signByDefault = true;
+        key = null;
+      };
+      includes = [
+        {path = cfg.credentials;}
+      ];
+      diff-so-fancy.enable = true;
+    };
+  }

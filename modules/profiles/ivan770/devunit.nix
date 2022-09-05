@@ -10,6 +10,7 @@
     apps.editors.helix
     apps.editors.vscode
     apps.social.firefox
+    apps.utilities.git
     apps.utilities.gpg
     desktop.hm-sway
   ];
@@ -17,7 +18,6 @@
   config = {
     home = {
       packages = with pkgs; [
-        git
         tdesktop
         rnix-lsp
       ];
@@ -33,6 +33,7 @@
           // {
             wayland = true;
           };
+        git.credentials = sops.secrets."users/ivan770/git".path;
         gpg.sshKeys = [
           "B0E258EAD4123779C4CFA077DBD8328FD08BADF5"
         ];

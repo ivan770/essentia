@@ -11,6 +11,7 @@
     apps.editors.vscode
     apps.social.firefox
     apps.social.discord
+    apps.utilities.git
     apps.utilities.gnome-terminal
     apps.utilities.gpg
     apps.utilities.mpv
@@ -21,7 +22,6 @@
 
   home = {
     packages = with pkgs; [
-      git
       tdesktop
       dconf2nix
       rnix-lsp
@@ -41,6 +41,7 @@
       inherit lib nur;
       enableGnomeShell = true;
     };
+    git.credentials = sops.secrets."users/ivan770/git".path;
     gnome-terminal.settings = import ./configs/gnome-terminal.nix {};
     gpg.sshKeys = [
       "B0E258EAD4123779C4CFA077DBD8328FD08BADF5"

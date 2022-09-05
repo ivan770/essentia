@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.essentia.programs.git;
@@ -15,6 +16,7 @@ in
 
     config.programs.git = {
       enable = true;
+      package = pkgs.gitMinimal;
       signing = {
         signByDefault = true;
         key = null;

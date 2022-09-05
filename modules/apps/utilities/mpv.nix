@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.essentia.programs.mpv;
@@ -26,6 +27,16 @@ in
 
     config.programs.mpv = {
       enable = true;
+      package =
+        pkgs.wrapMpv (pkgs.mpv-unwrapped.override {
+          alsaSupport = false;
+          bluraySupport = false;
+          dvdnavSupport = false;
+          javascriptSupport = false;
+          screenSaverSupport = false;
+        }) {
+          youtubeSupport = false;
+        };
       config = cfg.userProfile;
       defaultProfiles = cfg.activatedProfiles;
       profiles = {

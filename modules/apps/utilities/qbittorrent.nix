@@ -17,7 +17,12 @@ in
 
     config = mkMerge [
       {
-        home.packages = [pkgs.qbittorrent];
+        home.packages = [
+          (pkgs.qbittorrent.override {
+            webuiSupport = false;
+            trackerSearch = false;
+          })
+        ];
       }
       (mkIf (isString cfg.settings) {
         xdg.configFile."qBittorrent/qBittorrent.conf".text = cfg.settings;

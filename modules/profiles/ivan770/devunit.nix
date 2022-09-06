@@ -10,6 +10,7 @@
     apps.editors.helix
     apps.editors.vscode
     apps.social.firefox
+    apps.utilities.direnv
     apps.utilities.git
     apps.utilities.gpg
     desktop.hm-sway

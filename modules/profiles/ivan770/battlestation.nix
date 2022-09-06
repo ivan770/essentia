@@ -11,6 +11,7 @@
     apps.editors.vscode
     apps.social.firefox
     apps.social.discord
+    apps.utilities.direnv
     apps.utilities.git
     apps.utilities.gnome-terminal
     apps.utilities.gpg

@@ -90,18 +90,19 @@
         headset = "󰋎";
         default = "󰕾";
       };
-      on-click = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_SINK@ toggle";
-      on-scroll-up = "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 1%+";
-      on-scroll-down = "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 1%-";
+      on-click = "${pkgs.pamixer}/bin/pamixer -t";
+      on-scroll-up = "${pkgs.pamixer}/bin/pamixer -i 1 --set-limit 100";
+      on-scroll-down = "${pkgs.pamixer}/bin/pamixer -d 1 --set-limit 100";
     };
 
     "pulseaudio#source" = {
+      tooltip = false;
       format = "{format_source}";
       format-source = "󰍬 {volume}%";
       format-source-muted = "󰍭";
-      on-click = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_SOURCE@ toggle";
-      on-scroll-up = "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SOURCE@ 1%+";
-      on-scroll-down = "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SOURCE@ 1%-";
+      on-click = "${pkgs.pamixer}/bin/pamixer --default-source -t";
+      on-scroll-up = "${pkgs.pamixer}/bin/pamixer --default-source -i 1 --set-limit 100";
+      on-scroll-down = "${pkgs.pamixer}/bin/pamixer --default-source -d 1 --set-limit 100";
     };
 
     "sway/workspaces" = {

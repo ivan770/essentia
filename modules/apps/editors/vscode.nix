@@ -31,7 +31,7 @@ in
       programs.vscode = mkMerge [
         {
           enable = true;
-          package = pkgs.vscode;
+          package = pkgs.vscodium;
         }
         (mkIf (isString cfg.settings) {
           userSettings = fromJSONWithComments cfg.settings;

@@ -4,6 +4,7 @@
   lib,
   nur,
   nixosModules,
+  sops,
   ...
 }: {
   imports = with nixosModules; [

@@ -8,7 +8,12 @@
   modifier = cfg.modifier;
 in {
   terminal = "${pkgs.foot}/bin/foot";
-  menu = "${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop --dmenu=\"${pkgs.bemenu}/bin/bemenu --list 10 -c -W 0.5 -f -i\" --term=\"${pkgs.foot}/bin/foot\" --no-generic";
+  menu = ''
+    ${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop \
+      --dmenu="${pkgs.bemenu}/bin/bemenu --list 10 -c -W 0.5 -f -i" \
+      --term="${pkgs.foot}/bin/foot" \
+      --no-generic
+  '';
   bars = [];
   input."type:keyboard" = {
     xkb_layout = "us,ru,ua";
@@ -31,8 +36,8 @@ in {
   down = "s";
   right = "d";
   keybindings = {
-    "${modifier}+Return" = "exec ${cfg.terminal}";
-    "${modifier}+space" = "exec ${cfg.menu}";
+    "${modifier}+Return" = "exec ${cfg.menu}";
+    "${modifier}+Shift+Return" = "exec ${cfg.terminal}";
     "${modifier}+Shift+q" = "kill";
 
     "${modifier}+${cfg.up}" = "focus up";
@@ -44,6 +49,17 @@ in {
     "${modifier}+Shift+${cfg.left}" = "move left";
     "${modifier}+Shift+${cfg.right}" = "move right";
     "${modifier}+Shift+${cfg.down}" = "move down";
+
+    # FIXME: Remove code duplication
+    "${modifier}+Up" = "focus up";
+    "${modifier}+Left" = "focus left";
+    "${modifier}+Right" = "focus right";
+    "${modifier}+Down" = "focus down";
+
+    "${modifier}+Shift+Up" = "move up";
+    "${modifier}+Shift+Left" = "move left";
+    "${modifier}+Shift+Right" = "move right";
+    "${modifier}+Shift+Down" = "move down";
 
     "${modifier}+1" = "workspace number 1";
     "${modifier}+2" = "workspace number 2";

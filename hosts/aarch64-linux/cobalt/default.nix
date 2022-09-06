@@ -6,6 +6,7 @@
   imports = [
     ./hardware-configuration.nix
     nixosModules.users.ivan770
+    nixosModules.hardware.firmware
     nixosModules.hardware.networking
     nixosModules.hardware.systemd-boot
     nixosModules.server.generic
@@ -37,11 +38,6 @@
       secrets.postgresqlSecrets = true;
       systemd-boot.mountpoint = "/boot";
     };
-
-    boot.cleanTmpDir = true;
-    zramSwap.enable = true;
-
-    hardware.enableRedistributableFirmware = true;
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
 

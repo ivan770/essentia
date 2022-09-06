@@ -18,6 +18,7 @@
     nixosModules.desktop.sway
     nixosModules.hardware.backlight
     nixosModules.hardware.bluetooth
+    nixosModules.hardware.firmware
     nixosModules.hardware.networking
     nixosModules.hardware.sound
     nixosModules.hardware.systemd-boot
@@ -41,8 +42,6 @@
         desktopDns = true;
       };
     };
-
-    hardware.enableRedistributableFirmware = true;
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
 

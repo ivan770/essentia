@@ -12,6 +12,7 @@
     nixosModules.users.ivan770
     nixosModules.desktop.generic
     nixosModules.desktop.gnome
+    nixosModules.hardware.firmware
     nixosModules.hardware.networking
     nixosModules.hardware.nvidia
     nixosModules.hardware.printing
@@ -43,8 +44,6 @@
       };
       secrets.psqlSecrets = true;
     };
-
-    hardware.enableRedistributableFirmware = true;
 
     boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 

@@ -10,6 +10,7 @@
       tamasfe.even-better-toml
       usernamehw.errorlens
       jnoortheen.nix-ide
+      mkhl.direnv
     ]
     ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
@@ -23,12 +24,6 @@
         publisher = "ms-vscode";
         version = "1.8.2";
         sha256 = "UwDX7ErNfpEM1FWH7UwtSwPLzzk5t2qpY1g+5h4g04A=";
-      }
-      {
-        name = "direnv";
-        publisher = "mkhl";
-        version = "0.6.1";
-        sha256 = "5/Tqpn/7byl+z2ATflgKV1+rhdqj+XMEZNbGwDmGwLQ=";
       }
       {
         name = "clips-ide";

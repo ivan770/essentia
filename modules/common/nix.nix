@@ -11,13 +11,22 @@
 
     settings = {
       auto-optimise-store = true;
+      substituters = [
+        "https://nixpkgs-unfree.cachix.org"
+      ];
+      trusted-public-keys = [
+        "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
+      ];
       trusted-users = [
         "root"
         "@wheel"
       ];
     };
 
-    registry.nixpkgs.flake = inputs.nixpkgs;
+    registry = {
+      nixpkgs.flake = inputs.nixpkgs;
+      nixpkgs-unfree.flake = inputs.nixpkgs-unfree;
+    };
 
     nixPath = [
       "nixpkgs=${inputs.nixpkgs}"

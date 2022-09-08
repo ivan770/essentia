@@ -23,6 +23,7 @@
 
   home = {
     packages = with pkgs; [
+      matlab
       tdesktop
       dconf2nix
       rnix-lsp

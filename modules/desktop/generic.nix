@@ -9,6 +9,7 @@
     common.user-management
     desktop.console
     desktop.fonts
+    desktop.kernel
     desktop.plymouth
     desktop.silent-boot
   ];

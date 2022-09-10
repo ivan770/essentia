@@ -15,6 +15,7 @@
 
   config = {
     essentia = {
+      firmware.cpu.vendor = null;
       networking.wired = true;
       postgresql.serverConfig = {
         # PGTune suggestions

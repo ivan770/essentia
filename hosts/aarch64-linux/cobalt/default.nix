@@ -39,7 +39,7 @@
       systemd-boot.mountpoint = "/boot";
     };
 
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = pkgs.linuxPackages_hardened;
 
     system.stateVersion = "22.05";
   };

@@ -26,9 +26,7 @@
 
   config = {
     essentia = {
-      home-manager.profiles = {
-        ivan770 = "devunit";
-      };
+      home-manager.profiles.ivan770 = "devunit";
       firmware.cpu.vendor = "amd";
       locale = {
         base = "en_US.UTF-8";

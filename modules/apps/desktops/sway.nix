@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.essentia.sway;
+  cfg = config.essentia.programs.sway;
 in
   with lib; {
-    options.essentia.sway = {
+    options.essentia.programs.sway = {
       swaySettings = mkOption {
         type = types.nullOr types.attrs;
         default = null;

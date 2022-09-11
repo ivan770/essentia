@@ -65,11 +65,4 @@
     qbittorrent.settings = builtins.readFile ./configs/qbittorrent.conf;
     vscode = import ./vscode/config.nix {inherit pkgs;};
   };
-  programs = {
-    bash = {
-      enable = true;
-      enableVteIntegration = true;
-    };
-    home-manager.enable = true;
-  };
 }

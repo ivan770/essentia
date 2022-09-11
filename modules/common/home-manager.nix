@@ -35,6 +35,15 @@ in {
         (user: profile: {
           imports = [
             nixosModules.profiles.${user}.${profile}
+            {
+              programs = {
+                bash = {
+                  enable = true;
+                  enableVteIntegration = true;
+                };
+                home-manager.enable = true;
+              };
+            }
           ];
         })
         cfg.profiles;

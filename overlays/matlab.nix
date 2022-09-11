@@ -1,4 +1,1 @@
-inputs: let
-  inherit inputs;
-in
-  inputs.nix-matlab.overlay
+inputs: inputs.nix-matlab.overlay

@@ -21,7 +21,6 @@
     home = {
       packages = with pkgs; [
         tdesktop
-        rnix-lsp
       ];
       stateVersion = "22.05";
     };

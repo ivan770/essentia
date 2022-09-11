@@ -26,7 +26,6 @@
       matlab
       tdesktop
       dconf2nix
-      rnix-lsp
       ciscoPacketTracer8
       gnome.gnome-system-monitor
       gnome.nautilus

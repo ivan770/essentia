@@ -95,10 +95,16 @@ in {
   };
   modes = {
     resize = {
-      ${cfg.up} = "resize shrink height 10 px";
-      ${cfg.left} = "resize shrink width 10 px";
-      ${cfg.down} = "resize grow height 10 px";
-      ${cfg.right} = "resize grow width 10 px";
+      ${cfg.up} = "resize grow up 10 px";
+      ${cfg.left} = "resize grow left 10 px";
+      ${cfg.down} = "resize grow down 10 px";
+      ${cfg.right} = "resize grow right 10 px";
+
+      Up = "resize grow up 10 px";
+      Left = "resize grow left 10 px";
+      Down = "resize grow down 10 px";
+      Right = "resize grow right 10 px";
+
       Escape = "mode \"default\"";
     };
   };

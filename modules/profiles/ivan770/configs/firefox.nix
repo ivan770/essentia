@@ -9,7 +9,6 @@ with lib; {
     [
       bitwarden
       multi-account-containers
-      steam-database
       ublock-origin
     ]
     ++ optionals enableGnomeShell [gnome-shell-integration];

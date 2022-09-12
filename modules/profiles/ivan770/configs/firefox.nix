@@ -21,6 +21,10 @@ with lib; {
     "browser.newtabpage.activity-stream.feeds.topsites" = false;
     "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
 
+    # Disable microphone badge during calls
+    "privacy.webrtc.legacyGlobalIndicator" = false;
+    "privacy.webrtc.hideGlobalIndicator" = true;
+
     # Fonts
     "font.name.monospace.x-western" = "JetBrains Mono";
     "font.name.sans-serif.x-western" = "Noto Sans";

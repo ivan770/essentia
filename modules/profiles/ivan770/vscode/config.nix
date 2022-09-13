@@ -31,5 +31,11 @@
         version = "1.2.0";
         sha256 = "Tisq8a498xGXdBQQlw+NoSNEiCVrAzvmwE9X4QL+8V4=";
       }
+      {
+        name = "clips-lang";
+        publisher = "nerg";
+        version = "1.0.2";
+        sha256 = "aTvvzGsFVAvDWUl7kaOS6O0OVhTgCG4g0s02CiM4THE=";
+      }
     ];
 }

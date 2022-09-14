@@ -13,6 +13,13 @@ in
         description = "Bootloader mountpoint";
         example = "/boot";
       };
+
+      timeout = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Bootloader entry selection screen timeout";
+        example = 5;
+      };
     };
 
     config.boot.loader = {
@@ -26,6 +33,6 @@ in
         configurationLimit = 5;
         consoleMode = "max";
       };
-      timeout = 2;
+      timeout = cfg.timeout;
     };
   }

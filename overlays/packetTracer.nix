@@ -1,3 +1,4 @@
+# Overlay derived from https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/cisco-packet-tracer/8.nix
 inputs: self: super: {
   ciscoPacketTracer8 = with super; let
     version = "8.2.0";

@@ -1,3 +1,4 @@
+# Overlay derived from https://github.com/NixOS/nixpkgs/blob/master/pkgs/games/lunar-client/default.nix
 inputs: self: super: {
   lunar-client = with super; let
     name = "lunar-client";

@@ -26,10 +26,7 @@
     };
     essentia.programs = {
       firefox =
-        import ./configs/firefox.nix {
-          inherit lib nur;
-          enableGnomeShell = false;
-        }
+        import ./configs/firefox.nix {inherit lib nur;}
         // {
           wayland = true;
         };

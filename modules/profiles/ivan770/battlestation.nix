@@ -39,10 +39,7 @@
   };
   essentia.programs = {
     discord.settings = builtins.readFile ./configs/discord.json;
-    firefox = import ./configs/firefox.nix {
-      inherit lib nur;
-      enableGnomeShell = true;
-    };
+    firefox = import ./configs/firefox.nix {inherit lib nur;};
     git.credentials = sops.secrets."users/ivan770/git".path;
     gnome-terminal.settings = import ./configs/gnome-terminal.nix {};
     gpg.sshKeys = [

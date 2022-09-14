@@ -17,7 +17,7 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/desktop/app-folders" = {
-      folder-children = ["0c4f3931-521e-4951-8d18-beef06aed854" "52ab9df1-abdc-4d60-8ea4-838768e5002d" "f61696a4-9056-4e56-9dbd-6d732283a8cb"];
+      folder-children = ["0c4f3931-521e-4951-8d18-beef06aed854" "52ab9df1-abdc-4d60-8ea4-838768e5002d"];
     };
 
     "org/gnome/desktop/app-folders/folders/0c4f3931-521e-4951-8d18-beef06aed854" = {
@@ -30,11 +30,6 @@ with lib.hm.gvariant; {
       apps = ["org.gnome.Settings.desktop" "gnome-system-monitor.desktop" "org.gnome.tweaks.desktop" "org.gnome.DiskUtility.desktop"];
       name = "Utilities";
       translate = false;
-    };
-
-    "org/gnome/desktop/app-folders/folders/f61696a4-9056-4e56-9dbd-6d732283a8cb" = {
-      apps = ["steam.desktop" "LEGO Star Wars The Skywalker Saga.desktop" "Garry's Mod.desktop" "com.lunarclient.LunarClient.desktop"];
-      name = "Games";
     };
 
     "org/gnome/desktop/background" = {

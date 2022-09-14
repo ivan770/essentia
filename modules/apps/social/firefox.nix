@@ -49,9 +49,7 @@ in
 
     config.programs.firefox = {
       enable = true;
-      package = mkFirefoxWrapper (package.override {
-        forceWayland = cfg.wayland;
-      });
+      package = mkFirefoxWrapper package;
       extensions = cfg.extensions;
       profiles.default = {
         settings =

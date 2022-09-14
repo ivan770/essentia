@@ -23,6 +23,7 @@
 
   home = {
     packages = with pkgs; [
+      lunar-client
       matlab
       tdesktop
       dconf2nix

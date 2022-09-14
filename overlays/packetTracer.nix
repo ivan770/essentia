@@ -1,6 +1,5 @@
-inputs: self: super:
-with super; {
-  ciscoPacketTracer8 = let
+inputs: self: super: {
+  ciscoPacketTracer8 = with super; let
     version = "8.2.0";
 
     ptFiles = stdenv.mkDerivation {

@@ -37,7 +37,10 @@
         max_parallel_maintenance_workers = 2;
       };
       secrets.postgresqlSecrets = true;
-      systemd-boot.mountpoint = "/boot";
+      systemd-boot = {
+        mountpoint = "/boot";
+        timeout = 2;
+      };
     };
 
     boot.kernelPackages = pkgs.linuxPackages_hardened;

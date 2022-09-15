@@ -4,11 +4,9 @@
   ...
 }:
 with lib; {
-  extensions = with nur.repos.rycee.firefox-addons; [
-    bitwarden
-    multi-account-containers
-    ublock-origin
-  ];
+  extensions = builtins.attrValues {
+    inherit (nur.repos.rycee.firefox-addons) bitwarden multi-account-containers ublock-origin;
+  };
   settings = {
     # Appearance stuff
     "browser.theme.content-theme" = 0;

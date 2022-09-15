@@ -6,36 +6,21 @@
   sops,
   ...
 }: {
-  imports = with nixosModules; [
-    apps.editors.helix
-    apps.editors.vscode
-    apps.social.firefox
-    apps.social.discord
-    apps.utilities.direnv
-    apps.utilities.git
-    apps.utilities.gnome-terminal
-    apps.utilities.gpg
-    apps.utilities.mpv
-    apps.utilities.psql
-    apps.utilities.qbittorrent
-    ./dconf/battlestation.nix
-  ];
+  imports =
+    builtins.attrValues {
+      inherit (nixosModules.apps.editors) helix vscode;
+      inherit (nixosModules.apps.social) firefox discord;
+      inherit (nixosModules.apps.utilities) direnv git gnome-terminal gpg mpv psql qbittorrent;
+    }
+    ++ [
+      ./dconf/battlestation.nix
+    ];
 
   home = {
-    packages = with pkgs; [
-      lunar-client
-      matlab
-      tdesktop
-      dconf2nix
-      ciscoPacketTracer8
-      gnome.gnome-system-monitor
-      gnome.nautilus
-      gnome.file-roller
-      gnome.gnome-disk-utility
-      gnome.gnome-tweaks
-      gnome.seahorse
-      gnome.simple-scan
-    ];
+    packages = builtins.attrValues {
+      inherit (pkgs) lunar-client matlab tdesktop dconf2nix ciscoPacketTracer8;
+      inherit (pkgs.gnome) gnome-system-monitor nautilus file-roller gnome-disk-utility gnome-tweaks seahorse simple-scan;
+    };
     stateVersion = "22.05";
   };
   essentia.programs = {

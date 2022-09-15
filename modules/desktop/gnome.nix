@@ -34,9 +34,9 @@ in
           };
           desktopManager.gnome.enable = true;
         };
-        udev.packages = with pkgs; [
-          gnome.gnome-settings-daemon
-        ];
+        udev.packages = builtins.attrValues {
+          inherit (pkgs.gnome) gnome-settings-daemon;
+        };
       };
 
       programs = {
@@ -44,10 +44,9 @@ in
         xwayland.enable = cfg.wayland;
       };
 
-      environment.systemPackages = with pkgs; [
-        gnome.adwaita-icon-theme
-        gnomeExtensions.appindicator
-        gnomeExtensions.dash-to-dock
-      ];
+      environment.systemPackages = builtins.attrValues {
+        inherit (pkgs.gnome) adwaita-icon-theme;
+        inherit (pkgs.gnomeExtensions) appindicator dash-to-dock;
+      };
     };
   }

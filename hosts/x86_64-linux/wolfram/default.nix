@@ -4,22 +4,29 @@
   pkgs,
   ...
 }: {
-  imports = [
-    inputs.nixos-hardware.nixosModules.common-cpu-amd
-    inputs.nixos-hardware.nixosModules.common-pc
-    inputs.nixos-hardware.nixosModules.common-pc-hdd
-    nixosModules.users.ivan770
-    nixosModules.desktop.generic
-    nixosModules.desktop.gnome
-    nixosModules.hardware.firmware
-    nixosModules.hardware.networking
-    nixosModules.hardware.nvidia
-    nixosModules.hardware.printing
-    nixosModules.hardware.sound
-    nixosModules.hardware.systemd-boot
-    nixosModules.hardware.tpm
-    nixosModules.apps.games.steam
-  ];
+  imports = builtins.attrValues {
+    inherit
+      (inputs.nixos-hardware.nixosModules)
+      common-cpu-amd
+      common-pc
+      common-pc-hdd
+      ;
+
+    inherit (nixosModules.users) ivan770;
+    inherit (nixosModules.desktop) generic gnome;
+    inherit
+      (nixosModules.hardware)
+      firmware
+      networking
+      nvidia
+      printing
+      sound
+      systemd-boot
+      tpm
+      ;
+
+    inherit (nixosModules.apps.games) steam;
+  };
 
   config = {
     essentia = {

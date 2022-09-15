@@ -25,11 +25,11 @@ in {
     home-manager = {
       extraSpecialArgs = {
         # FIXME: Pls remove this mess.
-        inherit pkgs inputs nixosModules fromJSONWithComments;
+        inherit inputs nixosModules fromJSONWithComments;
         nur = config.nur;
         sops = config.sops;
       };
-      useUserPackages = true;
+      useGlobalPkgs = true;
       users =
         lib.mapAttrs
         (user: profile: {

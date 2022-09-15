@@ -4,4 +4,5 @@
       nano
     ];
   security.sudo.execWheelOnly = true;
+  users.mutableUsers = false;
 }

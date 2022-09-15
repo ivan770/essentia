@@ -4,25 +4,31 @@
   pkgs,
   ...
 }: {
-  imports = [
-    inputs.nixos-hardware.nixosModules.common-cpu-amd
-    inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
-    inputs.nixos-hardware.nixosModules.common-gpu-amd
-    inputs.nixos-hardware.nixosModules.common-pc
-    inputs.nixos-hardware.nixosModules.common-pc-laptop
-    inputs.nixos-hardware.nixosModules.common-pc-laptop-acpi_call
-    inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
-    nixosModules.users.ivan770
-    nixosModules.desktop.generic
-    nixosModules.desktop.sway
-    nixosModules.hardware.backlight
-    nixosModules.hardware.bluetooth
-    nixosModules.hardware.firmware
-    nixosModules.hardware.networking
-    nixosModules.hardware.sound
-    nixosModules.hardware.systemd-boot
-    nixosModules.hardware.tpm
-  ];
+  imports = builtins.attrValues {
+    inherit
+      (inputs.nixos-hardware.nixosModules)
+      common-cpu-amd
+      common-cpu-amd-pstate
+      common-gpu-amd
+      common-pc
+      common-pc-laptop
+      common-pc-laptop-acpi_call
+      common-pc-laptop-ssd
+      ;
+
+    inherit (nixosModules.users) ivan770;
+    inherit (nixosModules.desktop) generic sway;
+    inherit
+      (nixosModules.hardware)
+      backlight
+      bluetooth
+      firmware
+      networking
+      sound
+      systemd-boot
+      tpm
+      ;
+  };
 
   config = {
     essentia = {

@@ -7,21 +7,18 @@
   sops,
   ...
 }: {
-  imports = with nixosModules; [
-    apps.desktops.sway
-    apps.editors.helix
-    apps.editors.vscode
-    apps.social.firefox
-    apps.utilities.direnv
-    apps.utilities.git
-    apps.utilities.gpg
-  ];
+  imports = builtins.attrValues {
+    inherit (apps.desktops) sway;
+    inherit (apps.editors) helix vscode;
+    inherit (apps.social) firefox;
+    inherit (apps.utilities) direnv git gpg;
+  };
 
   config = {
     home = {
-      packages = with pkgs; [
-        tdesktop
-      ];
+      packages = builtins.attrValues {
+        inherit (pkgs) tdesktop;
+      };
       stateVersion = "22.05";
     };
     essentia.programs = {

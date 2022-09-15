@@ -24,7 +24,6 @@ in
         default = null;
         description = "VS Code extensions to install";
       };
-      wayland = mkEnableOption "Enable VS Code Wayland support";
     };
 
     config = {
@@ -44,9 +43,5 @@ in
           extensions = cfg.extensions;
         })
       ];
-
-      systemd.user.sessionVariables = mkIf cfg.wayland {
-        NIXOS_OZONE_WL = 1;
-      };
     };
   }

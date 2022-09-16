@@ -24,6 +24,9 @@ in
       includes = [
         {path = cfg.credentials;}
       ];
-      diff-so-fancy.enable = true;
+      difftastic = {
+        enable = true;
+        color = "always";
+      };
     };
   }

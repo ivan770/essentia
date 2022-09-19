@@ -160,6 +160,10 @@
     // Color all brackets without any additional plugins
     "editor.bracketPairColorization.enabled": true,
 
+    // Dispatch keybindings based on keycodes.
+    // This setting significantly improves VS Code behaviour with multiple input languages.
+    "keyboard.dispatch": "keyCode",
+
     // ==== HEX EDITOR ====
 
     // Show more bytes per row

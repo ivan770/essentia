@@ -6,7 +6,7 @@
 }: let
   cfg = config.essentia.nginx;
 
-  originPullCA = fetchurl {
+  originPullCA = builtins.fetchurl {
     url = "https://developers.cloudflare.com/ssl/static/authenticated_origin_pull_ca.pem";
     sha256 = "0ihxmayis1sxr6lsyc6rb1lv3lassf13csxcgym23p19w6gs43ih";
   };

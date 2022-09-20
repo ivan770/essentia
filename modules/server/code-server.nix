@@ -10,7 +10,6 @@ in
     options.essentia.code-server = {
       identity = mkOption {
         type = types.str;
-        apply = name: assert (name != "root" || abort "Activating Code Server under root is not allowed"); name;
         description = "Identity under which Code Server will be activated";
       };
     };

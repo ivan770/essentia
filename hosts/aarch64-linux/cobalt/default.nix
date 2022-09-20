@@ -12,7 +12,7 @@
       inherit (nixosModules.hardware) firmware networking systemd-boot;
       inherit (nixosModules.server) code-server generic nginx postgresql;
     }
-    // [
+    ++ [
       (modulesPath + "/profiles/qemu-guest.nix")
     ];
 

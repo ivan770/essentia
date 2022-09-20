@@ -1,4 +1,5 @@
 {
+  config,
   modulesPath,
   nixosModules,
   pkgs,

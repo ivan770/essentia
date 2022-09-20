@@ -1,7 +1,7 @@
-{sops, ...}: {
+{nixosModules, sops, ...}: {
   imports = builtins.attrValues {
-    inherit (apps.editors) helix;
-    inherit (apps.utilities) direnv git gpg;
+    inherit (nixosModules.apps.editors) helix;
+    inherit (nixosModules.apps.utilities) direnv git gpg;
   };
 
   home.stateVersion = "22.05";

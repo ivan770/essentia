@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   nixosModules,
   ...
 }: let

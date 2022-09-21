@@ -8,7 +8,7 @@
 
   originPullCA = builtins.fetchurl {
     url = "https://developers.cloudflare.com/ssl/static/authenticated_origin_pull_ca.pem";
-    sha256 = "0ihxmayis1sxr6lsyc6rb1lv3lassf13csxcgym23p19w6gs43ih";
+    sha256 = "0hxqszqfzsbmgksfm6k0gp0hsx9k1gqx24gakxqv0391wl6fsky1";
   };
 in
   with lib; {

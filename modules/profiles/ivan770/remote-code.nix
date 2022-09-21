@@ -1,4 +1,8 @@
-{nixosModules, sops, ...}: {
+{
+  nixosModules,
+  sops,
+  ...
+}: {
   imports = builtins.attrValues {
     inherit (nixosModules.apps.editors) helix;
     inherit (nixosModules.apps.utilities) direnv git gpg;

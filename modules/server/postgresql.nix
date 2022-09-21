@@ -32,7 +32,8 @@ in
       '';
       ensureUsers = [
         {
-          name = "ivan770";
+          # FIXME: Hardcoded for now
+          name = config.users.users.ivan770.name;
           ensurePermissions = {
             "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES";
           };

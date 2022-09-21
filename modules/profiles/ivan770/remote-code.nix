@@ -1,5 +1,6 @@
 {
   nixosModules,
+  pkgs,
   sops,
   ...
 }: {

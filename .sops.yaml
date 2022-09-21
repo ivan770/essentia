@@ -12,9 +12,3 @@ creation_rules:
       - *server_cobalt
       - *server_iridium
       - *server_wolfram
-  - path_regex: ^ssl.yaml$
-    key_groups:
-      - pgp:
-        - *admin_ivan770
-        age:
-        - *server_cobalt

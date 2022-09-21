@@ -33,7 +33,7 @@ in
       };
     };
 
-    config = mkMerge [
+    config.home.file = mkMerge [
       (mkIf (isString cfg.settings) {
         "${configFilePath}".text = cfg.settings;
       })

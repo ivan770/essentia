@@ -7,9 +7,8 @@
         chain input {
           type filter hook input priority 0; policy drop;
 
-          # Accept already established connections, reject invalid ones
+          # Accept correct connections
           ct state { established, related } accept
-          ct state invalid drop
 
           # Accept any loopback traffic
           iifname lo accept

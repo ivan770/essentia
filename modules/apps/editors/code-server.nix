@@ -7,9 +7,7 @@
 }: let
   cfg = config.essentia.programs.code-server;
 
-  jsonFormat = pkgs.formats.json {};
-
-  codeServerDir = "${xdg.dataHome}/code-server";
+  codeServerDir = "${config.xdg.dataHome}/code-server";
   userDir = "${codeServerDir}/User";
 
   configFilePath = "${userDir}/settings.json";

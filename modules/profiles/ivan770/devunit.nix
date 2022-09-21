@@ -8,10 +8,10 @@
   ...
 }: {
   imports = builtins.attrValues {
-    inherit (apps.desktops) sway;
-    inherit (apps.editors) helix vscode;
-    inherit (apps.social) firefox;
-    inherit (apps.utilities) direnv git gpg;
+    inherit (nixosModules.apps.desktops) sway;
+    inherit (nixosModules.apps.editors) helix vscode;
+    inherit (nixosModules.apps.social) firefox;
+    inherit (nixosModules.apps.utilities) direnv git gpg;
   };
 
   config = {

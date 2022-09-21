@@ -9,6 +9,7 @@ in
     options.essentia.secrets = {
       psqlSecrets = mkEnableOption "psql secrets needed for PostgreSQL client authentication";
       postgresqlSecrets = mkEnableOption "PostgreSQL secrets needed for client authentication";
+      ssl = mkEnableOption "ssl secrets needed for nginx";
     };
 
     config = {
@@ -30,6 +31,16 @@ in
             };
             networks = {};
           }
+          (mkIf cfg.ssl {
+            "ssl/cert" = {
+              owner = config.services.nginx.user;
+              group = config.services.nginx.group;
+            };
+            "ssl/key" = {
+              owner = config.services.nginx.user;
+              group = config.services.nginx.group;
+            };
+          })
           (mkIf cfg.psqlSecrets {
             "users/ivan770/postgresql/cert" = {
               owner = config.users.users.ivan770.name;

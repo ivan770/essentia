@@ -20,8 +20,8 @@ in
         description = "VS Code keybindings.json file contents";
       };
       extensions = mkOption {
-        type = types.nullOr (types.listOf types.package);
-        default = null;
+        type = types.listOf types.package;
+        default = [];
         description = "VS Code extensions to install";
       };
     };
@@ -38,7 +38,7 @@ in
         (mkIf (isString cfg.keybindings) {
           keybindings = fromJSONWithComments cfg.keybindings;
         })
-        (mkIf (isList cfg.extensions) {
+        (mkIf (cfg.extensions != []) {
           mutableExtensionsDir = false;
           extensions = cfg.extensions;
         })

@@ -1,22 +1,32 @@
 {
+  config,
+  modulesPath,
   nixosModules,
   pkgs,
   ...
 }: {
-  imports = [
-    ./hardware-configuration.nix
-    nixosModules.users.ivan770
-    nixosModules.hardware.firmware
-    nixosModules.hardware.networking
-    nixosModules.hardware.systemd-boot
-    nixosModules.server.generic
-    nixosModules.server.postgresql
-  ];
+  imports =
+    builtins.attrValues {
+      inherit (nixosModules.users) ivan770;
+      inherit (nixosModules.common) home-manager;
+      inherit (nixosModules.hardware) firmware networking systemd-boot;
+      inherit (nixosModules.server) code-server generic nginx postgresql;
+    }
+    ++ [
+      (modulesPath + "/profiles/qemu-guest.nix")
+    ];
 
   config = {
     essentia = {
       firmware.cpu.vendor = null;
+      home-manager.profiles.ivan770 = "remote-code";
       networking.wired = true;
+      nginx.endpoints = [
+        {
+          name = "remote.elusive.space";
+          port = config.services.code-server.port;
+        }
+      ];
       postgresql.serverConfig = {
         # PGTune suggestions
         max_connections = 25;
@@ -36,11 +46,29 @@
         max_parallel_workers = 4;
         max_parallel_maintenance_workers = 2;
       };
-      secrets.postgresqlSecrets = true;
+      secrets = {
+        postgresqlSecrets = true;
+        ssl = true;
+      };
       systemd-boot = {
         mountpoint = "/boot";
         timeout = 2;
       };
+    };
+
+    boot.initrd.availableKernelModules = ["xhci_pci" "virtio_pci" "usbhid"];
+
+    fileSystems."/" = {
+      device = "/dev/disk/by-uuid/3fda6dab-8ad9-4a14-bbf6-9efa36fb775b";
+      fsType = "ext4";
+      options = [
+        "noatime"
+      ];
+    };
+
+    fileSystems."/boot" = {
+      device = "/dev/disk/by-uuid/F638-2D0A";
+      fsType = "vfat";
     };
 
     boot.kernelPackages = pkgs.linuxPackages_hardened;

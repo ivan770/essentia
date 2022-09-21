@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  nixosModules,
   ...
 }: let
   cfg = config.essentia.code-server;

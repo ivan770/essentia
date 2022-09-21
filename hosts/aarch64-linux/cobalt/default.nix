@@ -20,7 +20,7 @@
     essentia = {
       code-server.identity = "ivan770";
       firmware.cpu.vendor = null;
-      home-manager.profiles.ivan770 = "remote";
+      home-manager.profiles.ivan770 = "remote-code";
       networking.wired = true;
       nginx.endpoints = [
         {

@@ -13,6 +13,10 @@
           # Accept any loopback traffic
           iifname lo accept
 
+          # Accept some ICMP traffic
+          ip protocol icmp icmp type { destination-unreachable, router-advertisement, time-exceeded, parameter-problem } accept
+          ip6 nexthdr icmpv6 icmpv6 type { destination-unreachable, packet-too-big, time-exceeded, parameter-problem, nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert } accept
+
           # Allow only SSH and HTTPS connections
           tcp dport { ssh, https } accept
         }

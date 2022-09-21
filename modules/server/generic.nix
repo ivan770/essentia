@@ -1,8 +1,6 @@
 {nixosModules, ...}: {
-  imports = with nixosModules; [
-    common.nix
-    common.secrets
-    common.security
-    common.ssh
-  ];
+  imports = builtins.attrValues {
+    inherit (nixosModules.common) nix secrets security ssh;
+    inherit (nixosModules.server) firewall;
+  };
 }

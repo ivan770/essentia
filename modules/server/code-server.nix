@@ -1,4 +1,4 @@
-{config, ...}: {
+{...}: {
   services.code-server = {
     enable = true;
     # FIXME: Hardcoded for now

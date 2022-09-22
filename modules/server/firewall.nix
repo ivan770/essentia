@@ -1,4 +1,4 @@
-{...}: let
+{config, ...}: let
   mkCfIPList = version: sha256: (
     builtins.replaceStrings ["\n"] [", "] (
       builtins.readFile (builtins.fetchurl {
@@ -15,6 +15,8 @@ in {
     enable = true;
     # Ruleset derived from https://wiki.nftables.org/wiki-nftables/index.php/Simple_ruleset_for_a_server
     ruleset = ''
+      include "${config.sops.secrets.trusted_networks.path}"
+
       define CF_IPV4 = { ${cfV4List} }
       define CF_IPV6 = { ${cfV6List} }
 
@@ -33,9 +35,9 @@ in {
           ip6 nexthdr icmpv6 icmpv6 type { destination-unreachable, packet-too-big, time-exceeded, parameter-problem, nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert } accept
 
           # Allow SSH and HTTPS connections
-          tcp dport { https } ip saddr $CF_IPV4 accept
-          tcp dport { https } ip6 saddr $CF_IPV6 accept
-          tcp dport { ssh } accept
+          tcp dport https ip saddr $CF_IPV4 accept
+          tcp dport https ip6 saddr $CF_IPV6 accept
+          tcp dport ssh ip saddr $TRUSTED_NETWORKS accept
         }
 
         chain output {

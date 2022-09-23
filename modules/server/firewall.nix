@@ -15,7 +15,7 @@ in {
     enable = true;
     # Ruleset derived from https://wiki.nftables.org/wiki-nftables/index.php/Simple_ruleset_for_a_server
     ruleset = ''
-      include "${config.sops.secrets.trusted_networks.path}"
+      include "${config.sops.secrets.trustedNetworks.path}"
 
       define CF_IPV4 = { ${cfV4List} }
       define CF_IPV6 = { ${cfV6List} }

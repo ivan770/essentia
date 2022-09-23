@@ -16,7 +16,7 @@
     openssh.authorizedKeys.keys = [
       (builtins.readFile (builtins.fetchurl {
         url = "https://ssh.ivan770.me";
-        sha256 = "0ihxmayis1sxr6lsyc6rb1lv3lassf13csxcgym23p19w6gs43ih";
+        sha256 = "1gsrc7pc1i6kx4hi5wskq6ml84pb1hcxqnxkb5qllk5pjg86360m";
       }))
     ];
   };

@@ -30,7 +30,7 @@ in
               group = config.users.users.ivan770.group;
             };
             networks = {};
-            trusted_networks = {};
+            trustedNetworks = {};
           }
           (mkIf cfg.ssl {
             "ssl/cert" = {

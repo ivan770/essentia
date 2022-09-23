@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   boot = {
     kernel.sysctl = {
       # Ignore incoming ICMP redirects

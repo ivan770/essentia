@@ -71,8 +71,6 @@
       fsType = "vfat";
     };
 
-    boot.kernelPackages = pkgs.linuxPackages_hardened;
-
     system.stateVersion = "22.05";
   };
 }

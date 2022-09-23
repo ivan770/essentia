@@ -26,7 +26,8 @@
       postBuild = ''
         wrapProgram $out/bin/firefox \
           ${lib.optionalString cfg.wayland "--set EGL_PLATFORM \"wayland\""} \
-          --set MOZ_DISABLE_RDD_SANDBOX 1
+          --set MOZ_DISABLE_RDD_SANDBOX 1 \
+          --set MOZ_X11_EGL 1
       '';
 
       inherit (browser) passthru;
@@ -138,9 +139,9 @@ in
             "media.ffmpeg.vaapi.enabled" = true;
             "media.rdd-ffmpeg.enabled" = true;
             "media.av1.enabled" = false;
-            "gfx.x11-egl.force-enabled" = true;
-            # In case if VAAPI detection failes force hardware decoding usage.
-            "media.hardware-video-decoding.force-enabled" = true;
+
+            # Enable VA-API decoding for WebRTC
+            "media.navigator.mediadatadecoder_vpx_enabled" = true;
           };
       };
     };

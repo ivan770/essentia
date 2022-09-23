@@ -9,28 +9,23 @@ in
     options.essentia.locale = {
       base = mkOption {
         type = types.str;
+        default = "en_US.UTF-8";
         description = "Primary language that is used to display system interface";
       };
 
       units = mkOption {
         type = types.str;
+        default = "en_US.UTF-8";
         description = "Language used to display units";
       };
 
       timeZone = mkOption {
         type = types.str;
+        default = "Etc/UTC";
         description = "Global time zone configuration";
       };
 
-      supportedLocales = mkOption {
-        type = types.listOf types.str;
-        description = "Locales for glibc to support";
-        default = [
-          "en_US.UTF-8/UTF-8"
-          "uk_UA.UTF-8/UTF-8"
-          "ru_UA.UTF-8/UTF-8"
-        ];
-      };
+      extendedLocales = mkEnableOption "extended locale support";
     };
 
     config = {
@@ -50,7 +45,13 @@ in
           LC_TELEPHONE = cfg.units;
           LC_TIME = cfg.units;
         };
-        supportedLocales = cfg.supportedLocales;
+
+        supportedLocales = [
+          "en_US.UTF-8/UTF-8"
+        ] ++ optionals cfg.extendedLocales [
+          "uk_UA.UTF-8/UTF-8"
+          "ru_UA.UTF-8/UTF-8"
+        ];
       };
       time.timeZone = cfg.timeZone;
     };

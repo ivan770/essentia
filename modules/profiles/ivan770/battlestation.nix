@@ -19,7 +19,7 @@
   home = {
     packages = builtins.attrValues {
       inherit (pkgs) lunar-client matlab tdesktop dconf2nix ciscoPacketTracer8;
-      inherit (pkgs.gnome) gnome-system-monitor nautilus file-roller gnome-disk-utility gnome-tweaks seahorse simple-scan;
+      inherit (pkgs.gnome) gnome-system-monitor nautilus file-roller gnome-disk-utility gnome-tweaks simple-scan;
     };
     stateVersion = "22.05";
   };

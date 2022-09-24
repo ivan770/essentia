@@ -2,10 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+with lib; let
   mkCfIPList = version: sha256: (
-    builtins.replaceStrings ["\n"] [", "] (
-      builtins.readFile (builtins.fetchurl {
+    replaceStrings ["\n"] [", "] (
+      readFile (fetchurl {
         inherit sha256;
         url = "https://www.cloudflare.com/ips-" + version;
       })
@@ -16,8 +17,8 @@
   cfV6List = mkCfIPList "v6" "1ad09hijignj6zlqvdjxv7rjj8567z357zfavv201b9vx3ikk7cy";
 
   protectedPorts =
-    lib.optional config.services.postgresql.enable config.services.postgresql.port
-    ++ lib.optionals config.services.openssh.enable config.services.openssh.ports;
+    optional config.services.postgresql.enable config.services.postgresql.port
+    ++ optionals config.services.openssh.enable config.services.openssh.ports;
 in {
   networking.nftables = {
     enable = true;
@@ -45,7 +46,7 @@ in {
           # Allow SSH and HTTPS connections
           tcp dport https ip saddr $CF_IPV4 accept
           tcp dport https ip6 saddr $CF_IPV6 accept
-          tcp dport { ${builtins.concatStringsSep ", " (map toString protectedPorts)} } ip saddr $TRUSTED_NETWORKS accept
+          tcp dport { ${concatStringsSep ", " (map toString protectedPorts)} } ip saddr $TRUSTED_NETWORKS accept
         }
 
         chain output {

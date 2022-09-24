@@ -6,7 +6,7 @@
 with lib; let
   mkCfIPList = version: sha256: (
     replaceStrings ["\n"] [", "] (
-      readFile (fetchurl {
+      readFile (builtins.fetchurl {
         inherit sha256;
         url = "https://www.cloudflare.com/ips-" + version;
       })

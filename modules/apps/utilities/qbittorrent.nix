@@ -9,7 +9,7 @@ in
   with lib; {
     options.essentia.programs.qbittorrent = {
       settings = mkOption {
-        type = types.nullOr types.str;
+        type = types.nullOr types.path;
         default = null;
         description = "qBittorrent settings file contents";
       };
@@ -24,8 +24,11 @@ in
           })
         ];
       }
-      (mkIf (isString cfg.settings) {
-        xdg.configFile."qBittorrent/qBittorrent.conf".text = cfg.settings;
+      (mkIf (builtins.isPath cfg.settings) {
+        home.activation.qBittorrent = lib.hm.dag.entryAfter ["writeBoundary"] ''
+          $DRY_RUN_CMD cp $VERBOSE_ARG \
+              ${cfg.settings} ${config.xdg.configHome}/qBittorrent/qBittorrent.conf
+        '';
       })
     ];
   }

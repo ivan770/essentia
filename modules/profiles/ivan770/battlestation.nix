@@ -45,7 +45,7 @@
       cert = sops.secrets."users/ivan770/postgresql/cert".path;
       key = sops.secrets."users/ivan770/postgresql/key".path;
     };
-    qbittorrent.settings = builtins.readFile ./configs/qbittorrent.conf;
+    qbittorrent.settings = ./configs/qbittorrent.conf;
     vscode = import ./vscode/config.nix {inherit pkgs;};
   };
 }

@@ -12,7 +12,7 @@
   cfV6List = mkCfIPList "v6" "1ad09hijignj6zlqvdjxv7rjj8567z357zfavv201b9vx3ikk7cy";
 
   protectedPorts = [
-    (mkIf config.services.postgresql.enable config.services.postgresql.port)
+    (lib.mkIf config.services.postgresql.enable config.services.postgresql.port)
   ] ++ lib.optionals config.services.openssh.enable config.services.openssh.port;
 in {
   networking.nftables = {

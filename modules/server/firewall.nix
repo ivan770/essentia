@@ -13,7 +13,7 @@
 
   protectedPorts = [
     (lib.mkIf config.services.postgresql.enable config.services.postgresql.port)
-  ] ++ lib.optionals config.services.openssh.enable config.services.openssh.port;
+  ] ++ lib.optionals config.services.openssh.enable config.services.openssh.ports;
 in {
   networking.nftables = {
     enable = true;

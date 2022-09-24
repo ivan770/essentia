@@ -37,11 +37,7 @@
         waybarSettings = import ./sway/waybar/bars.nix {inherit pkgs;};
         waybarStyle = builtins.readFile ./sway/waybar/style.css;
       };
-      vscode =
-        import ./vscode/config.nix {inherit pkgs;}
-        // {
-          wayland = true;
-        };
+      vscode = import ./vscode/config.nix {inherit pkgs;};
     };
     programs.foot = {
       enable = true;

@@ -12,6 +12,7 @@
       common-pc-hdd
       ;
 
+    inherit (nixosModules.common) systemd-initrd;
     inherit (nixosModules.users) ivan770;
     inherit (nixosModules.desktop) generic gnome;
     inherit

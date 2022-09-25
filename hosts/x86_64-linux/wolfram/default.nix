@@ -25,8 +25,6 @@
       systemd-boot
       tpm
       ;
-
-    inherit (nixosModules.apps.games) steam;
   };
 
   config = {

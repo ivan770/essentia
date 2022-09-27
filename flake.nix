@@ -26,6 +26,13 @@
       inputs.utils.follows = "flake-utils";
     };
 
+    impermanence = {
+      type = "github";
+      owner = "nix-community";
+      repo = "impermanence";
+      ref = "master";
+    };
+
     nur = {
       type = "github";
       owner = "nix-community";

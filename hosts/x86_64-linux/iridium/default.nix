@@ -17,6 +17,7 @@
       ;
 
     inherit (nixosModules.users) ivan770;
+    inherit (nixosModules.common) impermanence;
     inherit (nixosModules.desktop) generic sway;
     inherit
       (nixosModules.hardware)
@@ -58,22 +59,36 @@
     };
 
     fileSystems."/" = {
-      device = "/dev/disk/by-uuid/4e1bd269-67b9-48cb-95ea-bbcfd6b7f578";
-      fsType = "ext4";
+      device = "none";
+      fsType = "tmpfs";
       options = [
-        "noatime"
-        "commit=60"
+        "defaults"
+        "size=3G"
+        "mode=755"
       ];
     };
 
+    fileSystems."/nix" = {
+      device = "/dev/disk/by-uuid/97314665-334a-4f4a-a8bd-7c3a86d37527";
+      fsType = "f2fs";
+      options = [
+        "defaults"
+        "compress_algorithm=zstd:6"
+        "compress_chksum"
+        "atgc"
+        "gc_merge"
+        "lazytime"
+        "noatime"
+      ];
+      neededForBoot = true;
+    };
+
     fileSystems."/boot/efi" = {
-      device = "/dev/disk/by-uuid/4CEC-FA37";
+      device = "/dev/disk/by-uuid/73D2-6324";
       fsType = "vfat";
     };
 
-    swapDevices = [
-      {device = "/dev/disk/by-uuid/72c3245b-b368-4b1c-9be7-b29ce9451a93";}
-    ];
+    swapDevices = [];
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
 

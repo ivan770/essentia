@@ -26,6 +26,7 @@
       networking
       sound
       systemd-boot
+      tlp
       tpm
       ;
   };
@@ -44,6 +45,10 @@
           "default_5g"
         ];
         desktopDns = true;
+      };
+      tlp.cpu = {
+        ac = "performance";
+        bat = "schedutil";
       };
     };
 

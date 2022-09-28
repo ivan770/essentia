@@ -36,6 +36,7 @@
     essentia = {
       home-manager.profiles.ivan770 = "devunit";
       firmware.cpu.vendor = "amd";
+      impermanence.persistentDirectory = "/nix/persist";
       locale = {
         units = "uk_UA.UTF-8";
         timeZone = "Europe/Kiev";
@@ -51,6 +52,7 @@
         ac = "performance";
         bat = "schedutil";
       };
+      systemd-boot.mountpoint = "/boot";
     };
 
     boot = {

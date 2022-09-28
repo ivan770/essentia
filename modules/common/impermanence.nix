@@ -25,16 +25,16 @@ in
       services.openssh.hostKeys = mkIf config.services.openssh.enable [
         {
           bits = 4096;
-          path = "${persistentDirectory}/etc/ssh/ssh_host_rsa_key";
+          path = "${cfg.persistentDirectory}/etc/ssh/ssh_host_rsa_key";
           type = "rsa";
         }
         {
-          path = "${persistentDirectory}/etc/ssh/ssh_host_ed25519_key";
+          path = "${cfg.persistentDirectory}/etc/ssh/ssh_host_ed25519_key";
           type = "ed25519";
         }
       ];
 
-      environment.persistence.${persistentDirectory} = {
+      environment.persistence.${cfg.persistentDirectory} = {
         hideMounts = true;
 
         directories = [

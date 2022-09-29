@@ -1,11 +1,6 @@
-{
-  lib,
-  nur,
-  ...
-}:
-with lib; {
+{nur, ...}: {
   extensions = builtins.attrValues {
-    inherit (nur.repos.rycee.firefox-addons) bitwarden multi-account-containers ublock-origin;
+    inherit (nur.repos.rycee.firefox-addons) bitwarden multi-account-containers ublock-origin youtube-shorts-block;
   };
   settings = {
     # Appearance stuff

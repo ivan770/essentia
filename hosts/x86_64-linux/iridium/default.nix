@@ -16,7 +16,7 @@
       common-pc-laptop-ssd
       ;
 
-    inherit (nixosModules.users) ivan770;
+    inherit (nixosModules.users.ivan770) impermanence user;
     inherit (nixosModules.common) impermanence;
     inherit (nixosModules.desktop) generic sway;
     inherit

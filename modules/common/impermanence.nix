@@ -50,12 +50,18 @@ in
 
         directories = [
           "/var/lib/nixos"
-          { directory = "/var/lib/bluetooth"; mode = "0700"; }
+          {
+            directory = "/var/lib/bluetooth";
+            mode = "0700";
+          }
           "/var/lib/systemd"
           "/var/log"
 
           # /var/tmp implies a temporary file on a... persistent storage?
-          { directory = "/var/tmp"; mode = "0777"; }
+          {
+            directory = "/var/tmp";
+            mode = "0777";
+          }
         ];
 
         files = [

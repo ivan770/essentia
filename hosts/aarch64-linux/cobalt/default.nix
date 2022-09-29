@@ -7,7 +7,7 @@
 }: {
   imports =
     builtins.attrValues {
-      inherit (nixosModules.users) ivan770;
+      inherit (nixosModules.users.ivan770) user;
       inherit (nixosModules.common) home-manager;
       inherit (nixosModules.hardware) firmware networking systemd-boot;
       inherit (nixosModules.server) code-server generic nginx postgresql;

@@ -59,14 +59,8 @@ in
         ];
 
         files = [
-          {
-            file = "/etc/machine-id";
-            mode = "0444";
-          }
-          {
-            file = "/var/lib/logrotate.status";
-            mode = "0600";
-          }
+          "/etc/machine-id"
+          "/var/lib/logrotate.status"
         ];
 
         users = cfg.users;

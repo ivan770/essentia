@@ -52,7 +52,6 @@
         ac = "performance";
         bat = "schedutil";
       };
-      systemd-boot.mountpoint = "/boot";
     };
 
     boot = {

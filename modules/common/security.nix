@@ -3,6 +3,11 @@
     lib.mkForce [
       nano
     ];
-  security.sudo.execWheelOnly = true;
+  security.sudo = {
+    execWheelOnly = true;
+    extraConfig = ''
+      Defaults lecture=never
+    '';
+  };
   users.mutableUsers = false;
 }

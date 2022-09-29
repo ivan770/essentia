@@ -49,18 +49,24 @@ in
         hideMounts = true;
 
         directories = [
-          "/var/lib/bluetooth"
-          "/var/lib/logrotate.status"
           "/var/lib/nixos"
+          { directory = "/var/lib/bluetooth"; mode = "0700"; }
           "/var/lib/systemd"
           "/var/log"
 
           # /var/tmp implies a temporary file on a... persistent storage?
-          "/var/tmp"
+          { directory = "/var/tmp"; mode = "0777"; }
         ];
 
         files = [
-          "/etc/machine-id"
+          {
+            file = "/etc/machine-id";
+            mode = "0444";
+          }
+          {
+            file = "/var/lib/logrotate.status";
+            mode = "0600";
+          }
         ];
 
         users = cfg.users;

@@ -11,6 +11,7 @@
         "video"
         "wheel"
       ]
+      ++ lib.optionals config.hardware.steam-hardware.enable ["input"]
       ++ lib.optionals config.security.tpm2.enable [config.security.tpm2.tssGroup]
       ++ lib.optionals config.hardware.sane.enable ["scanner" "lp"];
     openssh.authorizedKeys.keys = [

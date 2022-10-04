@@ -18,6 +18,7 @@
     inherit
       (nixosModules.hardware)
       firmware
+      gaming
       networking
       nvidia
       printing

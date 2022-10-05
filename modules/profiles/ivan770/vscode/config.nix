@@ -37,5 +37,11 @@
         version = "1.0.2";
         sha256 = "aTvvzGsFVAvDWUl7kaOS6O0OVhTgCG4g0s02CiM4THE=";
       }
+      {
+        name = "language-julia";
+        publisher = "julialang";
+        version = "1.7.12";
+        sha256 = "g6os6ktSWzUSCnLzMkGRoOhCEvU3gXcGGj2cq1NKkaE=";
+      }
     ];
 }

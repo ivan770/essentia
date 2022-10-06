@@ -59,10 +59,13 @@ in
             base = true;
             gtk = true;
           };
+          # FIXME: Replace QT_QPA_PLATFORM value with "wayland"
+          # as soon as Contour (and every other installed Qt app)
+          # start working with Wayland correctly.
           extraSessionCommands =
             ''
               export SDL_VIDEODRIVER=wayland
-              export QT_QPA_PLATFORM=wayland
+              export QT_QPA_PLATFORM=xcb
               export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
               export NIXOS_OZONE_WL=1
             ''

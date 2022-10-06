@@ -10,7 +10,7 @@
     builtins.attrValues {
       inherit (nixosModules.apps.editors) helix vscode;
       inherit (nixosModules.apps.social) firefox discord;
-      inherit (nixosModules.apps.utilities) direnv git gnome-terminal gpg mpv psql qbittorrent;
+      inherit (nixosModules.apps.utilities) direnv git gpg mpv psql qbittorrent;
     }
     ++ [
       ./dconf/battlestation.nix
@@ -27,7 +27,6 @@
     discord.settings = builtins.readFile ./configs/discord.json;
     firefox = import ./configs/firefox.nix {inherit lib nur;};
     git.credentials = sops.secrets."users/ivan770/git".path;
-    gnome-terminal.settings = import ./configs/gnome-terminal.nix {};
     gpg.sshKeys = [
       "4F1412E8D1942B3317A706884B7A0711B34A46D6"
     ];
@@ -47,5 +46,10 @@
     };
     qbittorrent.settings = ./configs/qbittorrent.conf;
     vscode = import ./vscode/config.nix {inherit pkgs;};
+  };
+  programs.contour = {
+    enable = true;
+    settings = import ./contour/settings.nix {};
+    keybindings = lib.mkForce (import ./contour/keybindings.nix {});
   };
 }

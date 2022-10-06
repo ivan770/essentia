@@ -7,11 +7,11 @@
   cfg = config.wayland.windowManager.sway.config;
   modifier = cfg.modifier;
 in {
-  terminal = "${pkgs.foot}/bin/foot";
+  terminal = "${pkgs.contour}/bin/contour";
   menu = ''
     ${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop \
       --dmenu="${pkgs.bemenu}/bin/bemenu --list 10 -c -W 0.5 -f -i" \
-      --term="${pkgs.foot}/bin/foot" \
+      --term="${cfg.terminal}" \
       --no-generic
   '';
   bars = [];

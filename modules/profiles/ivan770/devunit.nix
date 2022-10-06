@@ -39,9 +39,10 @@
       };
       vscode = import ./vscode/config.nix {inherit pkgs;};
     };
-    programs.foot = {
+    programs.contour = {
       enable = true;
-      settings = import ./configs/foot.nix {};
+      settings = import ./contour/settings.nix {};
+      keybindings = lib.mkForce (import ./contour/keybindings.nix {});
     };
   };
 }

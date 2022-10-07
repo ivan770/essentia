@@ -48,8 +48,9 @@ in
       gtk = {
         enable = true;
         cursorTheme = {
+          package = pkgs.gnome.adwaita-icon-theme;
           name = "Adwaita";
-          size = 48;
+          size = 36;
         };
       };
       wayland.windowManager.sway = mkMerge [

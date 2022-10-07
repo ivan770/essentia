@@ -47,6 +47,10 @@
 
     files = [
       ".bash_history"
+      {
+        file = ".ssh/known_hosts";
+        parentDirectory = {mode = "0700";};
+      }
     ];
   };
 }

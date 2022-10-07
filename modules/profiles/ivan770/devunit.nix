@@ -11,7 +11,7 @@
     inherit (nixosModules.apps.desktops) sway;
     inherit (nixosModules.apps.editors) helix vscode;
     inherit (nixosModules.apps.social) firefox;
-    inherit (nixosModules.apps.utilities) direnv git gpg;
+    inherit (nixosModules.apps.utilities) direnv fonts git gpg;
   };
 
   config = {

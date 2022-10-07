@@ -1,13 +1,7 @@
 {pkgs, ...}: {
-  fonts = {
-    enableDefaultFonts = true;
-    fonts = with pkgs; [
-      corefonts
-      noto-fonts
-      noto-fonts-emoji
-      liberation_ttf
-      jetbrains-mono
-      material-design-icons
-    ];
+  # Required for default system-wide fonts configuration.
+  # See fonts.fontconfig.defaultFonts.* for more information.
+  fonts.fonts = builtins.attrValues {
+    inherit (pkgs) dejavu_fonts noto-fonts-emoji;
   };
 }

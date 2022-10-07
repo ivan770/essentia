@@ -10,7 +10,7 @@
     builtins.attrValues {
       inherit (nixosModules.apps.editors) helix vscode;
       inherit (nixosModules.apps.social) firefox discord;
-      inherit (nixosModules.apps.utilities) direnv git gpg mpv psql qbittorrent;
+      inherit (nixosModules.apps.utilities) direnv fonts git gpg mpv psql qbittorrent;
     }
     ++ [
       ./dconf/battlestation.nix

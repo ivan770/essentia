@@ -5,8 +5,8 @@ inputs: self: super: {
     libunicode-src = fetchFromGitHub {
       owner = "contour-terminal";
       repo = "libunicode";
-      rev = "a511f3995cdf708f2e199276c90e21408db00a50";
-      sha256 = "sha256-UBkEQ/sN2NNSx7Qi3sIURhSGoFxkU3UqtORsx/oKjOk=";
+      rev = "f464e0ffdb560cd20d8556226248d36e1b85d1a3";
+      sha256 = "sha256-5JpG1ExqdjMtFocmHJ5iuJEGtQbyrpVWnL4GNZyJLnk=";
     };
 
     termbench-pro-src = fetchFromGitHub {
@@ -18,13 +18,13 @@ inputs: self: super: {
   in
     stdenv.mkDerivation rec {
       pname = "contour";
-      version = "0.3.3.204";
+      version = "0.3.4.223";
 
       src = fetchFromGitHub {
         owner = "contour-terminal";
         repo = pname;
         rev = "v${version}";
-        sha256 = "sha256-Eun8l0SweUJ6dTVYTfsb21as6++OSWkmIy1aeOLiYt8=";
+        sha256 = "sha256-M76d4rzQNheE0LTz9+qX/K0/FxEZPeDVpH3CQHLTYzM=";
       };
 
       nativeBuildInputs = [
@@ -43,7 +43,7 @@ inputs: self: super: {
           pcre
           boost
           catch2
-          fmt_8
+          fmt_9
           microsoft_gsl
           range-v3
           libyamlcpp

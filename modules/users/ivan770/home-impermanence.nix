@@ -26,6 +26,10 @@
       # .local/*
       ".local/share/direnv"
       {
+        directory = ".local/share/TelegramDesktop";
+        mode = "0700";
+      }
+      {
         directory = ".local/state/wireplumber";
         mode = "0700";
       }

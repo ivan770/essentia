@@ -9,7 +9,6 @@
       (inputs.nixos-hardware.nixosModules)
       common-cpu-amd
       common-cpu-amd-pstate
-      common-gpu-amd
       common-pc
       common-pc-laptop
       common-pc-laptop-acpi_call
@@ -21,6 +20,7 @@
     inherit (nixosModules.desktop) generic sway;
     inherit
       (nixosModules.hardware)
+      amd-gpu
       backlight
       bluetooth
       firmware

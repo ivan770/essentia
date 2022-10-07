@@ -1,4 +1,5 @@
 {pkgs, ...}: {
+  programs.dconf.enable = true;
   xdg.portal = {
     enable = true;
     wlr = {
@@ -12,7 +13,6 @@
       };
     };
   };
-  programs.sway.enable = true;
   services = {
     dbus = {
       enable = true;

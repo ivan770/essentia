@@ -1,25 +1,20 @@
 {...}: {
-  profiles.main = {
-    cursor = {
-      shape = "block";
-      blinking = true;
-    };
-    font = {
-      regular.family = "JetBrains Mono";
-      size = 12;
-    };
-    history.limit = 10000;
-    scrollbar.position = "hidden";
+  font = {
+    size = 12;
+    normal.family = "JetBrains Mono";
   };
-  color_schemes.default = {
-    default = {
+
+  cursor.style = {
+    shape = "Block";
+    blinking = "On";
+  };
+
+  ipc_socket = false;
+
+  colors = {
+    primary = {
       background = "#000000";
       foreground = "#FFFFFF";
-    };
-
-    selection = {
-      background = "#FFFFFF";
-      foreground = "#000000";
     };
 
     normal = {

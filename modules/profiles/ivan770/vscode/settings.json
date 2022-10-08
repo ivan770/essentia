@@ -113,6 +113,9 @@
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
 
+    // Remove "File trash" feature
+    "files.enableTrash": false,
+
     // Don't flatten directory structure
     "explorer.compactFolders": false,
 

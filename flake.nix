@@ -19,9 +19,9 @@
 
     home-manager = {
       type = "github";
-      owner = "ivan770";
+      owner = "nix-community";
       repo = "home-manager";
-      ref = "contour";
+      ref = "master";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "flake-utils";
     };

@@ -33,16 +33,15 @@
       ];
       helix.settings = builtins.readFile ./configs/helix.toml;
       sway = {
-        swaySettings = import ./sway/sway.nix {inherit config lib pkgs;};
+        swaySettings = import ./sway/settings.nix {inherit config lib pkgs;};
         waybarSettings = import ./sway/waybar/bars.nix {inherit pkgs;};
         waybarStyle = builtins.readFile ./sway/waybar/style.css;
       };
       vscode = import ./vscode/config.nix {inherit pkgs;};
     };
-    programs.contour = {
+    programs.alacritty = {
       enable = true;
-      settings = import ./contour/settings.nix {};
-      keybindings = lib.mkForce (import ./contour/keybindings.nix {});
+      settings = import ./configs/alacritty.nix {};
     };
   };
 }

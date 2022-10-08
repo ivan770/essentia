@@ -47,9 +47,8 @@
     qbittorrent.settings = ./configs/qbittorrent.conf;
     vscode = import ./vscode/config.nix {inherit pkgs;};
   };
-  programs.contour = {
+  programs.alacritty = {
     enable = true;
-    settings = import ./contour/settings.nix {};
-    keybindings = lib.mkForce (import ./contour/keybindings.nix {});
+    settings = import ./configs/alacritty.nix {};
   };
 }

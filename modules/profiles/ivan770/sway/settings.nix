@@ -7,8 +7,7 @@
   cfg = config.wayland.windowManager.sway.config;
   modifier = cfg.modifier;
 in {
-  # FIXME: Remove "platform xcb" as soon as https://github.com/contour-terminal/contour/issues/525 gets resolved
-  terminal = "${pkgs.contour}/bin/contour platform xcb";
+  terminal = "${config.programs.alacritty.package}/bin/alacritty";
   menu = ''
     ${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop \
       --dmenu="${pkgs.bemenu}/bin/bemenu --list 10 -c -W 0.5 -f -i" \

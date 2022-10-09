@@ -89,7 +89,7 @@
       fsType = "vfat";
     };
 
-    swapDevices = [];
+    swapDevices = [{device = "/dev/disk/by-uuid/fc76a365-3349-4c6e-86f0-8bdd2245b259";}];
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
 

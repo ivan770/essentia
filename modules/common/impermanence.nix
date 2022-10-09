@@ -18,6 +18,8 @@ in
         default = {};
         description = "User-specific persistence configuration";
       };
+
+      persistentJournald = mkEnableOption "persistent journald logs";
     };
 
     imports = [
@@ -43,6 +45,10 @@ in
       # Coredumps are unused in this configuration anyway.
       systemd.coredump.extraConfig = ''
         Storage=none
+      '';
+
+      services.journald.extraConfig = mkIf (!cfg.persistentJournald) ''
+        Storage=volatile
       '';
 
       environment.persistence.${cfg.persistentDirectory} = {

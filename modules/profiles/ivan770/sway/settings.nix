@@ -35,6 +35,16 @@ in {
 
   gaps.smartBorders = "on";
 
+  window.commands = [
+    {
+      command = "floating enable";
+      criteria = {
+        app_id = "firefox";
+        title = "Picture-in-Picture";
+      };
+    }
+  ];
+
   defaultWorkspace = "workspace number 1";
   up = "w";
   left = "a";

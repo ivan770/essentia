@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  wlogoutStyle = pkgs.writeText "wlogout-style.css" (
+    builtins.replaceStrings ["$icons"] ["${pkgs.wlogout}/share/wlogout/icons"] (builtins.readFile ../wlogout/style.css)
+  );
+in {
   mainBar = {
     layer = "top";
     position = "top";
@@ -54,7 +58,7 @@
     network = {
       interval = 10;
       format-wifi = "{icon} {essid}";
-      format-ethernet = "󰈀 {ipaddr}";
+      format-ethernet = "󰈀 Connected";
       format-disconnected = "󰅤 Disconnected";
       format-icons = [
         "󰤟"
@@ -118,7 +122,17 @@
       tooltip = false;
       format = "󰍃";
       interval = "once";
-      on-click = "${pkgs.wlogout}/bin/wlogout";
+      on-click = ''
+        ${pkgs.wlogout}/bin/wlogout \
+          --css ${wlogoutStyle} \
+          --layout ${../wlogout/layout} \
+          --buttons-per-row 2 \
+          --margin-top 300 \
+          --margin-bottom 300 \
+          --margin-left 600 \
+          --margin-right 600 \
+          --protocol layer-shell
+      '';
     };
 
     "custom/cap-left" = {

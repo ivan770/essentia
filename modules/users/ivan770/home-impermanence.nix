@@ -10,6 +10,7 @@
         directory = ".gnupg";
         mode = "0700";
       }
+      ".julia"
       ".mozilla"
       {
         directory = ".pki";

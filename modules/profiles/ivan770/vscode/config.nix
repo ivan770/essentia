@@ -22,8 +22,8 @@
       {
         name = "hexeditor";
         publisher = "ms-vscode";
-        version = "1.9.8";
-        sha256 = "XgRD2rDSLf1uYBm5gBmLzT9oLCpBmhtfoabKBekldhg=";
+        version = "1.9.9";
+        sha256 = "azUd4e1AHpPMhb+nXRqTzb3W/Z0RvZLn/fSa+ihN63A=";
       }
       {
         name = "clips-ide";

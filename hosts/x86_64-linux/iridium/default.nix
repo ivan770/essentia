@@ -80,6 +80,7 @@
         "gc_merge"
         "lazytime"
         "noatime"
+        "nodiscard"
       ];
       neededForBoot = true;
     };

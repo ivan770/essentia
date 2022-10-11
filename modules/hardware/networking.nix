@@ -41,7 +41,7 @@ in {
         networks = builtins.listToAttrs (map (name: {
             inherit name;
             value = {
-              pskRaw = "@${strings.toUpper name}@";
+              pskRaw = "@${strings.toUpper (replaceStrings ["-"] ["_"] name)}@";
             };
           })
           cfg.wireless);

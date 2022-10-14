@@ -39,9 +39,16 @@
       };
       vscode = import ./vscode/config.nix {inherit pkgs;};
     };
-    programs.alacritty = {
-      enable = true;
-      settings = import ./configs/alacritty.nix {};
+    programs = {
+      alacritty = {
+        enable = true;
+        settings = import ./configs/alacritty.nix {};
+      };
+      lf =
+        import ./configs/lf.nix {}
+        // {
+          enable = true;
+        };
     };
   };
 }

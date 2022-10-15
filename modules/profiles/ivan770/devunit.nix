@@ -8,7 +8,7 @@
   ...
 }: {
   imports = builtins.attrValues {
-    inherit (nixosModules.apps.desktops) sway;
+    inherit (nixosModules.apps.desktops) sway yambar;
     inherit (nixosModules.apps.editors) helix vscode;
     inherit (nixosModules.apps.social) firefox;
     inherit (nixosModules.apps.utilities) direnv fonts git gpg;
@@ -32,12 +32,15 @@
         "4F1412E8D1942B3317A706884B7A0711B34A46D6"
       ];
       helix.settings = builtins.readFile ./configs/helix.toml;
-      sway = {
-        swaySettings = import ./sway/settings.nix {inherit config lib pkgs;};
-        waybarSettings = import ./sway/waybar/bars.nix {inherit pkgs;};
-        waybarStyle = builtins.readFile ./sway/waybar/style.css;
-      };
+      sway.settings = import ./sway/settings.nix {inherit config lib pkgs;};
       vscode = import ./vscode/config.nix {inherit pkgs;};
+      yambar = {
+        settings = import ./sway/yambar/config.nix {
+          inherit pkgs;
+          networkDevices = ["wlo1"];
+        };
+        systemd.enable = true;
+      };
     };
     programs = {
       alacritty = {

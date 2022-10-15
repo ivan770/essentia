@@ -9,10 +9,10 @@
   okColor = "00ff00ff";
   warnColor = "ff0000ff";
 
-  activeColor = "ffa0a04c";
+  activeColor = "7097f1ff";
   inactiveColor = "ffffff55";
 
-  font = "JetBrains Mono:pixelsize=14";
+  font = "Noto Sans:pixelsize=14:style=regular";
   mdIconFont = "Material Design Icons:pixelsize=14";
 in {
   bar = {

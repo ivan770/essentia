@@ -29,6 +29,24 @@ in
         '';
       };
 
+      cursor = {
+        name = mkOption {
+          type = types.str;
+          default = config.gtk.cursorTheme.name;
+          description = ''
+            Cursor name for yambar to use.
+          '';
+        };
+
+        size = mkOption {
+          type = types.int;
+          default = config.gtk.cursorTheme.size;
+          description = ''
+            Cursor size for yambar to use.
+          '';
+        };
+      };
+
       systemd = {
         enable = mkEnableOption "yambar systemd integration";
         target = mkOption {
@@ -54,7 +72,7 @@ in
       (mkIf cfg.systemd.enable {
         systemd.user.services.yambar = {
           Unit = {
-            Description = "Modular status panel for X11 and Wayland, inspired by polybar.";
+            Description = "yambar, a modular status panel for X11 and Wayland";
             Documentation = "https://gitlab.com/dnkl/yambar/-/blob/master/README.md";
             PartOf = ["graphical-session.target"];
             After = ["graphical-session.target"];
@@ -63,6 +81,10 @@ in
           Service = {
             ExecStart = "${pkgs.yambar}/bin/yambar";
             ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
+            Environment = [
+              "XCURSOR_THEME=${cfg.cursor.name}"
+              "XCURSOR_SIZE=${toString cfg.cursor.size}"
+            ];
             Restart = "on-failure";
             KillMode = "mixed";
           };

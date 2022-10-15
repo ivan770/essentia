@@ -36,7 +36,7 @@
       vscode = import ./vscode/config.nix {inherit pkgs;};
       yambar = {
         settings = import ./sway/yambar/config.nix {
-          inherit pkgs;
+          inherit lib pkgs;
           networkDevices = ["wlo1"];
         };
         systemd.enable = true;

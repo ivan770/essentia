@@ -11,7 +11,7 @@
     inherit (nixosModules.apps.desktops) sway yambar;
     inherit (nixosModules.apps.editors) helix vscode;
     inherit (nixosModules.apps.social) firefox;
-    inherit (nixosModules.apps.utilities) direnv fonts git gpg;
+    inherit (nixosModules.apps.utilities) direnv fonts git gpg psql;
   };
 
   config = {
@@ -32,6 +32,11 @@
         "4F1412E8D1942B3317A706884B7A0711B34A46D6"
       ];
       helix.settings = builtins.readFile ./configs/helix.toml;
+      psql = {
+        rootCert = sops.secrets."postgresql/ssl/root".path;
+        cert = sops.secrets."users/ivan770/postgresql/cert".path;
+        key = sops.secrets."users/ivan770/postgresql/key".path;
+      };
       sway.settings = import ./sway/settings.nix {inherit config lib pkgs;};
       vscode = import ./vscode/config.nix {inherit pkgs;};
       yambar = {

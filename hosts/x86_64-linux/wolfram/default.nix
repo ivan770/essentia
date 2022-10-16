@@ -41,7 +41,7 @@
         wired = true;
         desktopDns = true;
       };
-      secrets.psqlSecrets = true;
+      secrets.postgresql = "client";
     };
 
     boot = {

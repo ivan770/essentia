@@ -48,6 +48,7 @@
         ];
         desktopDns = true;
       };
+      secrets.postgresql = "client";
       tlp.cpu = {
         ac = "performance";
         bat = "schedutil";

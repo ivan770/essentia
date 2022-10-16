@@ -47,7 +47,7 @@
         max_parallel_maintenance_workers = 2;
       };
       secrets = {
-        postgresqlSecrets = true;
+        postgresql = "server";
         ssl = true;
       };
       systemd-boot = {

@@ -30,9 +30,6 @@
     // Disable layout control button at the window top
     "workbench.layoutControl.enabled": false,
 
-    // Make menu bar a burger menu inside side bar
-    "window.menuBarVisibility": "compact",
-
     // <3 Blackboard
     "workbench.colorTheme": "Blackboard",
     "workbench.preferredDarkColorTheme": "Blackboard",
@@ -86,8 +83,12 @@
         }
     },
 
-    // Use VS Code styled title bar instead of a native one
-    "window.titleBarStyle": "custom",
+    // Hide menu bar since it looks awful on Sway
+    "window.menuBarVisibility": "hidden",
+
+    // Explicitly specify the usage of native title bar to completely hide
+    // window controls on Sway
+    "window.titleBarStyle": "native",
 
     // Show VS Code styled file dialog instead of a native one
     "files.simpleDialog.enable": true,

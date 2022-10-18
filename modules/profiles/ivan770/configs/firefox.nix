@@ -15,6 +15,12 @@
     "browser.startup.homepage_override.mstone" = "ignore";
     "browser.urlbar.trimURLs" = false;
 
+    # Disable noisy search suggestions in URL bar
+    "browser.urlbar.suggest.bookmark" = false;
+    "browser.urlbar.suggest.engines" = false;
+    "browser.urlbar.suggest.openpage" = false;
+    "browser.urlbar.suggest.topsites" = false;
+
     # Disable microphone badge during calls
     "privacy.webrtc.legacyGlobalIndicator" = false;
     "privacy.webrtc.hideGlobalIndicator" = true;

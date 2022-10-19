@@ -11,6 +11,7 @@
       usernamehw.errorlens
       jnoortheen.nix-ide
       mkhl.direnv
+      ms-toolsai.jupyter
     ]
     ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {

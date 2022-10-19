@@ -190,6 +190,16 @@
     // Fix bug with errorneous Cargo.toml
     "crates.useLocalCargoIndex": false,
 
+    // ==== JULIA ====
+
+    // Julia extension automatically adds this to settings.json
+    "terminal.integrated.commandsToSkipShell": [
+        "language-julia.interrupt"
+    ],
+
+    // Same as with the previous one
+    "julia.symbolCacheDownload": true,
+
     // ==== NIX ====
 
     // Enable Nix LSP
@@ -229,6 +239,7 @@
     "go.survey.prompt": false,
 
     // Remove auto-updates
+    "extensions.autoCheckUpdates": false,
     "update.mode": "none",
     "extensions.autoUpdate": false,
     "go.toolsManagement.checkForUpdates": "off",

@@ -1,17 +1,17 @@
 {
   config,
-  pkgs,
   lib,
   inputs,
   nixosModules,
   fromJSONWithComments,
   ...
-}: let
+}:
+with lib; let
   cfg = config.essentia.home-manager;
 in {
   options.essentia.home-manager = {
-    profiles = lib.mkOption {
-      type = lib.types.attrsOf lib.types.str;
+    profiles = mkOption {
+      type = types.attrsOf types.str;
       default = {};
       description = "Users and their corresponding profiles.";
     };
@@ -26,12 +26,10 @@ in {
       extraSpecialArgs = {
         # FIXME: Pls remove this mess.
         inherit inputs nixosModules fromJSONWithComments;
-        nur = config.nur;
-        sops = config.sops;
       };
       useGlobalPkgs = true;
       users =
-        lib.mapAttrs
+        mapAttrs
         (user: profile: {
           imports = [
             nixosModules.profiles.${user}.${profile}

@@ -2,9 +2,8 @@
   config,
   pkgs,
   lib,
-  nur,
+  nixosConfig,
   nixosModules,
-  sops,
   ...
 }: {
   imports = builtins.attrValues {
@@ -23,19 +22,19 @@
     };
     essentia.programs = {
       firefox =
-        import ./configs/firefox.nix {inherit lib nur;}
+        import ./configs/firefox.nix {inherit nixosConfig;}
         // {
           wayland = true;
         };
-      git.credentials = sops.secrets."users/ivan770/git".path;
+      git.credentials = nixosConfig.sops.secrets."users/ivan770/git".path;
       gpg.sshKeys = [
         "4F1412E8D1942B3317A706884B7A0711B34A46D6"
       ];
       helix.settings = builtins.readFile ./configs/helix.toml;
       psql = {
-        rootCert = sops.secrets."postgresql/ssl/root".path;
-        cert = sops.secrets."users/ivan770/postgresql/cert".path;
-        key = sops.secrets."users/ivan770/postgresql/key".path;
+        rootCert = nixosConfig.sops.secrets."postgresql/ssl/root".path;
+        cert = nixosConfig.sops.secrets."users/ivan770/postgresql/cert".path;
+        key = nixosConfig.sops.secrets."users/ivan770/postgresql/key".path;
       };
       sway.settings = import ./sway/settings.nix {inherit config lib pkgs;};
       vscode = import ./vscode/config.nix {inherit pkgs;};

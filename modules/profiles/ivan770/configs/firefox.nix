@@ -1,6 +1,6 @@
-{nur, ...}: {
+{nixosConfig, ...}: {
   extensions = builtins.attrValues {
-    inherit (nur.repos.rycee.firefox-addons) bitwarden multi-account-containers ublock-origin youtube-shorts-block;
+    inherit (nixosConfig.nur.repos.rycee.firefox-addons) bitwarden multi-account-containers ublock-origin youtube-shorts-block;
   };
   settings = {
     # Appearance stuff

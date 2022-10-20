@@ -23,7 +23,7 @@
     stateVersion = "22.05";
   };
   essentia.programs = {
-    discord.settings = builtins.readFile ./configs/discord.json;
+    discord.settings = import ./configs/discord.nix;
     firefox = import ./configs/firefox.nix {inherit nixosConfig;};
     git.credentials = nixosConfig.sops.secrets."users/ivan770/git".path;
     gpg.sshKeys = [

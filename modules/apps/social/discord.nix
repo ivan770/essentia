@@ -5,22 +5,29 @@
   ...
 }: let
   cfg = config.essentia.programs.discord;
+
+  jsonFormat = pkgs.formats.json {};
+  configFile = jsonFormat.generate "discord.json" cfg.settings;
 in
   with lib; {
     options.essentia.programs.discord = {
       settings = mkOption {
-        type = types.nullOr types.str;
-        default = null;
-        description = "Discord settings file contents";
+        type = jsonFormat.type;
+        default = {};
+        example = literalExpression ''
+          {
+            SKIP_HOST_UPDATE = true;
+          }
+        '';
+        description = ''
+          Configuration written to
+          <filename>$XDG_CONFIG_HOME/discord/settings.json</filename>.
+        '';
       };
     };
 
-    config = mkMerge [
-      {
-        home.packages = [pkgs.discord];
-      }
-      (mkIf (isString cfg.settings) {
-        xdg.configFile."discord/settings.json".text = cfg.settings;
-      })
-    ];
+    config = {
+      home.packages = [pkgs.discord];
+      xdg.configFile."discord/settings.json".source = configFile;
+    };
   }

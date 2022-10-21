@@ -1,7 +1,7 @@
 {
   config,
-  lib,
   inputs,
+  lib,
   nixosModules,
   fromJSONWithComments,
   ...
@@ -23,10 +23,7 @@ in {
 
   config = {
     home-manager = {
-      extraSpecialArgs = {
-        # FIXME: Pls remove this mess.
-        inherit inputs nixosModules fromJSONWithComments;
-      };
+      extraSpecialArgs = {inherit nixosModules fromJSONWithComments;};
       useGlobalPkgs = true;
       users =
         mapAttrs

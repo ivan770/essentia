@@ -7,7 +7,7 @@
 }: {
   imports =
     builtins.attrValues {
-      inherit (nixosModules.apps.editors) helix vscode;
+      inherit (nixosModules.apps.editors) vscode;
       inherit (nixosModules.apps.social) firefox discord;
       inherit (nixosModules.apps.utilities) direnv fonts git gpg mpv psql qbittorrent;
     }
@@ -29,7 +29,6 @@
     gpg.sshKeys = [
       "4F1412E8D1942B3317A706884B7A0711B34A46D6"
     ];
-    helix.settings = builtins.readFile ./configs/helix.toml;
     mpv = {
       userProfile = import ./configs/mpv.nix;
       activatedProfiles = [
@@ -46,8 +45,14 @@
     qbittorrent.settings = ./configs/qbittorrent.conf;
     vscode = import ./vscode/config.nix {inherit pkgs;};
   };
-  programs.alacritty = {
-    enable = true;
-    settings = import ./configs/alacritty.nix {};
+  programs = {
+    alacritty = {
+      enable = true;
+      settings = import ./configs/alacritty.nix {};
+    };
+    helix = {
+      enable = true;
+      settings = import ./configs/helix.nix;
+    };
   };
 }

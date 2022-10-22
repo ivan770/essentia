@@ -1,6 +1,10 @@
-{pkgs, ...}: {
-  settings = builtins.readFile ./settings.json;
-  keybindings = builtins.readFile ./keybindings.json;
+{
+  lib,
+  pkgs,
+  recursiveMerge,
+  ...
+}: {
+  settings = import ./settings.nix {inherit lib recursiveMerge;};
   extensions = with pkgs.vscode-extensions;
     [
       eamodio.gitlens

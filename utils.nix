@@ -3,13 +3,20 @@
   inputs,
 }:
 with lib; rec {
-  fromJSONWithComments = input:
-    builtins.fromJSON (strings.concatStrings (filter
-      (line:
-        !hasPrefix "//" (
-          strings.concatStrings (filter (line: line != " ") (strings.stringToCharacters line))
-        ))
-      (strings.splitString "\n" input)));
+  recursiveMerge = attrList: let
+    f = attrPath:
+      zipAttrsWith (
+        n: values:
+          if tail values == []
+          then head values
+          else if all isList values
+          then unique (concatLists values)
+          else if all isAttrs values
+          then f (attrPath ++ [n]) values
+          else last values
+      );
+  in
+    f [] attrList;
 
   mkAttrsTree = dir:
     mapAttrs'
@@ -59,7 +66,7 @@ with lib; rec {
         {
           inherit (inputs.self) nixosModules;
         }
-        // {inherit inputs fromJSONWithComments;};
+        // {inherit inputs recursiveMerge;};
     };
 
   mkNixosConfigs = dir:

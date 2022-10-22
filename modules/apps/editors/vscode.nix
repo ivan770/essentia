@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  fromJSONWithComments,
   ...
 }: let
   cfg = config.essentia.programs.vscode;
@@ -10,12 +9,12 @@ in
   with lib; {
     options.essentia.programs.vscode = {
       settings = mkOption {
-        type = types.nullOr types.str;
+        type = types.nullOr types.attrs;
         default = null;
         description = "VS Code settings.json file contents";
       };
       keybindings = mkOption {
-        type = types.nullOr types.str;
+        type = types.nullOr types.attrs;
         default = null;
         description = "VS Code keybindings.json file contents";
       };
@@ -32,11 +31,11 @@ in
           enable = true;
           package = pkgs.vscodium;
         }
-        (mkIf (isString cfg.settings) {
-          userSettings = fromJSONWithComments cfg.settings;
+        (mkIf (isAttrs cfg.settings) {
+          userSettings = cfg.settings;
         })
-        (mkIf (isString cfg.keybindings) {
-          keybindings = fromJSONWithComments cfg.keybindings;
+        (mkIf (isAttrs cfg.keybindings) {
+          keybindings = cfg.keybindings;
         })
         (mkIf (cfg.extensions != []) {
           mutableExtensionsDir = false;

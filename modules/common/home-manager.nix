@@ -3,7 +3,7 @@
   inputs,
   lib,
   nixosModules,
-  fromJSONWithComments,
+  recursiveMerge,
   ...
 }:
 with lib; let
@@ -23,7 +23,7 @@ in {
 
   config = {
     home-manager = {
-      extraSpecialArgs = {inherit nixosModules fromJSONWithComments;};
+      extraSpecialArgs = {inherit nixosModules recursiveMerge;};
       useGlobalPkgs = true;
       users =
         mapAttrs

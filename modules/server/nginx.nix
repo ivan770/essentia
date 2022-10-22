@@ -58,36 +58,47 @@ in
       };
     };
 
-    config.services.nginx = {
-      enable = true;
-      recommendedOptimisation = true;
-      recommendedTlsSettings = true;
-      recommendedGzipSettings = true;
-      recommendedProxySettings = true;
+    config = {
+      assertions = [
+        {
+          assertion = all (activatedUpstream: elem activatedUpstream.upstream (map (upstream: upstream.name) cfg.upstreams)) cfg.activatedUpstreams;
+          message = ''
+            Only upstreams defined via config.essentia.nginx.upstreams can be activated via config.essentia.nginx.activatedUpstreams
+          '';
+        }
+      ];
 
-      upstreams = listToAttrs (map (upstream: {
-          inherit (upstream) name;
-          value.servers = {${upstream.endpoint} = {};};
-        })
-        cfg.upstreams);
+      services.nginx = {
+        enable = true;
+        recommendedOptimisation = true;
+        recommendedTlsSettings = true;
+        recommendedGzipSettings = true;
+        recommendedProxySettings = true;
 
-      virtualHosts = listToAttrs (map (activatedUpstream: {
-          inherit (activatedUpstream) name;
-          value = {
-            onlySSL = true;
-            kTLS = true;
-            sslCertificate = config.sops.secrets."ssl/cert".path;
-            sslCertificateKey = config.sops.secrets."ssl/key".path;
-            locations."/" = {
-              proxyPass = "http://${activatedUpstream.upstream}";
-              proxyWebsockets = true;
+        upstreams = listToAttrs (map (upstream: {
+            inherit (upstream) name;
+            value.servers = {${upstream.endpoint} = {};};
+          })
+          cfg.upstreams);
+
+        virtualHosts = listToAttrs (map (activatedUpstream: {
+            inherit (activatedUpstream) name;
+            value = {
+              onlySSL = true;
+              kTLS = true;
+              sslCertificate = config.sops.secrets."ssl/cert".path;
+              sslCertificateKey = config.sops.secrets."ssl/key".path;
+              locations."/" = {
+                proxyPass = "http://${activatedUpstream.upstream}";
+                proxyWebsockets = true;
+              };
+              extraConfig = ''
+                ssl_client_certificate ${originPullCA};
+                ssl_verify_client on;
+              '';
             };
-            extraConfig = ''
-              ssl_client_certificate ${originPullCA};
-              ssl_verify_client on;
-            '';
-          };
-        })
-        cfg.activatedUpstreams);
+          })
+          cfg.activatedUpstreams);
+      };
     };
   }

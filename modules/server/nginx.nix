@@ -23,7 +23,7 @@ in {
             '';
           };
           endpoint = mkOption {
-            type = types.int;
+            type = types.str;
             description = ''
               Endpoint, to which Nginx will proxy incoming requests.
             '';

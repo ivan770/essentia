@@ -21,10 +21,10 @@
       firmware.cpu.vendor = null;
       home-manager.profiles.ivan770 = "remote-code";
       networking.wired = true;
-      nginx.endpoints = [
+      nginx.activatedUpstreams = [
         {
           name = "remote.elusive.space";
-          port = config.services.code-server.port;
+          upstream = "code-server";
         }
       ];
       postgresql.serverConfig = {

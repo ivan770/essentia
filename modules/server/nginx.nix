@@ -61,7 +61,10 @@ in
     config = {
       assertions = [
         {
-          assertion = all (activatedUpstream: elem activatedUpstream.upstream (map (upstream: upstream.name) cfg.upstreams)) cfg.activatedUpstreams;
+          assertion = let
+            upstreamIdentifiers = map (upstream: upstream.name) cfg.upstreams;
+          in
+            all (activatedUpstream: elem activatedUpstream.upstream upstreamIdentifiers) cfg.activatedUpstreams;
           message = ''
             Only upstreams defined via config.essentia.nginx.upstreams can be activated via config.essentia.nginx.activatedUpstreams
           '';

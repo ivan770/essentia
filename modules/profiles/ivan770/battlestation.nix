@@ -43,7 +43,11 @@
       key = nixosConfig.sops.secrets."users/ivan770/postgresql/key".path;
     };
     qbittorrent.settings = ./configs/qbittorrent.conf;
-    vscode = import ./vscode/config.nix {inherit lib pkgs;};
+    vscode = {
+      settings = import ./vscode/settings.nix {inherit lib;};
+      keybindings = import ./vscode/keybindings.nix;
+      extensions = import ./vscode/extensions.nix {inherit pkgs;};
+    };
   };
   programs = {
     alacritty = {

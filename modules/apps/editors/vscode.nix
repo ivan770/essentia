@@ -14,7 +14,7 @@ in
         description = "VS Code settings.json file contents";
       };
       keybindings = mkOption {
-        type = types.nullOr types.attrs;
+        type = types.nullOr (types.listOf types.attrs);
         default = null;
         description = "VS Code keybindings.json file contents";
       };
@@ -34,7 +34,7 @@ in
         (mkIf (isAttrs cfg.settings) {
           userSettings = cfg.settings;
         })
-        (mkIf (isAttrs cfg.keybindings) {
+        (mkIf (isList cfg.keybindings) {
           keybindings = cfg.keybindings;
         })
         (mkIf (cfg.extensions != []) {

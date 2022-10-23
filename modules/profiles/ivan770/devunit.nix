@@ -36,7 +36,11 @@
         key = nixosConfig.sops.secrets."users/ivan770/postgresql/key".path;
       };
       sway.settings = import ./sway/settings.nix {inherit config lib pkgs;};
-      vscode = import ./vscode/config.nix {inherit pkgs;};
+      vscode = {
+        settings = import ./vscode/settings.nix {inherit lib;};
+        keybindings = import ./vscode/keybindings.nix;
+        extensions = import ./vscode/extensions.nix {inherit pkgs;};
+      };
       yambar = {
         settings = import ./sway/yambar/config.nix {
           inherit lib pkgs;

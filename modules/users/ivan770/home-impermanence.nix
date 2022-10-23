@@ -1,4 +1,4 @@
-{...}: {
+{
   essentia.impermanence.users.ivan770 = {
     directories = [
       # .*

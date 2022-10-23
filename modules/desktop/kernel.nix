@@ -1,4 +1,4 @@
-{...}: {
+{
   boot.kernelParams = [
     "mitigations=off"
     "nowatchdog"

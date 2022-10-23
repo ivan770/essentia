@@ -84,7 +84,7 @@
       in {
         devShell = pkgs.mkShell {
           buildInputs = builtins.attrValues {
-            inherit (pkgs) rnix-lsp;
+            inherit (pkgs) rnix-lsp dconf2nix;
           };
         };
 

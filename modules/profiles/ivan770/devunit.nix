@@ -52,14 +52,14 @@
     programs = {
       alacritty = {
         enable = true;
-        settings = import ./configs/alacritty.nix {};
+        settings = import ./configs/alacritty.nix;
       };
       helix = {
         enable = true;
         settings = import ./configs/helix.nix;
       };
       lf =
-        import ./configs/lf.nix {}
+        import ./configs/lf.nix
         // {
           enable = true;
         };

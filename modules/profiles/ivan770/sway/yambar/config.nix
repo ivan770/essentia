@@ -26,16 +26,16 @@ in {
 
     left = [
       (import ./components/workspaces.nix {inherit activeColor inactiveColor pkgs warnColor;})
-      (import ./components/window-title.nix {})
+      (import ./components/window-title.nix)
     ];
 
     center = [
-      (import ./components/clock.nix {})
+      (import ./components/clock.nix)
     ];
 
     right =
       [
-        (import ./components/layout.nix {})
+        (import ./components/layout.nix)
       ]
       ++ (map (name: import ./components/network.nix {inherit name mdIconFont warnColor;}) networkDevices)
       ++ [

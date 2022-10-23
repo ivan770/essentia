@@ -1,4 +1,4 @@
-{...}: {
+{
   foreign-toplevel.content.map = {
     tag = "activated";
     values = {

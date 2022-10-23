@@ -1,4 +1,4 @@
-{...}: {
+{
   keybindings = let
     toggleInDirection = direction: ''
       :{{

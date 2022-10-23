@@ -17,7 +17,7 @@
 
   home = {
     packages = builtins.attrValues {
-      inherit (pkgs) lunar-client steam matlab tdesktop dconf2nix ciscoPacketTracer8;
+      inherit (pkgs) lunar-client steam matlab tdesktop ciscoPacketTracer8;
       inherit (pkgs.gnome) gnome-system-monitor nautilus file-roller gnome-disk-utility gnome-tweaks simple-scan;
     };
     stateVersion = "22.05";
@@ -52,7 +52,7 @@
   programs = {
     alacritty = {
       enable = true;
-      settings = import ./configs/alacritty.nix {};
+      settings = import ./configs/alacritty.nix;
     };
     helix = {
       enable = true;

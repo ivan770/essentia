@@ -1,10 +1,9 @@
 {
   lib,
   pkgs,
-  recursiveMerge,
   ...
 }: {
-  settings = import ./settings.nix {inherit lib recursiveMerge;};
+  settings = import ./settings.nix {inherit lib;};
   extensions = with pkgs.vscode-extensions;
     [
       eamodio.gitlens

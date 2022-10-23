@@ -1,8 +1,4 @@
-{
-  lib,
-  recursiveMerge,
-  ...
-}:
+{lib, ...}:
 with lib; let
   # General VS Code appearance configuration
   appearance = {

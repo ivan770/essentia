@@ -3,7 +3,6 @@
   inputs,
   lib,
   nixosModules,
-  recursiveMerge,
   ...
 }:
 with lib; let
@@ -23,7 +22,7 @@ in {
 
   config = {
     home-manager = {
-      extraSpecialArgs = {inherit nixosModules recursiveMerge;};
+      extraSpecialArgs = {inherit nixosModules;};
       useGlobalPkgs = true;
       users =
         mapAttrs

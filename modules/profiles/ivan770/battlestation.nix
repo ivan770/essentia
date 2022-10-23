@@ -3,7 +3,6 @@
   lib,
   nixosConfig,
   nixosModules,
-  recursiveMerge,
   ...
 }: {
   imports =
@@ -44,7 +43,7 @@
       key = nixosConfig.sops.secrets."users/ivan770/postgresql/key".path;
     };
     qbittorrent.settings = ./configs/qbittorrent.conf;
-    vscode = import ./vscode/config.nix {inherit lib pkgs recursiveMerge;};
+    vscode = import ./vscode/config.nix {inherit lib pkgs;};
   };
   programs = {
     alacritty = {

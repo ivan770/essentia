@@ -43,10 +43,10 @@
         extendedLocales = true;
       };
       networking = {
-        wireless = [
+        dns.preset = "desktop";
+        wireless.networks = [
           "default_5g"
         ];
-        desktopDns = true;
       };
       secrets.postgresql = "client";
       tlp.cpu = {

@@ -20,7 +20,10 @@
     essentia = {
       firmware.cpu.vendor = null;
       home-manager.profiles.ivan770 = "remote-code";
-      networking.wired = true;
+      networking = {
+        dns.preset = "server";
+        wired.enable = true;
+      };
       nginx.activatedUpstreams = [
         {
           name = "remote.elusive.space";

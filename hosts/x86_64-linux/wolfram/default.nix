@@ -38,8 +38,8 @@
         extendedLocales = true;
       };
       networking = {
-        wired = true;
-        desktopDns = true;
+        dns.preset = "desktop";
+        wired.enable = true;
       };
       secrets.postgresql = "client";
     };

@@ -14,6 +14,7 @@
     "browser.newtabpage.introShown" = true;
     "browser.startup.homepage_override.mstone" = "ignore";
     "browser.urlbar.trimURLs" = false;
+    "browser.tabs.tabmanager.enabled" = false;
 
     # Disable noisy search suggestions in URL bar
     "browser.urlbar.suggest.bookmark" = false;
@@ -43,6 +44,9 @@
     "privacy.trackingprotection.fingerprinting.enabled" = true;
     "privacy.trackingprotection.pbmode.enabled" = true;
     "privacy.trackingprotection.socialtracking.enabled" = true;
+
+    # Disable Firefox View feature
+    "browser.tabs.firefox-view" = false;
 
     # Disable noisy default browser check
     "browser.shell.checkDefaultBrowser" = false;

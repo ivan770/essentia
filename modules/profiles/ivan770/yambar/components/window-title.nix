@@ -1,4 +1,6 @@
-{
+{wayland, ...}:
+if wayland
+then {
   foreign-toplevel.content.map = {
     tag = "activated";
     values = {
@@ -8,5 +10,11 @@
         max = 70;
       };
     };
+  };
+}
+else {
+  xwindow.content.string = {
+    text = "{title}";
+    max = 70;
   };
 }

@@ -15,5 +15,10 @@ inputs: self: super: {
           );
       in
         f [] attrList;
+
+    # Works only in HM profile modules.
+    runMenu = config: prompt: let
+      cfg = config.essentia.programs.menu;
+    in "${cfg.flavor} ${cfg.flags} ${cfg.promptTitleFlag} ${prompt}";
   });
 }

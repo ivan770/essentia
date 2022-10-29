@@ -3,6 +3,7 @@
   inactiveColor,
   pkgs,
   warnColor,
+  wayland,
   ...
 }: {
   i3.content."".map = {
@@ -11,7 +12,12 @@
       generic = {
         text = "{name}";
         margin = 5;
-        on-click = "${pkgs.sway}/bin/swaymsg --quiet workspace {name}";
+        on-click = let
+          socket =
+            if wayland
+            then "${pkgs.sway}/bin/swaymsg"
+            else "${pkgs.i3}/bin/i3-msg";
+        in "${socket} --quiet workspace {name}";
       };
     in {
       unfocused.string = generic;

@@ -1,34 +1,39 @@
 {
-  pkgs,
+  config,
   lib,
+  pkgs,
   nixosConfig,
   nixosModules,
   ...
 }: {
-  imports =
-    builtins.attrValues {
-      inherit (nixosModules.apps.editors) vscode;
-      inherit (nixosModules.apps.social) firefox discord;
-      inherit (nixosModules.apps.utilities) direnv fonts git gpg mpv psql qbittorrent;
-    }
-    ++ [
-      ./dconf/battlestation.nix
-    ];
+  imports = builtins.attrValues {
+    inherit (nixosModules.apps.desktop) feh fonts i3 menu yambar;
+    inherit (nixosModules.apps.editors) vscode;
+    inherit (nixosModules.apps.social) firefox discord;
+    inherit (nixosModules.apps.utilities) direnv git gpg mpv psql qbittorrent;
+  };
 
   home = {
     packages = builtins.attrValues {
       inherit (pkgs) lunar-client steam matlab tdesktop ciscoPacketTracer8;
-      inherit (pkgs.gnome) gnome-system-monitor nautilus file-roller gnome-disk-utility gnome-tweaks simple-scan;
     };
     stateVersion = "22.05";
   };
   essentia.programs = {
     discord.settings = import ./configs/discord.nix;
+    feh.image = "${./backgrounds/mountain.png}";
     firefox = import ./configs/firefox.nix {inherit nixosConfig;};
     git.credentials = nixosConfig.sops.secrets."users/ivan770/git".path;
     gpg.sshKeys = [
       "4F1412E8D1942B3317A706884B7A0711B34A46D6"
     ];
+    i3 = {
+      keyboard = {
+        layout = "us,ru,ua";
+        options = ["grp:lalt_lshift_toggle"];
+      };
+      settings = import ./wm/common.nix {inherit config lib pkgs;};
+    };
     mpv = {
       userProfile = import ./configs/mpv.nix;
       activatedProfiles = [
@@ -47,6 +52,13 @@
       settings = import ./vscode/settings.nix {inherit lib;};
       keybindings = import ./vscode/keybindings.nix;
       extensions = import ./vscode/extensions.nix {inherit pkgs;};
+    };
+    yambar = {
+      settings = import ./yambar/config.nix {
+        inherit config lib pkgs;
+        networkDevices = ["enp9s0"];
+      };
+      systemd.target = "i3";
     };
   };
   programs = {

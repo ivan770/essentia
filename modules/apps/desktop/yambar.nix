@@ -48,10 +48,9 @@ in
       };
 
       systemd = {
-        enable = mkEnableOption "yambar systemd integration";
         target = mkOption {
-          type = types.str;
-          default = "sway-session.target";
+          type = types.nullOr (types.enum ["i3" "sway"]);
+          default = null;
           description = ''
             The systemd target that will automatically start the yambar service.
           '';
@@ -69,13 +68,12 @@ in
         };
       }
 
-      (mkIf cfg.systemd.enable {
+      (mkIf (isString cfg.systemd.target) {
         systemd.user.services.yambar = {
           Unit = {
             Description = "yambar, a modular status panel for X11 and Wayland";
             Documentation = "https://gitlab.com/dnkl/yambar/-/blob/master/README.md";
             PartOf = ["graphical-session.target"];
-            After = ["graphical-session.target"];
           };
 
           Service = {
@@ -89,7 +87,7 @@ in
             KillMode = "mixed";
           };
 
-          Install = {WantedBy = [cfg.systemd.target];};
+          Install = {WantedBy = ["${cfg.systemd.target}-session.target"];};
         };
       })
     ];

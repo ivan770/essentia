@@ -14,7 +14,7 @@
 
     inherit (nixosModules.common) systemd-initrd;
     inherit (nixosModules.users.ivan770) user;
-    inherit (nixosModules.desktop) generic gnome;
+    inherit (nixosModules.desktop) generic i3;
     inherit
       (nixosModules.hardware)
       firmware

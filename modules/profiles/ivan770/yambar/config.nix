@@ -1,7 +1,10 @@
 {
+  config,
+  battery ? false,
   lib,
   networkDevices,
   pkgs,
+  wayland ? false,
   ...
 }: let
   spacing = 5;
@@ -25,8 +28,8 @@ in {
     background = "0000004c";
 
     left = [
-      (import ./components/workspaces.nix {inherit activeColor inactiveColor pkgs warnColor;})
-      (import ./components/window-title.nix)
+      (import ./components/workspaces.nix {inherit activeColor inactiveColor pkgs warnColor wayland;})
+      (import ./components/window-title.nix {inherit wayland;})
     ];
 
     center = [
@@ -35,12 +38,12 @@ in {
 
     right =
       [
-        (import ./components/layout.nix)
+        (import ./components/layout.nix {inherit wayland;})
       ]
       ++ (map (name: import ./components/network.nix {inherit name mdIconFont warnColor;}) networkDevices)
       ++ [
-        (import ./components/battery.nix {inherit lib mdIconFont okColor warnColor;})
-        (import ./components/logout.nix {inherit mdIconFont pkgs spacing;})
+        (lib.mkIf battery (import ./components/battery.nix {inherit lib mdIconFont okColor warnColor;}))
+        (import ./components/logout.nix {inherit config lib mdIconFont pkgs spacing;})
       ];
   };
 }

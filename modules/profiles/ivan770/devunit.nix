@@ -7,10 +7,10 @@
   ...
 }: {
   imports = builtins.attrValues {
-    inherit (nixosModules.apps.desktops) sway yambar;
+    inherit (nixosModules.apps.desktop) fonts menu sway yambar;
     inherit (nixosModules.apps.editors) vscode;
     inherit (nixosModules.apps.social) firefox;
-    inherit (nixosModules.apps.utilities) direnv fonts git gpg psql;
+    inherit (nixosModules.apps.utilities) direnv git gpg psql;
   };
 
   config = {
@@ -35,18 +35,23 @@
         cert = nixosConfig.sops.secrets."users/ivan770/postgresql/cert".path;
         key = nixosConfig.sops.secrets."users/ivan770/postgresql/key".path;
       };
-      sway.settings = import ./sway/settings.nix {inherit config lib pkgs;};
+      sway.settings = import ./wm/common.nix {
+        inherit config lib pkgs;
+        sway = true;
+      };
       vscode = {
         settings = import ./vscode/settings.nix {inherit lib;};
         keybindings = import ./vscode/keybindings.nix;
         extensions = import ./vscode/extensions.nix {inherit pkgs;};
       };
       yambar = {
-        settings = import ./sway/yambar/config.nix {
-          inherit lib pkgs;
+        settings = import ./yambar/config.nix {
+          inherit config lib pkgs;
+          battery = true;
           networkDevices = ["wlo1"];
+          wayland = true;
         };
-        systemd.enable = true;
+        systemd.target = "sway";
       };
     };
     programs = {

@@ -98,6 +98,10 @@ in
         # Disable window dragging on left mouse button
         Button1 = "focus";
 
+        XF86AudioPrev = mkExec "${pkgs.playerctl}/bin/playerctl previous";
+        XF86AudioPlay = mkExec "${pkgs.playerctl}/bin/playerctl play-pause";
+        XF86AudioNext = mkExec "${pkgs.playerctl}/bin/playerctl next";
+
         XF86AudioMute = mkExec "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_SINK@ toggle";
         XF86AudioLowerVolume = mkExec "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%-";
         XF86AudioRaiseVolume = mkExec "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%+";
@@ -125,7 +129,7 @@ in
       w = "resize grow up 5 px or 5 ppt";
       a = "resize grow left 5 px or 5 ppt";
       s = "resize grow down 5 px or 5 ppt";
-      d = "resize grow down 5 px or 5 ppt";
+      d = "resize grow right 5 px or 5 ppt";
 
       "Shift+w" = "resize shrink down 5 px or 5 ppt";
       "Shift+a" = "resize shrink right 5 px or 5 ppt";

@@ -53,6 +53,9 @@ in
       gtk = {
         enable = true;
         cursorTheme = {inherit (cursor) package name size;};
+        gtk3.extraConfig = {
+          gtk-application-prefer-dark-theme = true;
+        };
         gtk4.extraConfig = {
           gtk-hint-font-metrics = true;
         };

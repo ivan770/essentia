@@ -79,6 +79,8 @@ in
         "${modifier}+f" = "fullscreen";
         "${modifier}+c" = "move scratchpad";
 
+        "${modifier}+x" = "mode \"resize\"";
+
         "${modifier}+Tab" = "layout toggle splitv splith tabbed";
         "${modifier}+Shift+Tab" = "split toggle";
 
@@ -118,5 +120,19 @@ in
           );
       }
       // recursiveMerge workspaceKeys;
+
+    modes.resize = {
+      w = "resize grow up 5 px or 5 ppt";
+      a = "resize grow left 5 px or 5 ppt";
+      s = "resize grow down 5 px or 5 ppt";
+      d = "resize grow down 5 px or 5 ppt";
+
+      "Shift+w" = "resize shrink down 5 px or 5 ppt";
+      "Shift+a" = "resize shrink right 5 px or 5 ppt";
+      "Shift+s" = "resize shrink up 5 px or 5 ppt";
+      "Shift+d" = "resize shrink left 5 px or 5 ppt";
+
+      Escape = "mode default";
+    };
   }
   // optionalAttrs sway (import ./sway.nix {inherit config;})

@@ -20,6 +20,12 @@ in
 
     bars = [];
 
+    fonts = {
+      names = ["Noto Sans"];
+      style = "Regular";
+      size = 8.0;
+    };
+
     window = {
       border = 1;
       titlebar = false;
@@ -86,6 +92,9 @@ in
           '';
         in
           mkExec scratchpadCycle;
+
+        # Disable window dragging on left mouse button
+        Button1 = "focus";
 
         XF86AudioMute = mkExec "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_SINK@ toggle";
         XF86AudioLowerVolume = mkExec "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%-";

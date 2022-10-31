@@ -125,16 +125,18 @@ in
       }
       // recursiveMerge workspaceKeys;
 
-    modes.resize = {
-      w = "resize grow up 5 px or 5 ppt";
-      a = "resize grow left 5 px or 5 ppt";
-      s = "resize grow down 5 px or 5 ppt";
-      d = "resize grow right 5 px or 5 ppt";
+    modes.resize = let
+      mkResize = command: "resize ${command} 5 px or 5 ppt";
+    in {
+      w = mkResize "grow up";
+      a = mkResize "grow left";
+      s = mkResize "grow down";
+      d = mkResize "grow right";
 
-      "Shift+w" = "resize shrink down 5 px or 5 ppt";
-      "Shift+a" = "resize shrink right 5 px or 5 ppt";
-      "Shift+s" = "resize shrink up 5 px or 5 ppt";
-      "Shift+d" = "resize shrink left 5 px or 5 ppt";
+      "Shift+w" = mkResize "shrink down";
+      "Shift+a" = mkResize "shrink right";
+      "Shift+s" = mkResize "shrink up";
+      "Shift+d" = mkResize "shrink left";
 
       Escape = "mode default";
     };

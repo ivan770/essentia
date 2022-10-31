@@ -36,10 +36,20 @@ in
         };
       };
 
-      settings = mkOption {
+      config = mkOption {
         type = types.attrs;
         default = {};
-        description = "i3 user-specific settings";
+        description = ''
+          i3 user-specific settings.
+        '';
+      };
+
+      extraConfig = mkOption {
+        type = types.str;
+        default = "";
+        description = ''
+          Extra i3 configuration.
+        '';
       };
     };
 
@@ -79,11 +89,14 @@ in
       xsession = {
         enable = true;
         windowManager.i3 = {
+          inherit (cfg) config;
+
           enable = true;
-          config = cfg.settings;
-          extraConfig = ''
-            exec --no-startup-id systemctl --user start i3-session.target
-          '';
+          extraConfig =
+            cfg.extraConfig
+            + ''
+              exec --no-startup-id systemctl --user start i3-session.target
+            '';
         };
       };
       systemd.user.targets.i3-session = {

@@ -35,9 +35,12 @@
         cert = nixosConfig.sops.secrets."users/ivan770/postgresql/cert".path;
         key = nixosConfig.sops.secrets."users/ivan770/postgresql/key".path;
       };
-      sway.settings = import ./wm/common.nix {
-        inherit config lib pkgs;
-        sway = true;
+      sway = {
+        config = import ./wm/common.nix {
+          inherit config lib pkgs;
+          sway = true;
+        };
+        extraConfig = import ./wm/extraConfig.nix;
       };
       vscode = {
         settings = import ./vscode/settings.nix {inherit lib;};

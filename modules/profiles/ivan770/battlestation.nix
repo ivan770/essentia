@@ -32,7 +32,8 @@
         layout = "us,ru,ua";
         options = ["grp:lalt_lshift_toggle"];
       };
-      settings = import ./wm/common.nix {inherit config lib pkgs;};
+      config = import ./wm/common.nix {inherit config lib pkgs;};
+      extraConfig = import ./wm/extraConfig.nix;
     };
     mpv = {
       userProfile = import ./configs/mpv.nix;

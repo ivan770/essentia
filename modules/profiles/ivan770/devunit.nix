@@ -39,7 +39,9 @@
         inherit config lib pkgs;
         sway = true;
       };
-      extraConfig = import ./wm/extraConfig.nix;
+      extraConfig = import ./wm/extraConfig.nix {
+        sway = true;
+      };
     };
     vscode = {
       settings = import ./vscode/settings.nix {inherit lib;};

@@ -95,8 +95,8 @@ in
         in
           mkExec scratchpadCycle;
 
-        # Disable window dragging on left mouse button
-        Button1 = "focus";
+        # Disable window resizing with left mouse button
+        "--border Button1" = "nop";
 
         XF86AudioPrev = mkExec "${pkgs.playerctl}/bin/playerctl previous";
         XF86AudioPlay = mkExec "${pkgs.playerctl}/bin/playerctl play-pause";

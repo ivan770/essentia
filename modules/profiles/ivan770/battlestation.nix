@@ -33,7 +33,7 @@
         options = ["grp:lalt_lshift_toggle"];
       };
       config = import ./wm/common.nix {inherit config lib pkgs;};
-      extraConfig = import ./wm/extraConfig.nix;
+      extraConfig = import ./wm/extraConfig.nix {};
     };
     mpv = {
       userProfile = import ./configs/mpv.nix;

@@ -2,13 +2,12 @@
 if wayland
 then {
   foreign-toplevel.content.map = {
-    tag = "activated";
-    values = {
-      false.empty = {};
-      true.string = {
+    conditions = {
+      activated.string = {
         text = "{title}";
         max = 70;
       };
+      "~activated".empty = {};
     };
   };
 }

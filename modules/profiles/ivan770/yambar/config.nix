@@ -39,8 +39,9 @@ in {
     right =
       [
         (import ./components/layout.nix {inherit wayland;})
+        (import ./components/removables.nix {inherit okColor inactiveColor mdIconFont;})
       ]
-      ++ (map (name: import ./components/network.nix {inherit name mdIconFont warnColor;}) networkDevices)
+      ++ (map (name: import ./components/network.nix {inherit lib name mdIconFont warnColor;}) networkDevices)
       ++ [
         (lib.mkIf battery (import ./components/battery.nix {inherit lib mdIconFont okColor warnColor;}))
         (import ./components/logout.nix {inherit config lib mdIconFont pkgs spacing;})

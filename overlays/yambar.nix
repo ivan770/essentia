@@ -1,13 +1,13 @@
-# Required to fix broken yambar on i3
-# See "rev" commit details for more information.
 inputs: self: super: {
   yambar = super.yambar.overrideAttrs (new: old: {
+    version = "1.9";
+
     src = super.fetchFromGitea {
       domain = "codeberg.org";
       owner = "dnkl";
       repo = "yambar";
-      rev = "c44970717b52c1678b6a8dabdeda2ca75a42cdd5";
-      hash = "sha256-57AQHkFQXfo4783VVr05oxqZBFhuPNOoBhqhoZsiJkY=";
+      rev = "8deac539eff21841e17320a798ddef74a3205004";
+      hash = "sha256-HhslseU6ta8CTkHiHrNdA127atJ4zNVrk8UDabxuzYc=";
     };
   });
 }

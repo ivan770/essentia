@@ -43,7 +43,7 @@ in {
       ]
       ++ (map (name: import ./components/network.nix {inherit lib name mdIconFont warnColor;}) networkDevices)
       ++ [
-        (import ./components/sound.nix {inherit mdIconFont spacing warnColor;})
+        (import ./components/sound.nix {inherit mdIconFont pkgs spacing warnColor;})
         (lib.mkIf battery (import ./components/battery.nix {inherit lib mdIconFont okColor warnColor;}))
         (import ./components/logout.nix {inherit config lib mdIconFont pkgs spacing;})
       ];

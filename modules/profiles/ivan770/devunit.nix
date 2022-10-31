@@ -13,64 +13,62 @@
     inherit (nixosModules.apps.utilities) direnv git gpg psql;
   };
 
-  config = {
-    home = {
-      packages = builtins.attrValues {
-        inherit (pkgs) tdesktop;
-      };
-      stateVersion = "22.05";
+  home = {
+    packages = builtins.attrValues {
+      inherit (pkgs) tdesktop;
     };
-    essentia.programs = {
-      firefox =
-        import ./configs/firefox.nix {inherit nixosConfig;}
-        // {
-          wayland = true;
-        };
-      git.credentials = nixosConfig.sops.secrets."users/ivan770/git".path;
-      gpg.sshKeys = [
-        "4F1412E8D1942B3317A706884B7A0711B34A46D6"
-      ];
-      psql = {
-        rootCert = nixosConfig.sops.secrets."postgresql/ssl/root".path;
-        cert = nixosConfig.sops.secrets."users/ivan770/postgresql/cert".path;
-        key = nixosConfig.sops.secrets."users/ivan770/postgresql/key".path;
+    stateVersion = "22.05";
+  };
+  essentia.programs = {
+    firefox =
+      import ./configs/firefox.nix {inherit nixosConfig;}
+      // {
+        wayland = true;
       };
-      sway = {
-        config = import ./wm/common.nix {
-          inherit config lib pkgs;
-          sway = true;
-        };
-        extraConfig = import ./wm/extraConfig.nix;
-      };
-      vscode = {
-        settings = import ./vscode/settings.nix {inherit lib;};
-        keybindings = import ./vscode/keybindings.nix;
-        extensions = import ./vscode/extensions.nix {inherit pkgs;};
-      };
-      yambar = {
-        settings = import ./yambar/config.nix {
-          inherit config lib pkgs;
-          battery = true;
-          networkDevices = ["wlo1"];
-          wayland = true;
-        };
-        systemd.target = "sway";
-      };
+    git.credentials = nixosConfig.sops.secrets."users/ivan770/git".path;
+    gpg.sshKeys = [
+      "4F1412E8D1942B3317A706884B7A0711B34A46D6"
+    ];
+    psql = {
+      rootCert = nixosConfig.sops.secrets."postgresql/ssl/root".path;
+      cert = nixosConfig.sops.secrets."users/ivan770/postgresql/cert".path;
+      key = nixosConfig.sops.secrets."users/ivan770/postgresql/key".path;
     };
-    programs = {
-      alacritty = {
+    sway = {
+      config = import ./wm/common.nix {
+        inherit config lib pkgs;
+        sway = true;
+      };
+      extraConfig = import ./wm/extraConfig.nix;
+    };
+    vscode = {
+      settings = import ./vscode/settings.nix {inherit lib;};
+      keybindings = import ./vscode/keybindings.nix;
+      extensions = import ./vscode/extensions.nix {inherit pkgs;};
+    };
+    yambar = {
+      settings = import ./yambar/config.nix {
+        inherit config lib pkgs;
+        battery = true;
+        networkDevices = ["wlo1"];
+        wayland = true;
+      };
+      systemd.target = "sway";
+    };
+  };
+  programs = {
+    alacritty = {
+      enable = true;
+      settings = import ./configs/alacritty.nix;
+    };
+    helix = {
+      enable = true;
+      settings = import ./configs/helix.nix;
+    };
+    lf =
+      import ./configs/lf.nix
+      // {
         enable = true;
-        settings = import ./configs/alacritty.nix;
       };
-      helix = {
-        enable = true;
-        settings = import ./configs/helix.nix;
-      };
-      lf =
-        import ./configs/lf.nix
-        // {
-          enable = true;
-        };
-    };
   };
 }

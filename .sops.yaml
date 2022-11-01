@@ -1,14 +1,14 @@
 keys:
   - &admin_ivan770 b4a6756c7f760bf7ea7cef1082606e24a984df7d
-  - &server_cobalt age1rqunush2hefaymv0gp8qy6dlph9a7lk33u62la0sqe24aprzw4kqyrtkjq
-  - &server_iridium age1m4hhllc5nkhuay0u0v2czu2pp8zlkwahp99gave4ckz22q2kvayqe46zv3
-  - &server_wolfram age1cv2gscnyxy7h534up7m3mrlwqgctflxu8l34ukga5l5fcq590c5sa5ygq2
+  - &host_cobalt age1rqunush2hefaymv0gp8qy6dlph9a7lk33u62la0sqe24aprzw4kqyrtkjq
+  - &host_iridium age1m4hhllc5nkhuay0u0v2czu2pp8zlkwahp99gave4ckz22q2kvayqe46zv3
+  - &host_wolfram age1wekdmshg8xw0ck6e9m4qwqyq5f4cvkswdpnnqdmluyqwjn9wcdaqpkqmhw
 creation_rules:
   - path_regex: ^secrets.yaml$
     key_groups:
     - pgp:
       - *admin_ivan770
       age:
-      - *server_cobalt
-      - *server_iridium
-      - *server_wolfram
+      - *host_cobalt
+      - *host_iridium
+      - *host_wolfram

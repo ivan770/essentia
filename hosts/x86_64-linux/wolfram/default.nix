@@ -12,8 +12,8 @@
       common-pc-hdd
       ;
 
-    inherit (nixosModules.common) systemd-initrd;
-    inherit (nixosModules.users.ivan770) user;
+    inherit (nixosModules.common) impermanence systemd-initrd;
+    inherit (nixosModules.users.ivan770) home-impermanence user;
     inherit (nixosModules.desktop) generic i3;
     inherit
       (nixosModules.hardware)
@@ -32,6 +32,7 @@
     essentia = {
       home-manager.profiles.ivan770 = "battlestation";
       firmware.cpu.vendor = "amd";
+      impermanence.persistentDirectory = "/nix/persist";
       locale = {
         units = "uk_UA.UTF-8";
         timeZone = "Europe/Kiev";
@@ -42,6 +43,7 @@
         wired.enable = true;
       };
       secrets.postgresql = "client";
+      systemd-boot.timeout = 5;
     };
 
     boot = {
@@ -50,7 +52,17 @@
     };
 
     fileSystems."/" = {
-      device = "/dev/disk/by-uuid/5d431071-4cc8-47c8-8c3c-25c91c651a5d";
+      device = "none";
+      fsType = "tmpfs";
+      options = [
+        "defaults"
+        "size=3G"
+        "mode=755"
+      ];
+    };
+
+    fileSystems."/nix" = {
+      device = "/dev/disk/by-uuid/ca952a5f-a2fc-4536-b73f-3f267e66a8d6";
       fsType = "ext4";
       options = [
         "noatime"
@@ -59,7 +71,7 @@
     };
 
     fileSystems."/boot/efi" = {
-      device = "/dev/disk/by-uuid/7880-E722";
+      device = "/dev/disk/by-uuid/FDC7-96EA";
       fsType = "vfat";
     };
 

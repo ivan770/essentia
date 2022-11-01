@@ -46,13 +46,6 @@
       repo = "nixos-hardware";
     };
 
-    nix-matlab = {
-      type = "gitlab";
-      owner = "doronbehar";
-      repo = "nix-matlab";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     sops-nix = {
       type = "github";
       owner = "Mic92";

@@ -10,12 +10,12 @@
     inherit (nixosModules.apps.desktop) feh fonts i3 menu yambar;
     inherit (nixosModules.apps.editors) vscode;
     inherit (nixosModules.apps.social) firefox discord;
-    inherit (nixosModules.apps.utilities) direnv git gpg mpv psql qbittorrent;
+    inherit (nixosModules.apps.utilities) direnv git gpg mpv psql;
   };
 
   home = {
     packages = builtins.attrValues {
-      inherit (pkgs) lunar-client steam matlab tdesktop ciscoPacketTracer8;
+      inherit (pkgs) lunar-client steam tdesktop ciscoPacketTracer8;
     };
     stateVersion = "22.05";
   };
@@ -48,7 +48,6 @@
       cert = nixosConfig.sops.secrets."users/ivan770/postgresql/cert".path;
       key = nixosConfig.sops.secrets."users/ivan770/postgresql/key".path;
     };
-    qbittorrent.settings = ./configs/qbittorrent.conf;
     vscode = {
       settings = import ./vscode/settings.nix {inherit lib;};
       keybindings = import ./vscode/keybindings.nix;

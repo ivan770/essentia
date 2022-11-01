@@ -88,9 +88,12 @@ in
         "${modifier}+grave" = let
           scratchpadCycle = pkgs.writeShellScript "scratchpad-cycle.sh" ''
             ${pkgs.i3}/bin/i3-msg -t get_tree | \
-                ${pkgs.jq}/bin/jq -r '.nodes[] | .nodes[] | .nodes[] | select(.name=="__i3_scratch") | .floating_nodes[] | .nodes[] | .name' | \
+                ${pkgs.jq}/bin/jq -r '.nodes[] | .nodes[] | .nodes[]
+                    | select(.name=="__i3_scratch") | .floating_nodes[]
+                    | .nodes[] | (.name) + " - " + (.window | tostring)' | \
                 ${runMenu config "Scratchpad:"} | \
-                ${pkgs.findutils}/bin/xargs -I{} ${pkgs.i3}/bin/i3-msg '[title="{}"] scratchpad show'
+                ${pkgs.gawk}/bin/awk '{print $NF}' | \
+                ${pkgs.findutils}/bin/xargs -I{} ${pkgs.i3}/bin/i3-msg '[id="{}"] scratchpad show'
           '';
         in
           mkExec scratchpadCycle;

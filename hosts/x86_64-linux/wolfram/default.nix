@@ -43,12 +43,15 @@
         wired.enable = true;
       };
       secrets.postgresql = "client";
-      systemd-boot.timeout = 5;
     };
 
     boot = {
       initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
       kernelModules = ["kvm-amd"];
+      kernelParams = [
+        # Fix incorrect resolution with disabled bootloader menu
+        "video=efifb:auto"
+      ];
     };
 
     fileSystems."/" = {

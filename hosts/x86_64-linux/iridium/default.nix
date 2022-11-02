@@ -32,35 +32,36 @@
       ;
   };
 
-  config = {
-    essentia = {
-      home-manager.profiles.ivan770 = "devunit";
-      firmware.cpu.vendor = "amd";
-      impermanence.persistentDirectory = "/nix/persist";
-      locale = {
-        units = "uk_UA.UTF-8";
-        timeZone = "Europe/Kiev";
-        extendedLocales = true;
-      };
-      networking = {
-        dns.preset = "desktop";
-        wireless.networks = [
-          "default_5g"
-        ];
-      };
-      secrets.postgresql = "client";
-      tlp.cpu = {
-        ac = "performance";
-        bat = "schedutil";
-      };
+  essentia = {
+    home-manager.profiles.ivan770 = "devunit";
+    firmware.cpu.vendor = "amd";
+    impermanence.persistentDirectory = "/nix/persist";
+    locale = {
+      units = "uk_UA.UTF-8";
+      timeZone = "Europe/Kiev";
+      extendedLocales = true;
     };
-
-    boot = {
-      initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
-      kernelModules = ["kvm-amd"];
+    networking = {
+      dns.preset = "desktop";
+      wireless.networks = [
+        "default_5g"
+      ];
     };
+    secrets.postgresql = "client";
+    tlp.cpu = {
+      ac = "performance";
+      bat = "schedutil";
+    };
+  };
 
-    fileSystems."/" = {
+  boot = {
+    initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
+    kernelModules = ["kvm-amd"];
+    kernelPackages = pkgs.linuxPackages_latest;
+  };
+
+  fileSystems = {
+    "/" = {
       device = "none";
       fsType = "tmpfs";
       options = [
@@ -70,7 +71,7 @@
       ];
     };
 
-    fileSystems."/nix" = {
+    "/nix" = {
       device = "/dev/disk/by-uuid/97314665-334a-4f4a-a8bd-7c3a86d37527";
       fsType = "f2fs";
       options = [
@@ -86,15 +87,13 @@
       neededForBoot = true;
     };
 
-    fileSystems."/boot/efi" = {
+    "/boot/efi" = {
       device = "/dev/disk/by-uuid/73D2-6324";
       fsType = "vfat";
     };
-
-    swapDevices = [{device = "/dev/disk/by-uuid/fc76a365-3349-4c6e-86f0-8bdd2245b259";}];
-
-    boot.kernelPackages = pkgs.linuxPackages_latest;
-
-    system.stateVersion = "22.05";
   };
+
+  swapDevices = [{device = "/dev/disk/by-uuid/fc76a365-3349-4c6e-86f0-8bdd2245b259";}];
+
+  system.stateVersion = "22.05";
 }

@@ -28,33 +28,34 @@
       ;
   };
 
-  config = {
-    essentia = {
-      home-manager.profiles.ivan770 = "battlestation";
-      firmware.cpu.vendor = "amd";
-      impermanence.persistentDirectory = "/nix/persist";
-      locale = {
-        units = "uk_UA.UTF-8";
-        timeZone = "Europe/Kiev";
-        extendedLocales = true;
-      };
-      networking = {
-        dns.preset = "desktop";
-        wired.enable = true;
-      };
-      secrets.postgresql = "client";
+  essentia = {
+    home-manager.profiles.ivan770 = "battlestation";
+    firmware.cpu.vendor = "amd";
+    impermanence.persistentDirectory = "/nix/persist";
+    locale = {
+      units = "uk_UA.UTF-8";
+      timeZone = "Europe/Kiev";
+      extendedLocales = true;
     };
-
-    boot = {
-      initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
-      kernelModules = ["kvm-amd"];
-      kernelParams = [
-        # Fix incorrect resolution with disabled bootloader menu
-        "video=efifb:auto"
-      ];
+    networking = {
+      dns.preset = "desktop";
+      wired.enable = true;
     };
+    secrets.postgresql = "client";
+  };
 
-    fileSystems."/" = {
+  boot = {
+    initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
+    kernelModules = ["kvm-amd"];
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    kernelParams = [
+      # Fix incorrect resolution with disabled bootloader menu
+      "video=efifb:auto"
+    ];
+  };
+
+  fileSystems = {
+    "/" = {
       device = "none";
       fsType = "tmpfs";
       options = [
@@ -64,7 +65,7 @@
       ];
     };
 
-    fileSystems."/nix" = {
+    "/nix" = {
       device = "/dev/disk/by-uuid/ca952a5f-a2fc-4536-b73f-3f267e66a8d6";
       fsType = "ext4";
       options = [
@@ -73,15 +74,13 @@
       ];
     };
 
-    fileSystems."/boot/efi" = {
+    "/boot/efi" = {
       device = "/dev/disk/by-uuid/FDC7-96EA";
       fsType = "vfat";
     };
-
-    swapDevices = [{device = "/dev/disk/by-uuid/82b0acf4-9271-4e28-94b4-13bb56341200";}];
-
-    boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
-
-    system.stateVersion = "22.05";
   };
+
+  swapDevices = [{device = "/dev/disk/by-uuid/82b0acf4-9271-4e28-94b4-13bb56341200";}];
+
+  system.stateVersion = "22.05";
 }

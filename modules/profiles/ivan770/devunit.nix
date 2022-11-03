@@ -13,11 +13,8 @@
     inherit (nixosModules.apps.utilities) direnv git gpg psql;
   };
 
-  home = {
-    packages = builtins.attrValues {
-      inherit (pkgs) tdesktop ciscoPacketTracer8;
-    };
-    stateVersion = "22.05";
+  home.packages = builtins.attrValues {
+    inherit (pkgs) tdesktop ciscoPacketTracer8;
   };
   essentia.programs = {
     firefox =

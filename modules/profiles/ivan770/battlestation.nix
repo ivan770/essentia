@@ -13,11 +13,8 @@
     inherit (nixosModules.apps.utilities) direnv git gpg mpv psql;
   };
 
-  home = {
-    packages = builtins.attrValues {
-      inherit (pkgs) lunar-client steam tdesktop ciscoPacketTracer8;
-    };
-    stateVersion = "22.05";
+  home.packages = builtins.attrValues {
+    inherit (pkgs) lunar-client steam tdesktop ciscoPacketTracer8;
   };
   essentia.programs = {
     discord.settings = import ./configs/discord.nix;

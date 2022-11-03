@@ -10,7 +10,6 @@
     inherit (nixosModules.apps.utilities) direnv git gpg;
   };
 
-  home.stateVersion = "22.05";
   essentia.programs = {
     code-server = {
       settings = import ./vscode/settings.nix {inherit lib;};

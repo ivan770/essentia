@@ -30,6 +30,7 @@ in {
           imports = [
             nixosModules.profiles.${user}.${profile}
             {
+              home.stateVersion = config.system.stateVersion;
               programs = {
                 bash = {
                   enable = true;

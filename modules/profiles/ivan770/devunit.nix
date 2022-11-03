@@ -15,7 +15,7 @@
 
   home = {
     packages = builtins.attrValues {
-      inherit (pkgs) tdesktop;
+      inherit (pkgs) tdesktop ciscoPacketTracer8;
     };
     stateVersion = "22.05";
   };

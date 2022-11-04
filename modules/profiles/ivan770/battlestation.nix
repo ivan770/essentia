@@ -10,7 +10,7 @@
     inherit (nixosModules.apps.desktop) feh fonts i3 menu yambar;
     inherit (nixosModules.apps.editors) vscode;
     inherit (nixosModules.apps.social) firefox discord;
-    inherit (nixosModules.apps.utilities) direnv git gpg mpv psql;
+    inherit (nixosModules.apps.utilities) direnv git gpg psql;
   };
 
   home.packages = builtins.attrValues {
@@ -31,14 +31,6 @@
       };
       config = import ./wm/common.nix {inherit config lib pkgs;};
       extraConfig = import ./wm/extraConfig.nix {};
-    };
-    mpv = {
-      userProfile = import ./configs/mpv.nix;
-      activatedProfiles = [
-        "audio-normalization"
-        "large-cache-buffer"
-        "nvidia"
-      ];
     };
     psql = {
       rootCert = nixosConfig.sops.secrets."postgresql/ssl/root".path;

@@ -2,6 +2,7 @@
   programs.dconf.enable = true;
   services.xserver = {
     enable = true;
+    excludePackages = [pkgs.xterm];
     displayManager.startx.enable = true;
   };
   xdg.portal = {

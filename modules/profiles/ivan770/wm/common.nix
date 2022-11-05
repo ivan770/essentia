@@ -43,6 +43,10 @@ in
       titlebar = false;
       criteria = [
         {title = "Picture-in-Picture";}
+        {
+          title = "Friends List";
+          class = "Steam";
+        }
       ];
     };
 

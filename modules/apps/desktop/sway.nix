@@ -35,6 +35,9 @@ in
           name = "Adwaita";
           size = 36;
         };
+        gtk3.extraConfig = {
+          gtk-application-prefer-dark-theme = true;
+        };
       };
       wayland.windowManager.sway = {
         inherit (cfg) config extraConfig;

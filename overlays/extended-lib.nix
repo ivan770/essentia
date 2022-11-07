@@ -1,7 +1,7 @@
 inputs: self: super: {
-  lib = super.lib.extend (self: super: {
+  lib = super.lib.extend (selfLib: superLib: {
     recursiveMerge = attrList:
-      with super; let
+      with superLib; let
         f = attrPath:
           zipAttrsWith (
             n: values:
@@ -15,6 +15,15 @@ inputs: self: super: {
           );
       in
         f [] attrList;
+
+    partiallyRequireFile = sources: {sha256, ...} @ args:
+      if builtins.hasAttr sha256 sources
+      then
+        builtins.fetchurl {
+          inherit sha256;
+          url = sources.${sha256};
+        }
+      else super.requireFile args;
 
     # Works only in HM profile modules.
     runMenu = config: prompt: let

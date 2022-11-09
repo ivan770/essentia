@@ -13,7 +13,8 @@
       ]
       ++ lib.optionals config.hardware.steam-hardware.enable ["input"]
       ++ lib.optionals config.security.tpm2.enable [config.security.tpm2.tssGroup]
-      ++ lib.optionals config.hardware.sane.enable ["scanner" "lp"];
+      ++ lib.optionals config.hardware.sane.enable ["scanner" "lp"]
+      ++ lib.optionals config.virtualisation.virtualbox.host.enable ["vboxusers"];
     openssh.authorizedKeys.keys = [
       (builtins.readFile (builtins.fetchurl {
         url = "https://ssh.ivan770.me";

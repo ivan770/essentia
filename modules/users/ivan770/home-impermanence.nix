@@ -28,6 +28,10 @@
       }
       ".config/discord"
       ".config/lunarclient"
+      {
+        directory = ".config/VirtualBox";
+        mode = "0700";
+      }
       ".config/VSCodium"
 
       # .local/*

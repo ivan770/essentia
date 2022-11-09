@@ -64,10 +64,5 @@
       enable = true;
       settings = import ./configs/helix.nix;
     };
-    lf =
-      import ./configs/lf.nix
-      // {
-        enable = true;
-      };
   };
 }

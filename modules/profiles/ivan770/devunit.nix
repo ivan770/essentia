@@ -37,7 +37,7 @@ in {
     };
     vscode = {
       settings = call ./vscode/settings.nix {};
-      keybindings = call ./vscode/keybindings.nix;
+      keybindings = import ./vscode/keybindings.nix;
       extensions = call ./vscode/extensions.nix {};
     };
     yambar = {

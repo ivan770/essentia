@@ -1,12 +1,11 @@
 {
+  call,
   lib,
   nixosConfig,
   nixosModules,
   pkgs,
   ...
-} @ args: let
-  call = lib.mkCall args;
-in {
+}: {
   imports = builtins.attrValues {
     inherit (nixosModules.apps.editors) code-server;
     inherit (nixosModules.apps.utilities) direnv git gpg;

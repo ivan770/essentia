@@ -20,28 +20,28 @@ in {
     inputs.home-manager.nixosModules.home-manager
   ];
 
-  config = {
-    home-manager = {
-      extraSpecialArgs = {inherit nixosModules;};
-      useGlobalPkgs = true;
-      users =
-        mapAttrs
-        (user: profile: {
-          imports = [
-            nixosModules.profiles.${user}.${profile}
-            {
-              home.stateVersion = config.system.stateVersion;
-              programs = {
-                bash = {
-                  enable = true;
-                  enableVteIntegration = true;
-                };
-                home-manager.enable = true;
-              };
-            }
-          ];
-        })
-        cfg.profiles;
-    };
+  config.home-manager = {
+    extraSpecialArgs = {inherit nixosModules;};
+    useGlobalPkgs = true;
+    sharedModules = [
+      {
+        home.stateVersion = config.system.stateVersion;
+        programs = {
+          bash = {
+            enable = true;
+            enableVteIntegration = true;
+          };
+          home-manager.enable = true;
+        };
+      }
+    ];
+    users = mapAttrs (user: profile: {
+        config,
+        lib,
+        pkgs,
+        ...
+      } @ args:
+        lib.mkCall args nixosModules.profiles.${user}.${profile} {})
+    cfg.profiles;
   };
 }

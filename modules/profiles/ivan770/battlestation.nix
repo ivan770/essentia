@@ -1,12 +1,11 @@
 {
+  call,
   lib,
   pkgs,
   nixosConfig,
   nixosModules,
   ...
-} @ args: let
-  call = lib.mkCall args;
-in {
+}: {
   imports = builtins.attrValues {
     inherit (nixosModules.apps.desktop) feh fonts i3 menu yambar;
     inherit (nixosModules.apps.editors) vscode;

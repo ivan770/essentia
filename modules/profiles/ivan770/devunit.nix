@@ -1,15 +1,11 @@
 {
+  call,
   pkgs,
   lib,
   nixosConfig,
   nixosModules,
   ...
-} @ args: let
-  call = lib.mkCall (args
-    // {
-      wayland = true;
-    });
-in {
+}: {
   imports = builtins.attrValues {
     inherit (nixosModules.apps.desktop) fonts menu sway yambar;
     inherit (nixosModules.apps.editors) vscode;

@@ -25,6 +25,11 @@ inputs: self: super: {
         }
       else super.requireFile args;
 
+    mkCall = args: path: overrides: let
+      f = import path;
+    in
+      f ((builtins.intersectAttrs (builtins.functionArgs f) (args // {call = selfLib.mkCall args;})) // overrides);
+
     # Works only in HM profile modules.
     runMenu = config: prompt: let
       cfg = config.essentia.programs.menu;

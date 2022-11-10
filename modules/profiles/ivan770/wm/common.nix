@@ -1,8 +1,9 @@
 {
+  call,
   config,
   lib,
   pkgs,
-  sway ? false,
+  wayland ? false,
   ...
 }:
 with lib; let
@@ -54,7 +55,7 @@ in
 
     keybindings = let
       # Wrapper to correctly call commands from i3 without showing loading indicator indefinitely
-      mkExec = command: "exec ${optionalString (!sway) "--no-startup-id"} ${command}";
+      mkExec = command: "exec ${optionalString (!wayland) "--no-startup-id"} ${command}";
 
       workspaceKeys = zipListsWith (key: workspace: {
         "${modifier}+${toString key}" = "workspace number ${toString workspace}";
@@ -125,7 +126,7 @@ in
           '';
         in
           mkExec (
-            if sway
+            if wayland
             then grim
             else maim
           );
@@ -148,4 +149,4 @@ in
       Escape = "mode default";
     };
   }
-  // optionalAttrs sway (import ./sway.nix {inherit config;})
+  // optionalAttrs wayland (call ./sway.nix {})

@@ -4,7 +4,9 @@
   nixosModules,
   pkgs,
   ...
-}: {
+} @ args: let
+  call = lib.mkCall args;
+in {
   imports = builtins.attrValues {
     inherit (nixosModules.apps.editors) code-server;
     inherit (nixosModules.apps.utilities) direnv git gpg;
@@ -12,9 +14,9 @@
 
   essentia.programs = {
     code-server = {
-      settings = import ./vscode/settings.nix {inherit lib;};
+      settings = call ./vscode/settings.nix {};
       keybindings = import ./vscode/keybindings.nix;
-      extensions = import ./vscode/extensions.nix {inherit pkgs;};
+      extensions = call ./vscode/extensions.nix {};
     };
     git.credentials = nixosConfig.sops.secrets."users/ivan770/git".path;
     gpg.sshKeys = [

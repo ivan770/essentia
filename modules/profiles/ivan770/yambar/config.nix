@@ -6,7 +6,7 @@
   pkgs,
   wayland ? false,
   ...
-}: let
+} @ args: let
   spacing = 5;
 
   okColor = "00ff00ff";
@@ -17,6 +17,13 @@
 
   font = "Noto Sans:pixelsize=14:style=regular";
   mdIconFont = "Material Design Icons:pixelsize=14";
+
+  call = lib.mkCall (args
+    // {
+      # Explicitly include "wayland" to bypass a strange Nix behaviour
+      # specified in https://nixos.org/manual/nix/stable/language/constructs.html#functions
+      inherit spacing okColor warnColor activeColor inactiveColor font mdIconFont wayland;
+    });
 in {
   bar = {
     inherit font spacing;
@@ -28,8 +35,8 @@ in {
     background = "0000004c";
 
     left = [
-      (import ./components/workspaces.nix {inherit activeColor inactiveColor pkgs warnColor wayland;})
-      (import ./components/window-title.nix {inherit wayland;})
+      (call ./components/workspaces.nix {})
+      (call ./components/window-title.nix {})
     ];
 
     center = [
@@ -38,14 +45,14 @@ in {
 
     right =
       [
-        (import ./components/layout.nix {inherit wayland;})
-        (import ./components/removables.nix {inherit okColor inactiveColor mdIconFont;})
+        (call ./components/layout.nix {})
+        (call ./components/removables.nix {})
       ]
-      ++ (map (name: import ./components/network.nix {inherit lib name mdIconFont warnColor;}) networkDevices)
+      ++ (map (name: call ./components/network.nix {inherit name;}) networkDevices)
       ++ [
-        (import ./components/sound.nix {inherit mdIconFont pkgs spacing warnColor;})
-        (lib.mkIf battery (import ./components/battery.nix {inherit lib mdIconFont okColor warnColor;}))
-        (import ./components/logout.nix {inherit config lib mdIconFont pkgs spacing;})
+        (call ./components/sound.nix {})
+        (lib.mkIf battery (call ./components/battery.nix {}))
+        (call ./components/logout.nix {})
       ];
   };
 }

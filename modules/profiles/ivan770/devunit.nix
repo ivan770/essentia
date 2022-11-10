@@ -1,11 +1,15 @@
 {
-  config,
   pkgs,
   lib,
   nixosConfig,
   nixosModules,
   ...
-}: {
+} @ args: let
+  call = lib.mkCall (args
+    // {
+      wayland = true;
+    });
+in {
   imports = builtins.attrValues {
     inherit (nixosModules.apps.desktop) fonts menu sway yambar;
     inherit (nixosModules.apps.editors) vscode;
@@ -17,11 +21,7 @@
     inherit (pkgs) tdesktop ciscoPacketTracer8;
   };
   essentia.programs = {
-    firefox =
-      import ./configs/firefox.nix {inherit nixosConfig;}
-      // {
-        wayland = true;
-      };
+    firefox = call ./configs/firefox.nix {};
     git.credentials = nixosConfig.sops.secrets."users/ivan770/git".path;
     gpg.sshKeys = [
       "4F1412E8D1942B3317A706884B7A0711B34A46D6"
@@ -32,25 +32,18 @@
       key = nixosConfig.sops.secrets."users/ivan770/postgresql/key".path;
     };
     sway = {
-      config = import ./wm/common.nix {
-        inherit config lib pkgs;
-        sway = true;
-      };
-      extraConfig = import ./wm/extraConfig.nix {
-        sway = true;
-      };
+      config = call ./wm/common.nix {};
+      extraConfig = call ./wm/extraConfig.nix {};
     };
     vscode = {
-      settings = import ./vscode/settings.nix {inherit lib;};
-      keybindings = import ./vscode/keybindings.nix;
-      extensions = import ./vscode/extensions.nix {inherit pkgs;};
+      settings = call ./vscode/settings.nix {};
+      keybindings = call ./vscode/keybindings.nix;
+      extensions = call ./vscode/extensions.nix {};
     };
     yambar = {
-      settings = import ./yambar/config.nix {
-        inherit config lib pkgs;
+      settings = call ./yambar/config.nix {
         battery = true;
         networkDevices = ["wlo1"];
-        wayland = true;
       };
       systemd.target = "sway";
     };

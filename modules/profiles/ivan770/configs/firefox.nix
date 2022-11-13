@@ -21,6 +21,9 @@
     "browser.urlbar.suggest.engines" = false;
     "browser.urlbar.suggest.openpage" = false;
     "browser.urlbar.suggest.topsites" = false;
+    "browser.urlbar.shortcuts.bookmarks" = false;
+    "browser.urlbar.shortcuts.history" = false;
+    "browser.urlbar.shortcuts.tabs" = false;
     "browser.search.hiddenOneOffs" = "Google,Amazon.com,Bing,DuckDuckGo,Wikipedia (en)";
 
     # Disable microphone badge during calls

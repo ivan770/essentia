@@ -14,44 +14,16 @@ in
   with lib; {
     options.essentia.nginx = {
       upstreams = mkOption {
-        type = types.listOf (types.submodule {
-          options = {
-            name = mkOption {
-              type = types.str;
-              description = ''
-                Upstream's unique identifier.
-              '';
-            };
-            endpoint = mkOption {
-              type = types.str;
-              description = ''
-                Endpoint, to which Nginx will proxy incoming requests.
-              '';
-            };
-          };
-        });
-        default = [];
-        description = "Supported Nginx upstreams";
+        type = types.attrsOf types.str;
+        default = {};
+        description = ''
+          Supported Nginx upstreams.
+        '';
       };
 
       activatedUpstreams = mkOption {
-        type = types.listOf (types.submodule {
-          options = {
-            name = mkOption {
-              type = types.str;
-              description = ''
-                Upstream's public hostname.
-              '';
-            };
-            upstream = mkOption {
-              type = types.str;
-              description = ''
-                Identifier of an upstream, to which Nginx will proxy incoming requests.
-              '';
-            };
-          };
-        });
-        default = [];
+        type = types.attrsOf types.str;
+        default = {};
         description = ''
           Activated Nginx upstreams.
         '';
@@ -62,9 +34,9 @@ in
       assertions = [
         {
           assertion = let
-            upstreamIdentifiers = map (upstream: upstream.name) cfg.upstreams;
+            activatedUpstreams = filterAttrs (_: value: hasAttr value cfg.upstreams) cfg.activatedUpstreams;
           in
-            all (activatedUpstream: elem activatedUpstream.upstream upstreamIdentifiers) cfg.activatedUpstreams;
+            (attrNames activatedUpstreams) == (attrNames cfg.activatedUpstreams);
           message = ''
             Only upstreams defined via config.essentia.nginx.upstreams can be activated via config.essentia.nginx.activatedUpstreams
           '';
@@ -78,30 +50,28 @@ in
         recommendedGzipSettings = true;
         recommendedProxySettings = true;
 
-        upstreams = listToAttrs (map (upstream: {
-            inherit (upstream) name;
-            value.servers = {${upstream.endpoint} = {};};
+        upstreams =
+          mapAttrs (_: endpoint: {
+            servers.${endpoint} = {};
           })
-          cfg.upstreams);
+          cfg.upstreams;
 
-        virtualHosts = listToAttrs (map (activatedUpstream: {
-            inherit (activatedUpstream) name;
-            value = {
-              onlySSL = true;
-              kTLS = true;
-              sslCertificate = config.sops.secrets."ssl/cert".path;
-              sslCertificateKey = config.sops.secrets."ssl/key".path;
-              locations."/" = {
-                proxyPass = "http://${activatedUpstream.upstream}";
-                proxyWebsockets = true;
-              };
-              extraConfig = ''
-                ssl_client_certificate ${originPullCA};
-                ssl_verify_client on;
-              '';
+        virtualHosts =
+          mapAttrs (_: upstream: {
+            onlySSL = true;
+            kTLS = true;
+            sslCertificate = config.sops.secrets."ssl/cert".path;
+            sslCertificateKey = config.sops.secrets."ssl/key".path;
+            locations."/" = {
+              proxyPass = "http://${upstream}";
+              proxyWebsockets = true;
             };
+            extraConfig = ''
+              ssl_client_certificate ${originPullCA};
+              ssl_verify_client on;
+            '';
           })
-          cfg.activatedUpstreams);
+          cfg.activatedUpstreams;
       };
     };
   }

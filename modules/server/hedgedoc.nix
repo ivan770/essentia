@@ -4,6 +4,7 @@
   in {
     config = {
       domain,
+      exposedServices,
       localAddress,
       ...
     }: {
@@ -24,6 +25,7 @@
           };
           defaultPermission = "private";
           host = localAddress;
+          port = exposedServices.main;
           protocolUseSSL = true;
         };
       };
@@ -32,5 +34,6 @@
     };
 
     bindSlots.data = dataDir;
+    exposedServices.main = 3000;
   };
 }

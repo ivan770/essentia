@@ -23,12 +23,9 @@
       dns.preset = "server";
       wired.enable = true;
     };
-    nginx.activatedUpstreams = [
-      {
-        name = "remote.elusive.space";
-        upstream = "code-server";
-      }
-    ];
+    nginx.activatedUpstreams = {
+      "remote.elusive.space" = "code-server";
+    };
     postgresql.serverConfig = {
       # PGTune suggestions
       max_connections = 25;

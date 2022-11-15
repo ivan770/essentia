@@ -8,10 +8,5 @@
     auth = "none";
   };
 
-  essentia.nginx.upstreams = [
-    {
-      name = "code-server";
-      endpoint = "${config.services.code-server.host}:${toString config.services.code-server.port}";
-    }
-  ];
+  essentia.nginx.upstreams.code-server = "${config.services.code-server.host}:${toString config.services.code-server.port}";
 }

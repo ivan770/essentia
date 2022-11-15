@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.essentia.containers;
@@ -23,6 +24,14 @@ in
               default = {};
               description = ''
                 Filesystem binds that have to be provisioned by an activated container configuration.
+              '';
+            };
+
+            exposedServices = mkOption {
+              type = types.attrsOf types.int;
+              default = {};
+              description = ''
+                Container's public HTTP services.
               '';
             };
           };
@@ -77,18 +86,18 @@ in
     };
 
     config = let
-      serviceConfigurations = filterAttrs (name: _: hasAttr name cfg.activatedConfigurations) cfg.configurations;
+      serviceConfigurations = filterAttrs (name: _: hasAttr name cfg.configurations) cfg.activatedConfigurations;
 
       intersectedConfigurations =
-        mapAttrs (name: serviceConfiguration: {
-          inherit serviceConfiguration;
-          userConfiguration = cfg.activatedConfigurations.${name};
+        mapAttrs (name: userConfiguration: {
+          inherit userConfiguration;
+          serviceConfiguration = cfg.configurations.${name};
         })
         serviceConfigurations;
     in {
       assertions = [
         {
-          assertion = (attrNames serviceConfigurations) == (attrNames cfg.configurations);
+          assertion = (attrNames serviceConfigurations) == (attrNames cfg.activatedConfigurations);
           message = ''
             You can only activate containers that are defined via config.essentia.containers.configurations.
           '';
@@ -106,22 +115,44 @@ in
       ];
 
       containers =
-        mapAttrs (name: {
+        mapAttrs (_: {
           serviceConfiguration,
           userConfiguration,
         }: {
           inherit (userConfiguration.network) hostAddress localAddress;
 
+          autoStart = true;
           ephemeral = true;
           privateNetwork = true;
-          extraFlags = ["-U"] ++ (attrValues (mapAttrs (name: mountPoint: "--bind ${userConfiguration.bindMounts.${name}}:${mountPoint}:idmap") serviceConfiguration.bindSlots));
+
+          extraFlags =
+            ["-U"]
+            ++ (
+              attrValues (
+                mapAttrs (name: mountPoint: "--bind ${userConfiguration.bindMounts.${name}}:${mountPoint}:idmap") serviceConfiguration.bindSlots
+              )
+            );
 
           config = attrs: (serviceConfiguration.config (attrs
             // {
               inherit (userConfiguration.network) localAddress;
+              inherit (serviceConfiguration) exposedServices;
             }
             // userConfiguration.specialArgs));
         })
         intersectedConfigurations;
+
+      # FIXME: Remove "pkgs.lib" if/when https://github.com/NixOS/nixpkgs/pull/157056 gets merged.
+      essentia.nginx.upstreams = pkgs.lib.recursiveMerge (attrValues (mapAttrs (
+          name: {
+            serviceConfiguration,
+            userConfiguration,
+          }:
+            mapAttrs' (
+              service: port: nameValuePair "${name}-${service}" "${userConfiguration.network.localAddress}:${toString port}"
+            )
+            serviceConfiguration.exposedServices
+        )
+        intersectedConfigurations));
     };
   }

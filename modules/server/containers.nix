@@ -114,15 +114,7 @@ in
 
           ephemeral = true;
           privateNetwork = true;
-
-          bindMounts =
-            mapAttrs (name: mountPoint: {
-              inherit mountPoint;
-
-              hostPath = userConfiguration.bindMounts.${name};
-              isReadOnly = false;
-            })
-            serviceConfiguration.bindSlots;
+          extraFlags = ["-U"] ++ (attrValues (mapAttrs (name: mountPoint: "--bind ${userConfiguration.bindMounts.${name}}:${mountPoint}:idmap") serviceConfiguration.bindSlots));
 
           config = attrs: (serviceConfiguration.config (attrs
             // {

@@ -60,6 +60,7 @@ in
             directory = "/var/lib/bluetooth";
             mode = "0700";
           }
+          "/var/lib/cups"
           "/var/lib/systemd"
           "/var/log"
 

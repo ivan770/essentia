@@ -41,7 +41,6 @@
       dns.preset = "desktop";
       wired.enable = true;
     };
-    secrets.postgresql = "client";
   };
 
   boot = {

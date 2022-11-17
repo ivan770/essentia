@@ -10,7 +10,7 @@
     inherit (nixosModules.apps.desktop) feh fonts i3 menu yambar;
     inherit (nixosModules.apps.editors) vscode;
     inherit (nixosModules.apps.social) firefox discord;
-    inherit (nixosModules.apps.utilities) direnv git gpg psql;
+    inherit (nixosModules.apps.utilities) direnv git gpg;
   };
 
   home.packages = builtins.attrValues {
@@ -31,11 +31,6 @@
       };
       config = call ./wm/common.nix {};
       extraConfig = call ./wm/extraConfig.nix {};
-    };
-    psql = {
-      rootCert = nixosConfig.sops.secrets."postgresql/ssl/root".path;
-      cert = nixosConfig.sops.secrets."users/ivan770/postgresql/cert".path;
-      key = nixosConfig.sops.secrets."users/ivan770/postgresql/key".path;
     };
     vscode = {
       settings = call ./vscode/settings.nix {};

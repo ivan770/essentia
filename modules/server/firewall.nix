@@ -4,6 +4,8 @@
   ...
 }:
 with lib; let
+  cfg = config.essentia.firewall;
+
   mkCfIPList = version: sha256: (
     replaceStrings ["\n"] [", "] (
       readFile (builtins.fetchurl {
@@ -16,14 +18,25 @@ with lib; let
   cfV4List = mkCfIPList "v4" "0ywy9sg7spafi3gm9q5wb59lbiq0swvf0q3iazl0maq1pj1nsb7h";
   cfV6List = mkCfIPList "v6" "1ad09hijignj6zlqvdjxv7rjj8567z357zfavv201b9vx3ikk7cy";
 
-  protectedPorts =
-    optional config.services.postgresql.enable config.services.postgresql.port
-    ++ optionals config.services.openssh.enable config.services.openssh.ports;
+  protectedPorts = optionals config.services.openssh.enable config.services.openssh.ports;
 in {
-  networking.nftables = {
+  options.essentia.firewall = {
+    forwardedInterfaces = mkOption {
+      type = types.listOf types.str;
+      default = [];
+      description = ''
+        Interfaces that have their traffic forwarded through the main outgoing interface.
+      '';
+    };
+  };
+
+  config.networking.nftables = {
     enable = true;
     # Ruleset derived from https://wiki.nftables.org/wiki-nftables/index.php/Simple_ruleset_for_a_server
-    ruleset = ''
+    ruleset = let
+      mkForwardedInterfacesRule = rule:
+        optionalString (cfg.forwardedInterfaces != []) "iifname { ${concatStringsSep " " (map (interface: "\"${interface}\"") cfg.forwardedInterfaces)} } ${rule}";
+    in ''
       include "${config.sops.secrets.trustedNetworks.path}"
 
       define CF_IPV4 = { ${cfV4List} }
@@ -55,6 +68,19 @@ in {
 
         chain forward {
           type filter hook forward priority 0; policy drop;
+
+          # Accept correct connections and immediately drop invalid ones
+          ct state vmap { established : accept, related : accept, invalid : drop }
+
+          # Accept packets that interact with the forwarded interfaces
+          ${mkForwardedInterfacesRule "accept"}
+        }
+
+        chain postrouting {
+          type nat hook postrouting priority 100; policy accept;
+
+          # Enable forwarded interfaces IP masquerade
+          ${mkForwardedInterfacesRule "masquerade random"}
         }
       }
     '';

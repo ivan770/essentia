@@ -15,7 +15,7 @@ in {
     inherit (nixosModules.apps.desktop) fonts menu sway yambar;
     inherit (nixosModules.apps.editors) vscode;
     inherit (nixosModules.apps.social) firefox;
-    inherit (nixosModules.apps.utilities) direnv git gpg psql;
+    inherit (nixosModules.apps.utilities) direnv git gpg;
   };
 
   home.packages = builtins.attrValues {
@@ -31,11 +31,6 @@ in {
     gpg.sshKeys = [
       "4F1412E8D1942B3317A706884B7A0711B34A46D6"
     ];
-    psql = {
-      rootCert = nixosConfig.sops.secrets."postgresql/ssl/root".path;
-      cert = nixosConfig.sops.secrets."users/ivan770/postgresql/cert".path;
-      key = nixosConfig.sops.secrets."users/ivan770/postgresql/key".path;
-    };
     sway = {
       config = call ./wm/common.nix {};
       extraConfig = call ./wm/extraConfig.nix {};

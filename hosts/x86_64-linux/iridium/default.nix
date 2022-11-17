@@ -47,7 +47,6 @@
         "default_5g"
       ];
     };
-    secrets.postgresql = "client";
     tlp.cpu = {
       ac = "performance";
       bat = "schedutil";

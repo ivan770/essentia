@@ -17,7 +17,7 @@
 
     inherit (nixosModules.users.ivan770) home-impermanence user;
     inherit (nixosModules.common) impermanence;
-    inherit (nixosModules.desktop) generic sway;
+    inherit (nixosModules.desktop) generic postgresql sway;
     inherit
       (nixosModules.hardware)
       amd-gpu

@@ -61,6 +61,12 @@ in
             mode = "0700";
           }
           "/var/lib/cups"
+          (mkIf config.services.postgresql.enable {
+            directory = "/var/lib/postgresql";
+            mode = "0750";
+            user = config.users.users.postgres.name;
+            group = config.users.users.postgres.group;
+          })
           "/var/lib/systemd"
           "/var/log"
 

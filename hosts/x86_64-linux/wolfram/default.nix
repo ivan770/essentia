@@ -14,7 +14,7 @@
 
     inherit (nixosModules.common) impermanence systemd-initrd;
     inherit (nixosModules.users.ivan770) home-impermanence user;
-    inherit (nixosModules.desktop) generic i3 virtualbox;
+    inherit (nixosModules.desktop) generic i3 postgresql virtualbox;
     inherit
       (nixosModules.hardware)
       firmware

@@ -101,7 +101,6 @@ in
             "device.sensors.orientation.enabled" = false;
             "device.sensors.proximity.enabled" = false;
             "dom.battery.enabled" = false;
-            "dom.event.clipboardevents.enabled" = false;
 
             # Bloatware removal
             "extensions.pocket.enabled" = false;

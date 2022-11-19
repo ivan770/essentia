@@ -9,14 +9,6 @@
       ref = "nixos-unstable";
     };
 
-    nixpkgs-unfree = {
-      type = "github";
-      owner = "numtide";
-      repo = "nixpkgs-unfree";
-      ref = "nixos-unstable";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     home-manager = {
       type = "github";
       owner = "nix-community";

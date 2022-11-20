@@ -14,7 +14,13 @@
         settings = {
           inherit domain;
 
+          host = localAddress;
+          port = exposedServices.main;
+          protocolUseSSL = true;
+
           allowAnonymous = false;
+          allowEmailRegister = false;
+          allowGravatar = false;
           csp = {
             allowFraming = false;
             allowPDFEmbed = false;
@@ -24,9 +30,6 @@
             storage = "${dataDir}/hedgedoc.sqlite";
           };
           defaultPermission = "private";
-          host = localAddress;
-          port = exposedServices.main;
-          protocolUseSSL = true;
         };
       };
 

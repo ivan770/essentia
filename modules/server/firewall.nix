@@ -34,8 +34,11 @@ in {
     enable = true;
     # Ruleset derived from https://wiki.nftables.org/wiki-nftables/index.php/Simple_ruleset_for_a_server
     ruleset = let
-      mkForwardedInterfacesRule = rule:
-        optionalString (cfg.forwardedInterfaces != []) "iifname { ${concatStringsSep " " (map (interface: "\"${interface}\"") cfg.forwardedInterfaces)} } ${rule}";
+      mkForwardedInterfacesRule = criteria: rule:
+        optionalString (cfg.forwardedInterfaces != []) "${criteria} { ${concatStringsSep " " (map (interface: "\"${interface}\"") cfg.forwardedInterfaces)} } ${rule}";
+
+      mkForwardedInterfacesInputRule = rule: mkForwardedInterfacesRule "iifname" rule;
+      mkForwardedInterfacesOutputRule = rule: mkForwardedInterfacesRule "oifname" rule;
     in ''
       include "${config.sops.secrets.trustedNetworks.path}"
 
@@ -73,14 +76,15 @@ in {
           ct state vmap { established : accept, related : accept, invalid : drop }
 
           # Accept packets that interact with the forwarded interfaces
-          ${mkForwardedInterfacesRule "accept"}
+          ${mkForwardedInterfacesInputRule "accept"}
+          ${mkForwardedInterfacesOutputRule "accept"}
         }
 
         chain postrouting {
           type nat hook postrouting priority 100; policy accept;
 
           # Enable forwarded interfaces IP masquerade
-          ${mkForwardedInterfacesRule "masquerade random"}
+          ${mkForwardedInterfacesInputRule "masquerade random"}
         }
       }
     '';

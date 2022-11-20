@@ -16,6 +16,10 @@
       # Ignore incoming ICMP echo requests
       "net.ipv4.icmp_echo_ignore_all" = 1;
       "net.ipv6.icmp.echo_ignore_all" = 1;
+
+      # RFC 3704 (strict reverse path filtering)
+      "net.ipv4.conf.all.rp_filter" = 1;
+      "net.ipv4.conf.default.rp_filter" = 1;
     };
 
     kernelPackages = pkgs.linuxPackages_hardened;

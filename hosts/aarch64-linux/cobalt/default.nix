@@ -22,7 +22,7 @@
       bindMounts.data = "/var/lib/hedgedoc-data";
       network = {
         localAddress = "192.168.100.1";
-        localAddress = "192.168.101.1";
+        hostAddress = "192.168.101.1";
       };
       specialArgs.domain = "docs.elusive.space";
     };

@@ -50,6 +50,7 @@
 
     # Disable Firefox View feature
     "browser.tabs.firefox-view" = false;
+    "browser.firefox-view.view-count" = 1;
 
     # Disable noisy default browser check
     "browser.shell.checkDefaultBrowser" = false;

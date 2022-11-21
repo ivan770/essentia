@@ -43,12 +43,40 @@ in
         }
       ];
 
-      services.nginx = {
+      services.nginx = let
+        connectionCount = 10240;
+
+        bodyLimit = "6k";
+        headerLimit = "3k";
+        timeout = 15;
+      in {
         enable = true;
         recommendedOptimisation = true;
         recommendedTlsSettings = true;
         recommendedGzipSettings = true;
         recommendedProxySettings = true;
+
+        appendConfig = ''
+          worker_processes auto;
+          worker_rlimit_nofile ${toString (connectionCount * 2)};
+        '';
+
+        eventsConfig = ''
+          worker_connections ${toString connectionCount};
+        '';
+
+        clientMaxBodySize = bodyLimit;
+        commonHttpConfig = ''
+          access_log off;
+
+          client_body_buffer_size ${bodyLimit};
+          client_header_buffer_size ${headerLimit};
+          large_client_header_buffers 2 ${headerLimit};
+
+          client_body_timeout ${toString timeout};
+          client_header_timeout ${toString timeout};
+          send_timeout ${toString timeout};
+        '';
 
         upstreams =
           mapAttrs (_: endpoint: {

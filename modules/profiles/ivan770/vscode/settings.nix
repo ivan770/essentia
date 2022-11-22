@@ -258,6 +258,9 @@ with lib; let
     "terminal.integrated.commandsToSkipShell" = [
       "language-julia.interrupt"
     ];
+
+    # Telemetry removal
+    "julia.enableTelemetry" = false;
   };
 
   # Nix-related configuration

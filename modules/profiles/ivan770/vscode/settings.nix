@@ -1,4 +1,8 @@
-{lib, ...}:
+{
+  lib,
+  pkgs,
+  ...
+}:
 with lib; let
   # General VS Code appearance configuration
   appearance = {
@@ -265,8 +269,9 @@ with lib; let
 
   # Nix-related configuration
   nix = {
-    # Activate the usage of rnix-lsp
+    # Activate the usage of nil
     "nix.enableLanguageServer" = true;
+    "nix.serverPath" = "${pkgs.nil}/bin/nil";
   };
 
   # Markdown-related configuration

@@ -67,12 +67,6 @@
           inherit system;
         };
       in {
-        devShell = pkgs.mkShell {
-          buildInputs = builtins.attrValues {
-            inherit (pkgs) rnix-lsp;
-          };
-        };
-
         formatter = pkgs.alejandra;
       }
     );

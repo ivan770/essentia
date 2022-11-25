@@ -22,11 +22,7 @@ in {
     inherit (pkgs) tdesktop ciscoPacketTracer8;
   };
   essentia.programs = {
-    firefox =
-      (call ./configs/firefox.nix {})
-      // {
-        wayland = true;
-      };
+    firefox = call ./configs/firefox.nix {};
     git.credentials = nixosConfig.sops.secrets."users/ivan770/git".path;
     gpg.sshKeys = [
       "4F1412E8D1942B3317A706884B7A0711B34A46D6"

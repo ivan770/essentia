@@ -6,11 +6,6 @@
 }: let
   cfg = config.essentia.programs.firefox;
 
-  package =
-    if cfg.wayland
-    then pkgs.firefox-wayland
-    else pkgs.firefox;
-
   mkFirefoxWrapper = lib.makeOverridable (browser:
     pkgs.symlinkJoin {
       name = "ess-firefox";
@@ -25,12 +20,9 @@
 
       postBuild = ''
         wrapProgram $out/bin/firefox \
-          ${lib.optionalString cfg.wayland "--set EGL_PLATFORM \"wayland\""} \
           --set MOZ_DISABLE_RDD_SANDBOX 1 \
           --set MOZ_X11_EGL 1
       '';
-
-      inherit (browser) passthru;
     });
 in
   with lib; {
@@ -45,12 +37,11 @@ in
         default = {};
         description = "Preferred Firefox settings";
       };
-      wayland = mkEnableOption "Enable Firefox Wayland support";
     };
 
     config.programs.firefox = {
       enable = true;
-      package = mkFirefoxWrapper package;
+      package = mkFirefoxWrapper pkgs.firefox;
       extensions = cfg.extensions;
       profiles.default = {
         settings =

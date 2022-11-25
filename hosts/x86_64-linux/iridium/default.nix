@@ -38,8 +38,7 @@
     impermanence.persistentDirectory = "/nix/persist";
     locale = {
       units = "uk_UA.UTF-8";
-      timeZone = "Europe/Kiev";
-      extendedLocales = true;
+      timeZone = "Europe/Kyiv";
     };
     networking = {
       dns.preset = "desktop";

@@ -29,17 +29,19 @@ with lib; rec {
   listNixFilesRecursive = path:
     filter (hasSuffix ".nix") (filesystem.listFilesRecursive path);
 
-  mkNixosConfig = path: system: name:
+  mkNixosConfig = path: hostPlatform: name:
     makeOverridable nixosSystem {
-      inherit system;
-
       modules =
         [
           {
             networking.hostName = name;
-            nixpkgs.overlays = mkIf (inputs.self ? overlays) (
-              collect (a: !isAttrs a) inputs.self.overlays
-            );
+            nixpkgs = {
+              inherit hostPlatform;
+
+              overlays = mkIf (inputs.self ? overlays) (
+                collect (a: !isAttrs a) inputs.self.overlays
+              );
+            };
           }
           inputs.nur.nixosModules.nur
           inputs.sops-nix.nixosModules.sops

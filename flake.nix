@@ -6,14 +6,14 @@
       type = "github";
       owner = "NixOS";
       repo = "nixpkgs";
-      ref = "nixos-unstable";
+      ref = "nixos-22.11";
     };
 
     home-manager = {
       type = "github";
       owner = "nix-community";
       repo = "home-manager";
-      ref = "master";
+      ref = "release-22.11";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "flake-utils";
     };

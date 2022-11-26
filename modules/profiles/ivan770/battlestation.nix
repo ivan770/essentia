@@ -27,7 +27,7 @@
     i3 = {
       keyboard = {
         layout = "us,ru,ua";
-        options = ["grp:lalt_lshift_toggle"];
+        options = ["grp:caps_toggle"];
       };
       config = call ./wm/common.nix {};
       extraConfig = call ./wm/extraConfig.nix {};

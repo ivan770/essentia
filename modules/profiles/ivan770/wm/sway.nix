@@ -1,7 +1,7 @@
 {config, ...}: {
   input."type:keyboard" = {
     xkb_layout = "us,ru,ua";
-    xkb_options = "grp:lalt_lshift_toggle";
+    xkb_options = "grp:caps_toggle";
   };
 
   input."type:touchpad" = {

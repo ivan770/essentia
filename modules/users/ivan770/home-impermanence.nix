@@ -26,6 +26,10 @@
         directory = ".config/dconf";
         mode = "0700";
       }
+      {
+        directory = ".config/deluge";
+        mode = "0700";
+      }
       ".config/discord"
       ".config/lunarclient"
       {

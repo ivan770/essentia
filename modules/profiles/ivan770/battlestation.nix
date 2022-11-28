@@ -14,7 +14,7 @@
   };
 
   home.packages = builtins.attrValues {
-    inherit (pkgs) lunar-client steam tdesktop ciscoPacketTracer8;
+    inherit (pkgs) lunar-client steam tdesktop ciscoPacketTracer8 deluge;
   };
   essentia.programs = {
     discord.settings = import ./configs/discord.nix;

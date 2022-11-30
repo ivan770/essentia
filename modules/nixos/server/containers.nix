@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.essentia.containers;
+  cfg = config.essentia.server.containers;
 in
   with lib; {
-    options.essentia.containers = {
+    options.essentia.server.containers = {
       configurations = mkOption {
         type = types.attrsOf (types.submodule {
           options = {
@@ -143,7 +143,7 @@ in
         intersectedConfigurations;
 
       # FIXME: Remove "pkgs.lib" if/when https://github.com/NixOS/nixpkgs/pull/157056 gets merged.
-      essentia.nginx.upstreams = pkgs.lib.recursiveMerge (attrValues (mapAttrs (
+      essentia.server.nginx.upstreams = pkgs.lib.recursiveMerge (attrValues (mapAttrs (
           name: {
             serviceConfiguration,
             userConfiguration,

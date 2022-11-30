@@ -10,28 +10,30 @@
   ];
 
   essentia = {
-    code-server.enable = true;
-    containers.activatedConfigurations.hedgedoc = {
-      bindMounts.data = "/var/lib/hedgedoc-data";
-      network = {
-        localAddress = "192.168.100.1";
-        hostAddress = "192.168.101.1";
-      };
-      specialArgs.domain = "docs.elusive.space";
-    };
-    firewall.enable = true;
     firmware.cpu.vendor = null;
     home-manager.profiles.ivan770 = "remote-code";
     networking = {
       dns.preset = "server";
       wired.enable = true;
     };
-    nginx.activatedUpstreams = {
-      "remote.elusive.space" = "code-server";
-      "docs.elusive.space" = "hedgedoc-main";
-    };
     secrets.ssl = true;
-    server-kernel.enable = true;
+    server = {
+      enable = true;
+      code-server.enable = true;
+      containers.activatedConfigurations.hedgedoc = {
+        bindMounts.data = "/var/lib/hedgedoc-data";
+        network = {
+          localAddress = "192.168.100.1";
+          hostAddress = "192.168.101.1";
+        };
+        specialArgs.domain = "docs.elusive.space";
+      };
+      firewall.enable = true;
+      nginx.activatedUpstreams = {
+        "remote.elusive.space" = "code-server";
+        "docs.elusive.space" = "hedgedoc-main";
+      };
+    };
     systemd-boot = {
       mountpoint = "/boot";
       timeout = 2;

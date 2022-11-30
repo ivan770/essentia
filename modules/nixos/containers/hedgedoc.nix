@@ -1,5 +1,5 @@
 {
-  essentia.containers.configurations.hedgedoc = let
+  essentia.server.containers.configurations.hedgedoc = let
     dataDir = "/var/lib/hedgedoc";
   in {
     config = {

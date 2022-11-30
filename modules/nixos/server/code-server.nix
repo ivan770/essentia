@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.essentia.code-server;
+  cfg = config.essentia.server.code-server;
 in
   with lib; {
-    options.essentia.code-server = {
+    options.essentia.server.code-server = {
       enable = mkEnableOption "code-server support";
     };
 
@@ -20,6 +20,6 @@ in
         auth = "none";
       };
 
-      essentia.nginx.upstreams.code-server = "${config.services.code-server.host}:${toString config.services.code-server.port}";
+      essentia.server.nginx.upstreams.code-server = "${config.services.code-server.host}:${toString config.services.code-server.port}";
     };
   }

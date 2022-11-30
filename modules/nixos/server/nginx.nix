@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.essentia.nginx;
+  cfg = config.essentia.server.nginx;
 
   originPullCA = builtins.fetchurl {
     url = "https://developers.cloudflare.com/ssl/static/authenticated_origin_pull_ca.pem";
@@ -12,7 +12,7 @@
   };
 in
   with lib; {
-    options.essentia.nginx = {
+    options.essentia.server.nginx = {
       upstreams = mkOption {
         type = types.attrsOf types.str;
         default = {};

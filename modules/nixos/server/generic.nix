@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  cfg = config.essentia.server-kernel;
+  cfg = config.essentia.server;
 in
   with lib; {
-    options.essentia.server-kernel = {
-      enable = mkEnableOption "server-tailored kernel customizations";
+    options.essentia.server = {
+      enable = mkEnableOption "generic server configuration";
     };
 
     config.boot = mkIf cfg.enable {

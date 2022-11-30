@@ -4,7 +4,7 @@
   ...
 }:
 with lib; let
-  cfg = config.essentia.firewall;
+  cfg = config.essentia.server.firewall;
 
   mkCfIPList = version: sha256: (
     replaceStrings ["\n"] [", "] (
@@ -20,7 +20,7 @@ with lib; let
 
   protectedPorts = optionals config.services.openssh.enable config.services.openssh.ports;
 in {
-  options.essentia.firewall = {
+  options.essentia.server.firewall = {
     enable = mkEnableOption "server-tailored firewall support";
 
     forwardedInterfaces = mkOption {

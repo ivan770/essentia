@@ -86,24 +86,13 @@ in
           jsonFormat.generate "code-server-keybindings"
           (map dropNullFields cfg.keybindings);
       }))
-      (mkIf (cfg.extensions != []) (let
-        subDir = "share/vscode/extensions";
-
-        # Adapted from https://discourse.nixos.org/t/vscode-extensions-setup/1801/2
-        toPaths = ext:
-          map (k: {"${extensionPath}/${k}".source = "${ext}/${subDir}/${k}";})
-          (
-            if ext ? vscodeExtUniqueId
-            then [ext.vscodeExtUniqueId]
-            else builtins.attrNames (builtins.readDir (ext + "/${subDir}"))
-          );
-      in {
+      (mkIf (cfg.extensions != []) {
         "${extensionPath}".source = let
           combinedExtensionsDrv = pkgs.buildEnv {
             name = "vscode-extensions";
             paths = cfg.extensions;
           };
-        in "${combinedExtensionsDrv}/${subDir}";
-      }))
+        in "${combinedExtensionsDrv}/share/vscode/extensions";
+      })
     ];
   }

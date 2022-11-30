@@ -10,5 +10,7 @@ in
       enable = mkEnableOption "VirtualBox support";
     };
 
-    config.virtualisation.virtualbox.host.enable = cfg.enable;
+    config.virtualisation.virtualbox.host = mkIf cfg.enable {
+      enable = true;
+    };
   }

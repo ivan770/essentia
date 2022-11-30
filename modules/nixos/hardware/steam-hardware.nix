@@ -10,5 +10,7 @@ in
       enable = mkEnableOption "Steam hardware support";
     };
 
-    config.hardware.steam-hardware.enable = cfg.enable;
+    config.hardware.steam-hardware = mkIf cfg.enable {
+      enable = true;
+    };
   }

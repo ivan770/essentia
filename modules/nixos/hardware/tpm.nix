@@ -10,5 +10,7 @@ in
       enable = mkEnableOption "TPM2 support";
     };
 
-    config.security.tpm2.enable = cfg.enable;
+    config.security.tpm2 = mkIf cfg.enable {
+      enable = true;
+    };
   }

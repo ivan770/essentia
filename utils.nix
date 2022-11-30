@@ -23,6 +23,13 @@ with lib; rec {
       (builtins.readDir dir)
     );
 
+  attrsTreeToList = attrs:
+    mapAttrsToList (_: v:
+      if isAttrs v
+      then attrsTreeToList v
+      else v)
+    attrs;
+
   mkOverlayTree = path:
     lib.mapAttrsRecursive (_: ovl: import ovl inputs) (mkAttrsTree path);
 
@@ -46,6 +53,7 @@ with lib; rec {
           inputs.nur.nixosModules.nur
           inputs.sops-nix.nixosModules.sops
         ]
+        ++ flatten (attrsTreeToList inputs.self.nixosModules.nixos)
         ++ listNixFilesRecursive path;
 
       specialArgs =

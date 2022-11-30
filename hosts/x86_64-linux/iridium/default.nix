@@ -9,30 +9,23 @@
       (inputs.nixos-hardware.nixosModules)
       common-cpu-amd
       common-cpu-amd-pstate
+      common-gpu-amd
       common-pc
       common-pc-laptop
       common-pc-laptop-acpi_call
       common-pc-laptop-ssd
       ;
-
-    inherit (nixosModules.users.ivan770) home-impermanence user;
-    inherit (nixosModules.common) impermanence;
-    inherit (nixosModules.desktop) generic postgresql sway;
-    inherit
-      (nixosModules.hardware)
-      amd-gpu
-      backlight
-      bluetooth
-      firmware
-      networking
-      sound
-      systemd-boot
-      tlp
-      tpm
-      ;
   };
 
   essentia = {
+    amd-gpu.enable = true;
+    backlight.enable = true;
+    bluetooth.enable = true;
+    desktop = {
+      enable = true;
+      sway.enable = true;
+      postgresql.enable = true;
+    };
     home-manager.profiles.ivan770 = "devunit";
     firmware.cpu.vendor = "amd";
     impermanence.persistentDirectory = "/nix/persist";
@@ -46,10 +39,13 @@
         "default_5g"
       ];
     };
+    sound.enable = true;
     tlp.cpu = {
       ac = "performance";
       bat = "schedutil";
     };
+    tpm.enable = true;
+    users.activated = ["ivan770"];
   };
 
   boot = {

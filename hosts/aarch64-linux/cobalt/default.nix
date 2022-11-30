@@ -5,19 +5,12 @@
   pkgs,
   ...
 }: {
-  imports =
-    builtins.attrValues {
-      inherit (nixosModules.users.ivan770) user;
-      inherit (nixosModules.common) home-manager;
-      inherit (nixosModules.hardware) firmware networking systemd-boot;
-      inherit (nixosModules.server) code-server generic hedgedoc nginx;
-    }
-    ++ [
-      (modulesPath + "/profiles/qemu-guest.nix")
-    ];
+  imports = [
+    (modulesPath + "/profiles/qemu-guest.nix")
+  ];
 
   essentia = {
-    firmware.cpu.vendor = null;
+    code-server.enable = true;
     containers.activatedConfigurations.hedgedoc = {
       bindMounts.data = "/var/lib/hedgedoc-data";
       network = {
@@ -26,6 +19,8 @@
       };
       specialArgs.domain = "docs.elusive.space";
     };
+    firewall.enable = true;
+    firmware.cpu.vendor = null;
     home-manager.profiles.ivan770 = "remote-code";
     networking = {
       dns.preset = "server";
@@ -36,10 +31,13 @@
       "docs.elusive.space" = "hedgedoc-main";
     };
     secrets.ssl = true;
+    server-kernel.enable = true;
     systemd-boot = {
       mountpoint = "/boot";
       timeout = 2;
     };
+    systemd-initrd.enable = true;
+    users.activated = ["ivan770"];
   };
 
   boot.initrd.availableKernelModules = ["xhci_pci" "virtio_pci" "usbhid"];

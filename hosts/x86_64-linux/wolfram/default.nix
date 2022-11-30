@@ -11,26 +11,17 @@
       common-pc
       common-pc-hdd
       ;
-
-    inherit (nixosModules.common) impermanence systemd-initrd;
-    inherit (nixosModules.users.ivan770) home-impermanence user;
-    inherit (nixosModules.desktop) generic i3 postgresql virtualbox;
-    inherit
-      (nixosModules.hardware)
-      firmware
-      gaming
-      networking
-      nvidia
-      printing
-      sound
-      systemd-boot
-      tpm
-      ;
   };
 
   essentia = {
     home-manager.profiles.ivan770 = "battlestation";
     firmware.cpu.vendor = "amd";
+    desktop = {
+      enable = true;
+      i3.enable = true;
+      postgresql.enable = true;
+      virtualbox.enable = true;
+    };
     impermanence.persistentDirectory = "/nix/persist";
     locale = {
       units = "uk_UA.UTF-8";
@@ -40,6 +31,13 @@
       dns.preset = "desktop";
       wired.enable = true;
     };
+    nvidia.enable = true;
+    printing.enable = true;
+    sound.enable = true;
+    steam-hardware.enable = true;
+    systemd-initrd.enable = true;
+    tpm.enable = true;
+    users.activated = ["ivan770"];
   };
 
   boot = {

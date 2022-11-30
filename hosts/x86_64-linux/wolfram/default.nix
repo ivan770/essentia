@@ -35,7 +35,6 @@
     printing.enable = true;
     sound.enable = true;
     steam-hardware.enable = true;
-    systemd-initrd.enable = true;
     tpm.enable = true;
     users.activated = ["ivan770"];
   };

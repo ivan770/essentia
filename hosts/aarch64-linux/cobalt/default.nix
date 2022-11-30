@@ -36,7 +36,6 @@
       mountpoint = "/boot";
       timeout = 2;
     };
-    systemd-initrd.enable = true;
     users.activated = ["ivan770"];
   };
 

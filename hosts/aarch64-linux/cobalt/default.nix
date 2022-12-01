@@ -22,10 +22,6 @@
       code-server.enable = true;
       containers.activatedConfigurations.hedgedoc = {
         bindMounts.data = "/var/lib/hedgedoc-data";
-        network = {
-          localAddress = "192.168.100.1";
-          hostAddress = "192.168.101.1";
-        };
         specialArgs.domain = "docs.elusive.space";
       };
       firewall.enable = true;

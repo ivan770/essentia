@@ -53,22 +53,6 @@ in
               '';
             };
 
-            network = {
-              hostAddress = mkOption {
-                type = types.str;
-                description = ''
-                  Host interface IPv4 address.
-                '';
-              };
-
-              localAddress = mkOption {
-                type = types.str;
-                description = ''
-                  Container interface IPv4 address.
-                '';
-              };
-            };
-
             specialArgs = mkOption {
               type = types.attrs;
               default = {};
@@ -88,9 +72,19 @@ in
     config = let
       serviceConfigurations = filterAttrs (name: _: hasAttr name cfg.configurations) cfg.activatedConfigurations;
 
+      networkConfigurations = listToAttrs (zipListsWith
+        (name: number: {
+          inherit name;
+          value = {
+            localAddress = "192.168.100.${toString number}";
+            hostAddress = "192.168.101.${toString number}";
+          };
+        }) (attrNames serviceConfigurations) (range 1 254));
+
       intersectedConfigurations =
         mapAttrs (name: userConfiguration: {
           inherit userConfiguration;
+          networkConfiguration = networkConfigurations.${name};
           serviceConfiguration = cfg.configurations.${name};
         })
         serviceConfigurations;
@@ -106,6 +100,7 @@ in
           assertion = all ({
             serviceConfiguration,
             userConfiguration,
+            ...
           }:
             (attrNames serviceConfiguration.bindSlots) == (attrNames userConfiguration.bindMounts)) (attrValues intersectedConfigurations);
           message = ''
@@ -116,10 +111,11 @@ in
 
       containers =
         mapAttrs (_: {
+          networkConfiguration,
           serviceConfiguration,
           userConfiguration,
         }: {
-          inherit (userConfiguration.network) hostAddress localAddress;
+          inherit (networkConfiguration) hostAddress localAddress;
 
           autoStart = true;
           ephemeral = true;
@@ -135,7 +131,7 @@ in
 
           config = attrs: (serviceConfiguration.config (attrs
             // {
-              inherit (userConfiguration.network) localAddress;
+              inherit (networkConfiguration) localAddress;
               inherit (serviceConfiguration) exposedServices;
             }
             // userConfiguration.specialArgs));
@@ -145,11 +141,12 @@ in
       # FIXME: Remove "pkgs.lib" if/when https://github.com/NixOS/nixpkgs/pull/157056 gets merged.
       essentia.server.nginx.upstreams = pkgs.lib.recursiveMerge (attrValues (mapAttrs (
           name: {
+            networkConfiguration,
             serviceConfiguration,
             userConfiguration,
           }:
             mapAttrs' (
-              service: port: nameValuePair "${name}-${service}" "${userConfiguration.network.localAddress}:${toString port}"
+              service: port: nameValuePair "${name}-${service}" "${networkConfiguration.localAddress}:${toString port}"
             )
             serviceConfiguration.exposedServices
         )

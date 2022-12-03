@@ -5,25 +5,6 @@
   ...
 }: let
   cfg = config.essentia.programs.firefox;
-
-  mkFirefoxWrapper = lib.makeOverridable (browser:
-    pkgs.symlinkJoin {
-      name = "ess-firefox";
-
-      paths = [browser];
-
-      nativeBuildInputs = builtins.attrValues {
-        inherit (pkgs) makeWrapper;
-      };
-
-      strictDeps = true;
-
-      postBuild = ''
-        wrapProgram $out/bin/firefox \
-          --set MOZ_DISABLE_RDD_SANDBOX 1 \
-          --set MOZ_X11_EGL 1
-      '';
-    });
 in
   with lib; {
     options.essentia.programs.firefox = {
@@ -41,7 +22,6 @@ in
 
     config.programs.firefox = {
       enable = true;
-      package = mkFirefoxWrapper pkgs.firefox;
       extensions = cfg.extensions;
       profiles.default = {
         settings =

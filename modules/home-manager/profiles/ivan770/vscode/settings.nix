@@ -248,13 +248,6 @@ with lib; let
     "crates.useLocalCargoIndex" = false;
   };
 
-  # Go-related configuration
-  go = {
-    # Online-based features and telemetry removal
-    "go.survey.prompt" = false;
-    "go.toolsManagement.checkForUpdates" = "off";
-  };
-
   # Julia-related configuration
   julia = {
     # These configuration entries are automatically added by the Julia extension
@@ -294,7 +287,6 @@ in
     github
 
     rust
-    go
     julia
     nix
     markdown

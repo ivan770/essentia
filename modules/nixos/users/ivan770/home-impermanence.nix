@@ -63,7 +63,6 @@
       "Config"
       "Documents"
       "Downloads"
-      "go"
       "Music"
       "Pictures"
       # Cisco Packet Tracer data directory

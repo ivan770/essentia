@@ -29,6 +29,7 @@
         layout = "us,ru,ua";
         options = ["grp:caps_toggle"];
       };
+      mouse.speed = -0.139013;
       config = call ./wm/common.nix {};
       extraConfig = call ./wm/extraConfig.nix {};
     };

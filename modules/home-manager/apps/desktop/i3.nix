@@ -36,6 +36,24 @@ in
         };
       };
 
+      mouse = {
+        profile = mkOption {
+          type = types.enum ["adaptive" "flat"];
+          default = "flat";
+          description = ''
+            Preferred mouse acceleration profile.
+          '';
+        };
+
+        speed = mkOption {
+          type = types.number;
+          default = 0;
+          description = ''
+            Preferred mouse acceleration speed.
+          '';
+        };
+      };
+
       config = mkOption {
         type = types.attrs;
         default = {};
@@ -99,13 +117,77 @@ in
             '';
         };
       };
-      systemd.user.targets.i3-session = {
-        Unit = {
-          Description = "i3 compositor session";
-          Documentation = ["man:systemd.special(7)"];
-          BindsTo = ["graphical-session.target"];
-          Wants = ["graphical-session-pre.target"];
-          After = ["graphical-session-pre.target"];
+      systemd.user = {
+        services.libinput-mouse-accel = {
+          Unit = {
+            Description = "libinput mouse acceleration configurator";
+            After = ["i3-session.target"];
+            PartOf = ["i3-session.target"];
+          };
+
+          Service = {
+            Type = "oneshot";
+            RemainAfterExit = true;
+            ExecStart = let
+              xinput = "${pkgs.xorg.xinput}/bin/xinput";
+              grep = "${pkgs.gnugrep}/bin/grep";
+              wc = "${pkgs.coreutils}/bin/wc";
+
+              devices = concatStringsSep "|" [
+                "Mouse"
+                "Touchpad"
+              ];
+
+              accelerationConfig = {
+                "libinput Accel Profile Enabled" =
+                  if cfg.mouse.profile == "adaptive"
+                  then "1 0"
+                  else "0 1";
+                "libinput Accel Speed" = cfg.mouse.speed;
+              };
+
+              # To ignore matches like "libinput Accel Profile Enabled Default"
+              # an unmatched brace is left at the end of a pattern.
+              patterns = mapAttrsToList (name: _: "${name} \\(") accelerationConfig;
+
+              regex = concatMapStringsSep "|" (pattern: "(${pattern})") patterns;
+
+              configurator = concatStringsSep "\n" (
+                mapAttrsToList (
+                  name: value: "${xinput} set-prop \"$device\" \"${name}\" ${toString value}"
+                )
+                accelerationConfig
+              );
+
+              script = pkgs.writeShellScript "libinput-mouse-config.sh" ''
+                ${xinput} list --name-only | ${grep} -E "(${devices})" | while read -r line
+                do
+                  device="pointer:$line"
+
+                  count=$(${xinput} list-props "$device" | ${grep} -E "${regex}" | ${wc} -l)
+
+                  if [ "$count" -eq ${toString (length patterns)} ]
+                  then
+                    ${configurator}
+                  fi
+                done
+              '';
+            in (toString script);
+          };
+
+          Install = {
+            WantedBy = ["i3-session.target"];
+          };
+        };
+
+        targets.i3-session = {
+          Unit = {
+            Description = "i3 compositor session";
+            Documentation = ["man:systemd.special(7)"];
+            BindsTo = ["graphical-session.target"];
+            Wants = ["graphical-session-pre.target"];
+            After = ["graphical-session-pre.target"];
+          };
         };
       };
     };

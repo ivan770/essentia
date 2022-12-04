@@ -28,7 +28,7 @@ in
             };
 
             exposedServices = mkOption {
-              type = types.attrsOf types.int;
+              type = types.listOf types.str;
               default = {};
               description = ''
                 Container's public HTTP services.
@@ -84,7 +84,13 @@ in
       intersectedConfigurations =
         mapAttrs (name: userConfiguration: {
           inherit userConfiguration;
-          networkConfiguration = networkConfigurations.${name};
+          networkConfiguration =
+            (networkConfigurations.${name})
+            // {
+              exposedServices = listToAttrs (
+                zipListsWith (name: value: {inherit name value;}) cfg.configurations.${name}.exposedServices (range 20000 30000)
+              );
+            };
           serviceConfiguration = cfg.configurations.${name};
         })
         serviceConfigurations;
@@ -131,8 +137,7 @@ in
 
           config = attrs: (serviceConfiguration.config (attrs
             // {
-              inherit (networkConfiguration) localAddress;
-              inherit (serviceConfiguration) exposedServices;
+              inherit (networkConfiguration) exposedServices localAddress;
             }
             // userConfiguration.specialArgs));
         })
@@ -148,7 +153,7 @@ in
             mapAttrs' (
               service: port: nameValuePair "${name}-${service}" "${networkConfiguration.localAddress}:${toString port}"
             )
-            serviceConfiguration.exposedServices
+            networkConfiguration.exposedServices
         )
         intersectedConfigurations));
     };

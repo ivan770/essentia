@@ -37,6 +37,6 @@
     };
 
     bindSlots.data = dataDir;
-    exposedServices.main = 3000;
+    exposedServices = ["main"];
   };
 }

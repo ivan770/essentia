@@ -130,7 +130,7 @@ in
 
         Print = let
           maim = ''
-            ${pkgs.maim}/bin/maim -s | \
+            ${pkgs.maim}/bin/maim -s -u | \
               ${pkgs.xclip}/bin/xclip -selection clipboard -t image/png
           '';
 

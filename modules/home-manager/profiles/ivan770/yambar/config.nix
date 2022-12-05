@@ -31,6 +31,8 @@ in {
     height = 26;
     location = "top";
 
+    right-margin = spacing;
+
     foreground = "ffffffff";
     background = "0000004c";
 
@@ -52,7 +54,6 @@ in {
       ++ [
         (call ./components/sound.nix {})
         (lib.mkIf battery (call ./components/battery.nix {}))
-        (call ./components/logout.nix {})
       ];
   };
 }

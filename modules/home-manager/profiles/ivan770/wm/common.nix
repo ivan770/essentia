@@ -89,6 +89,18 @@ in
         "${modifier}+Tab" = "layout toggle splitv splith tabbed";
         "${modifier}+Shift+Tab" = "split toggle";
 
+        "${modifier}+Delete" = mkExec (pkgs.writeShellScript "generate-powermenu.sh" (let
+          systemctl = "${pkgs.systemd}/bin/systemctl";
+          loginctl = "${pkgs.systemd}/bin/loginctl";
+        in ''
+          case "$(echo -e "Shutdown\nRestart\nSuspend\nLogout" | ${lib.runMenu config "Power:"})" in
+              Shutdown) exec ${systemctl} poweroff;;
+              Restart) exec ${systemctl} reboot;;
+              Suspend) exec ${systemctl} suspend;;
+              Logout) exec ${loginctl} terminate-user $USER;;
+          esac
+        ''));
+
         "${modifier}+grave" = let
           scratchpadCycle = pkgs.writeShellScript "scratchpad-cycle.sh" (let
             i3 = ''

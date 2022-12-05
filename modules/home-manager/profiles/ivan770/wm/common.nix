@@ -89,17 +89,31 @@ in
         "${modifier}+Tab" = "layout toggle splitv splith tabbed";
         "${modifier}+Shift+Tab" = "split toggle";
 
-        # FIXME: Obviously broken on Sway
         "${modifier}+grave" = let
-          scratchpadCycle = pkgs.writeShellScript "scratchpad-cycle.sh" ''
-            ${pkgs.i3}/bin/i3-msg -t get_tree | \
+          scratchpadCycle = pkgs.writeShellScript "scratchpad-cycle.sh" (let
+            i3 = ''
+              ${pkgs.i3}/bin/i3-msg -t get_tree | \
                 ${pkgs.jq}/bin/jq -r '.nodes[] | .nodes[] | .nodes[]
                     | select(.name=="__i3_scratch") | .floating_nodes[]
                     | .nodes[] | (.name) + " - " + (.window | tostring)' | \
                 ${runMenu config "Scratchpad:"} | \
                 ${pkgs.gawk}/bin/awk '{print $NF}' | \
                 ${pkgs.findutils}/bin/xargs -I{} ${pkgs.i3}/bin/i3-msg '[id="{}"] scratchpad show'
-          '';
+            '';
+
+            sway = ''
+              ${pkgs.sway}/bin/swaymsg -t get_tree | \
+                ${pkgs.jq}/bin/jq -r '.nodes[] | .nodes[]
+                    | select(.name=="__i3_scratch") | .floating_nodes[]
+                    | (.name) + " - " + (.id | tostring)' | \
+                ${runMenu config "Scratchpad:"} | \
+                ${pkgs.gawk}/bin/awk '{print $NF}' | \
+                ${pkgs.findutils}/bin/xargs -I{} ${pkgs.sway}/bin/swaymsg '[con_id="{}"] scratchpad show'
+            '';
+          in
+            if wayland
+            then sway
+            else i3);
         in
           mkExec scratchpadCycle;
 

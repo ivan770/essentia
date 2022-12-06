@@ -6,6 +6,7 @@
         directory = ".cache";
         mode = "0700";
       }
+      ".cargo"
       {
         directory = ".gnupg";
         mode = "0700";
@@ -19,6 +20,7 @@
         directory = ".pki";
         mode = "0700";
       }
+      ".rustup"
       ".steam"
 
       # .config/*

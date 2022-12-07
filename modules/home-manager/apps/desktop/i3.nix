@@ -121,8 +121,8 @@ in
         services.libinput-mouse-accel = {
           Unit = {
             Description = "libinput mouse acceleration configurator";
-            After = ["i3-session.target"];
-            PartOf = ["i3-session.target"];
+            After = ["graphical-session-pre.target"];
+            PartOf = ["graphical-session.target"];
           };
 
           Service = {
@@ -176,7 +176,7 @@ in
           };
 
           Install = {
-            WantedBy = ["i3-session.target"];
+            WantedBy = ["graphical-session.target"];
           };
         };
 

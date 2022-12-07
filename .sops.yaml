@@ -1,6 +1,6 @@
 keys:
   - &admin_ivan770 b4a6756c7f760bf7ea7cef1082606e24a984df7d
-  - &host_cobalt age1rqunush2hefaymv0gp8qy6dlph9a7lk33u62la0sqe24aprzw4kqyrtkjq
+  - &host_cobalt age1t6px3k99wc73u9djp320csy8knuyjj7gkkk0vyjvxden9hueg4kq49mvm7
   - &host_iridium age1m4hhllc5nkhuay0u0v2czu2pp8zlkwahp99gave4ckz22q2kvayqe46zv3
   - &host_wolfram age1wekdmshg8xw0ck6e9m4qwqyq5f4cvkswdpnnqdmluyqwjn9wcdaqpkqmhw
 creation_rules:

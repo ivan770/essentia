@@ -12,6 +12,7 @@
   essentia = {
     firmware.cpu.vendor = null;
     home-manager.profiles.ivan770 = "remote-code";
+    impermanence.persistentDirectory = "/nix/persist";
     networking = {
       dns.preset = "server";
       wired.enable = true;
@@ -41,7 +42,17 @@
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/3fda6dab-8ad9-4a14-bbf6-9efa36fb775b";
+      device = "none";
+      fsType = "tmpfs";
+      options = [
+        "defaults"
+        "size=3G"
+        "mode=755"
+      ];
+    };
+
+    "/nix" = {
+      device = "/dev/disk/by-uuid/a367286c-5971-4719-8848-14d827784f9e";
       fsType = "ext4";
       options = [
         "noatime"

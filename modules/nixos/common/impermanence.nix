@@ -61,11 +61,11 @@ in
           (mkIf
             (hasAttr "hedgedoc" config.essentia.server.containers.activatedConfigurations)
             "/var/lib/hedgedoc-data")
-          {
+          (mkIf config.essentia.bluetooth.enable {
             directory = "/var/lib/bluetooth";
             mode = "0700";
-          }
-          "/var/lib/cups"
+          })
+          (mkIf config.essentia.printing.enable "/var/lib/cups")
           (mkIf config.services.postgresql.enable {
             directory = "/var/lib/postgresql";
             mode = "0750";

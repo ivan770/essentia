@@ -19,8 +19,6 @@ in
         default = {};
         description = "User-specific persistence configuration";
       };
-
-      persistentJournald = mkEnableOption "persistent journald logs";
     };
 
     imports = [
@@ -46,10 +44,6 @@ in
       # Coredumps are unused in this configuration anyway.
       systemd.coredump.extraConfig = ''
         Storage=none
-      '';
-
-      services.journald.extraConfig = mkIf (!cfg.persistentJournald) ''
-        Storage=volatile
       '';
 
       # FIXME: Refactor the entire impermanence module as soon as https://github.com/nix-community/impermanence/pull/109 gets merged

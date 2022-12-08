@@ -13,6 +13,7 @@
     firmware.cpu.vendor = null;
     home-manager.profiles.ivan770 = "remote-code";
     impermanence.persistentDirectory = "/nix/persist";
+    logging.flavor = "persistent";
     networking = {
       dns.preset = "server";
       wired.enable = true;

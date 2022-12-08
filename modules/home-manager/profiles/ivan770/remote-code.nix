@@ -6,10 +6,14 @@
   pkgs,
   ...
 }: {
-  imports = builtins.attrValues {
-    inherit (nixosModules.home-manager.apps.editors) code-server;
-    inherit (nixosModules.home-manager.apps.utilities) direnv git gpg;
-  };
+  imports =
+    builtins.attrValues {
+      inherit (nixosModules.home-manager.apps.editors) code-server;
+      inherit (nixosModules.home-manager.apps.utilities) direnv git gpg;
+    }
+    ++ [
+      ./impermanence.nix
+    ];
 
   essentia.programs = {
     code-server = {

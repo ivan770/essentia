@@ -1,11 +1,8 @@
-{
-  essentia.impermanence.users.ivan770 = {
-    directories = [
+{lib, ...}:
+with lib; {
+  essentia.home-impermanence = {
+    directories = mkOptionDefault [
       # .*
-      {
-        directory = ".cache";
-        mode = "0700";
-      }
       ".cargo"
       {
         directory = ".gnupg";
@@ -16,18 +13,10 @@
       ".lunarclient"
       ".minecraft"
       ".mozilla"
-      {
-        directory = ".pki";
-        mode = "0700";
-      }
       ".rustup"
       ".steam"
 
       # .config/*
-      {
-        directory = ".config/dconf";
-        mode = "0700";
-      }
       {
         directory = ".config/deluge";
         mode = "0700";
@@ -56,10 +45,6 @@
         mode = "0700";
       }
       ".local/share/vulkan"
-      {
-        directory = ".local/state/wireplumber";
-        mode = "0700";
-      }
 
       # Personal directories
       "Config"
@@ -74,12 +59,7 @@
       "Videos"
     ];
 
-    files = [
-      ".bash_history"
-      {
-        file = ".ssh/known_hosts";
-        parentDirectory = {mode = "0700";};
-      }
+    files = mkOptionDefault [
       ".packettracer"
     ];
   };

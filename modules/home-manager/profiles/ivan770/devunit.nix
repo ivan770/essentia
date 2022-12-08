@@ -11,12 +11,16 @@
       wayland = true;
     });
 in {
-  imports = builtins.attrValues {
-    inherit (nixosModules.home-manager.apps.desktop) fonts menu sway yambar;
-    inherit (nixosModules.home-manager.apps.editors) vscode;
-    inherit (nixosModules.home-manager.apps.social) firefox;
-    inherit (nixosModules.home-manager.apps.utilities) direnv git gpg;
-  };
+  imports =
+    builtins.attrValues {
+      inherit (nixosModules.home-manager.apps.desktop) fonts menu sway yambar;
+      inherit (nixosModules.home-manager.apps.editors) vscode;
+      inherit (nixosModules.home-manager.apps.social) firefox;
+      inherit (nixosModules.home-manager.apps.utilities) direnv git gpg;
+    }
+    ++ [
+      ./impermanence.nix
+    ];
 
   home.packages = builtins.attrValues {
     inherit (pkgs) tdesktop ciscoPacketTracer8;

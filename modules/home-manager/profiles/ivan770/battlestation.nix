@@ -6,12 +6,16 @@
   nixosModules,
   ...
 }: {
-  imports = builtins.attrValues {
-    inherit (nixosModules.home-manager.apps.desktop) feh fonts i3 menu yambar;
-    inherit (nixosModules.home-manager.apps.editors) vscode;
-    inherit (nixosModules.home-manager.apps.social) firefox discord;
-    inherit (nixosModules.home-manager.apps.utilities) direnv git gpg;
-  };
+  imports =
+    builtins.attrValues {
+      inherit (nixosModules.home-manager.apps.desktop) feh fonts i3 menu yambar;
+      inherit (nixosModules.home-manager.apps.editors) vscode;
+      inherit (nixosModules.home-manager.apps.social) firefox discord;
+      inherit (nixosModules.home-manager.apps.utilities) direnv git gpg;
+    }
+    ++ [
+      ./impermanence.nix
+    ];
 
   home.packages = builtins.attrValues {
     inherit (pkgs) lunar-client steam tdesktop ciscoPacketTracer8 deluge;

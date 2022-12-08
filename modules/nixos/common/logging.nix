@@ -15,26 +15,31 @@ in {
       '';
     };
 
-    maxLogSize = mkOption {
-      type = types.int;
-      default = if cfg.flavor == "volatile"
-        then 128
-        else 2048;
-      defaultText = "if config.essentia.logging.flavor == \"volatile\" then 128 else 2048";
-      description = ''
-        Upper size limit enforced on journald, in MB.
-      '';
+    maxLogSize = {
+      volatile = mkOption {
+        type = types.int;
+        default = 128;
+        description = ''
+          Upper size limit enforced on journald's in-memory journal.
+        '';
+      };
+
+      persistent = mkOption {
+        type = types.int;
+        default = 2048;
+        description = ''
+          Upper size limit enforced on journald's persistent journal.
+        '';
+      };
     };
   };
 
-  config.services.journald.extraConfig = let
-    flavorPrefix = if cfg.flavor == "volatile"
-      then "Runtime"
-      else "System";
-  in ''
+  config.services.journald.extraConfig = ''
     MaxLevelStore=warning
 
     Storage=${cfg.flavor}
-    ${flavorPrefix}MaxUse=${toString cfg.maxLogSize}M
+
+    RuntimeMaxUse=${toString cfg.maxLogSize.volatile}M
+    SystemMaxUse=${toString cfg.maxLogSize.persistent}M
   '';
 }

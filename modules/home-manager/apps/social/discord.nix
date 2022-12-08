@@ -28,6 +28,11 @@ in
 
     config = {
       home.packages = [pkgs.discord];
+
+      essentia.home-impermanence.directories = mkOptionDefault [
+        ".config/discord"
+      ];
+
       xdg.configFile."discord/settings.json".source = configFile;
     };
   }

@@ -26,6 +26,7 @@ in
 
     config = {
       programs.gpg.enable = true;
+
       services.gpg-agent = mkMerge [
         {
           enable = true;
@@ -36,6 +37,13 @@ in
           enableSshSupport = true;
           sshKeys = cfg.sshKeys;
         })
+      ];
+
+      essentia.home-impermanence.directories = mkOptionDefault [
+        {
+          directory = ".gnupg";
+          mode = "0700";
+        }
       ];
     };
   }

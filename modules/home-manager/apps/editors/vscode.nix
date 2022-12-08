@@ -42,5 +42,10 @@ in
           extensions = cfg.extensions;
         })
       ];
+
+      essentia.home-impermanence.directories = mkOptionDefault [
+        ".config/VSCodium"
+        ".local/share/jupyter"
+      ];
     };
   }

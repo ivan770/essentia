@@ -10,16 +10,14 @@
     builtins.attrValues {
       inherit (nixosModules.home-manager.apps.desktop) feh fonts i3 menu yambar;
       inherit (nixosModules.home-manager.apps.editors) vscode;
-      inherit (nixosModules.home-manager.apps.social) firefox discord;
-      inherit (nixosModules.home-manager.apps.utilities) direnv git gpg;
+      inherit (nixosModules.home-manager.apps.games) lunar-client steam;
+      inherit (nixosModules.home-manager.apps.social) firefox discord tdesktop;
+      inherit (nixosModules.home-manager.apps.utilities) deluge direnv git gpg packetTracer;
     }
     ++ [
       ./impermanence.nix
     ];
 
-  home.packages = builtins.attrValues {
-    inherit (pkgs) lunar-client steam tdesktop ciscoPacketTracer8 deluge;
-  };
   essentia.programs = {
     discord.settings = import ./configs/discord.nix;
     feh.image = "${./backgrounds/mountain.png}";

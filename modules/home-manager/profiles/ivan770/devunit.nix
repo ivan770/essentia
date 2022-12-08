@@ -15,16 +15,13 @@ in {
     builtins.attrValues {
       inherit (nixosModules.home-manager.apps.desktop) fonts menu sway yambar;
       inherit (nixosModules.home-manager.apps.editors) vscode;
-      inherit (nixosModules.home-manager.apps.social) firefox;
-      inherit (nixosModules.home-manager.apps.utilities) direnv git gpg;
+      inherit (nixosModules.home-manager.apps.social) firefox tdesktop;
+      inherit (nixosModules.home-manager.apps.utilities) direnv git gpg packetTracer;
     }
     ++ [
       ./impermanence.nix
     ];
 
-  home.packages = builtins.attrValues {
-    inherit (pkgs) tdesktop ciscoPacketTracer8;
-  };
   essentia.programs = {
     firefox = call ./configs/firefox.nix {};
     git.credentials = nixosConfig.sops.secrets."users/ivan770/git".path;

@@ -57,6 +57,10 @@ in
 
         directories = [
           "/var/lib/nixos"
+          # FIXME: Refactor the entire impermanence module as soon as https://github.com/nix-community/impermanence/pull/109 gets merged
+          (mkIf
+            (hasAttr "hedgedoc" config.essentia.server.containers.activatedConfigurations)
+            "/var/lib/hedgedoc-data")
           {
             directory = "/var/lib/bluetooth";
             mode = "0700";

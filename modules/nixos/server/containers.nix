@@ -45,14 +45,6 @@ in
       activatedConfigurations = mkOption {
         type = types.attrsOf (types.submodule {
           options = {
-            bindMounts = mkOption {
-              type = types.attrsOf types.str;
-              default = {};
-              description = ''
-                Filesystem binds that are applied to an activated container.
-              '';
-            };
-
             specialArgs = mkOption {
               type = types.attrs;
               default = {};
@@ -102,21 +94,10 @@ in
             You can only activate containers that are defined via config.essentia.containers.configurations.
           '';
         }
-        {
-          assertion = all ({
-            serviceConfiguration,
-            userConfiguration,
-            ...
-          }:
-            (attrNames serviceConfiguration.bindSlots) == (attrNames userConfiguration.bindMounts)) (attrValues intersectedConfigurations);
-          message = ''
-            You have to provision all the required filesystem bind slots for each container.
-          '';
-        }
       ];
 
       containers =
-        mapAttrs (_: {
+        mapAttrs (name: {
           networkConfiguration,
           serviceConfiguration,
           userConfiguration,
@@ -131,7 +112,7 @@ in
             ["-U"]
             ++ (
               attrValues (
-                mapAttrs (name: mountPoint: "--bind ${userConfiguration.bindMounts.${name}}:${mountPoint}:idmap") serviceConfiguration.bindSlots
+                mapAttrs (slot: mountPoint: "--bind /var/lib/ess-containers/${name}-${slot}:${mountPoint}:idmap") serviceConfiguration.bindSlots
               )
             );
 

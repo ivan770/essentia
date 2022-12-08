@@ -22,7 +22,6 @@
       enable = true;
       code-server.enable = true;
       containers.activatedConfigurations.hedgedoc = {
-        bindMounts.data = "/var/lib/hedgedoc-data";
         specialArgs.domain = "docs.elusive.space";
       };
       firewall.enable = true;

@@ -52,15 +52,15 @@ in
         Storage=volatile
       '';
 
+      # FIXME: Refactor the entire impermanence module as soon as https://github.com/nix-community/impermanence/pull/109 gets merged
       environment.persistence.${cfg.persistentDirectory} = {
         hideMounts = true;
 
         directories = [
           "/var/lib/nixos"
-          # FIXME: Refactor the entire impermanence module as soon as https://github.com/nix-community/impermanence/pull/109 gets merged
           (mkIf
-            (hasAttr "hedgedoc" config.essentia.server.containers.activatedConfigurations)
-            "/var/lib/hedgedoc-data")
+            (config.essentia.server.containers.activatedConfigurations != {})
+            "/var/lib/ess-containers")
           (mkIf config.essentia.bluetooth.enable {
             directory = "/var/lib/bluetooth";
             mode = "0700";

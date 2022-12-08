@@ -40,7 +40,7 @@ in {
     yambar = {
       settings = call ./yambar/config.nix {
         battery = true;
-        networkDevices = ["wlo1"];
+        networkDevices = ["wlan0"];
       };
       systemd.target = "sway";
     };

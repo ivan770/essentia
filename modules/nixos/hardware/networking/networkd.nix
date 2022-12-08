@@ -43,7 +43,7 @@ in {
             inherit networkConfig dhcpV4Config;
           };
         })
-        (mkIf (cfg.wireless.networks != []) {
+        (mkIf cfg.wireless.enable {
           "20-wireless" = {
             enable = true;
             name = "wl*";

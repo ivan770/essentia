@@ -65,6 +65,10 @@ in
             directory = "/var/lib/bluetooth";
             mode = "0700";
           })
+          (mkIf config.essentia.networking.wireless.enable {
+            directory = "/var/lib/iwd";
+            mode = "0700";
+          })
           (mkIf config.essentia.printing.enable "/var/lib/cups")
           (mkIf config.services.postgresql.enable {
             directory = "/var/lib/postgresql";

@@ -19,7 +19,6 @@ in
             owner = config.users.users.ivan770.name;
             group = config.users.users.ivan770.group;
           };
-          networks = {};
           trustedNetworks = {};
         }
         (mkIf cfg.ssl {

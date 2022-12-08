@@ -35,9 +35,7 @@
     };
     networking = {
       dns.preset = "desktop";
-      wireless.networks = [
-        "default_5g"
-      ];
+      wireless.enable = true;
     };
     sound.enable = true;
     tlp.cpu = {

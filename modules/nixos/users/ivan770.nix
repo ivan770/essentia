@@ -12,10 +12,10 @@ with lib; {
         "video"
         "wheel"
       ]
-      ++ lib.optionals config.hardware.steam-hardware.enable ["input"]
-      ++ lib.optionals config.security.tpm2.enable [config.security.tpm2.tssGroup]
-      ++ lib.optionals config.hardware.sane.enable ["scanner" "lp"]
-      ++ lib.optionals config.virtualisation.virtualbox.host.enable ["vboxusers"];
+      ++ lib.optionals config.essentia.steam-hardware.enable ["input"]
+      ++ lib.optionals config.essentia.tpm.enable [config.security.tpm2.tssGroup]
+      ++ lib.optionals config.essentia.printing.enable ["scanner" "lp"]
+      ++ lib.optionals config.essentia.desktop.virtualbox.enable ["vboxusers"];
     openssh.authorizedKeys.keys = [
       (builtins.readFile (builtins.fetchurl {
         url = "https://ssh.ivan770.me";

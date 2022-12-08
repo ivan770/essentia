@@ -18,7 +18,6 @@
       dns.preset = "server";
       wired.enable = true;
     };
-    secrets.ssl = true;
     server = {
       enable = true;
       code-server.enable = true;

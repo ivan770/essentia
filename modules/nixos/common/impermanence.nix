@@ -29,7 +29,7 @@ in
       # sops-nix executes secretsForUsers before impermanence module activation,
       # leading to incorrect user password provision on startup.
       # To fix this behaviour, host keys can be simply moved to persistent directory explicitly.
-      services.openssh.hostKeys = mkIf config.services.openssh.enable [
+      services.openssh.hostKeys = [
         {
           bits = 4096;
           path = "${cfg.persistentDirectory}/etc/ssh/ssh_host_rsa_key";

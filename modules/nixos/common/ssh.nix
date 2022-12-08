@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   services.openssh = {
     enable = true;
     allowSFTP = false;
@@ -10,4 +10,6 @@
       MaxAuthTries 3
     '';
   };
+
+  essentia.server.firewall.protectedPorts = config.services.openssh.ports;
 }

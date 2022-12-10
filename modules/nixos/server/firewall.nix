@@ -46,7 +46,6 @@ in {
         optionalString (cfg.forwardedInterfaces != []) "${criteria} { ${concatStringsSep " " (map (interface: "\"${interface}\"") cfg.forwardedInterfaces)} } ${rule}";
 
       mkForwardedInterfacesInputRule = rule: mkForwardedInterfacesRule "iifname" rule;
-      mkForwardedInterfacesOutputRule = rule: mkForwardedInterfacesRule "oifname" rule;
     in ''
       include "${config.sops.secrets.trustedNetworks.path}"
 
@@ -85,7 +84,6 @@ in {
 
           # Accept packets that interact with the forwarded interfaces
           ${mkForwardedInterfacesInputRule "accept"}
-          ${mkForwardedInterfacesOutputRule "accept"}
         }
 
         chain postrouting {

@@ -43,6 +43,7 @@
       owner = "Mic92";
       repo = "sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
     };
 
     flake-utils = {

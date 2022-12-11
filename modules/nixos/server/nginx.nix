@@ -48,7 +48,7 @@ in
 
         bodyLimit = "6k";
         headerLimit = "3k";
-        timeout = 15;
+        timeout = "15s";
       in {
         enable = true;
         recommendedOptimisation = true;
@@ -66,6 +66,7 @@ in
         '';
 
         clientMaxBodySize = bodyLimit;
+        proxyTimeout = timeout;
         commonHttpConfig = ''
           access_log off;
 
@@ -73,9 +74,9 @@ in
           client_header_buffer_size ${headerLimit};
           large_client_header_buffers 2 ${headerLimit};
 
-          client_body_timeout ${toString timeout};
-          client_header_timeout ${toString timeout};
-          send_timeout ${toString timeout};
+          client_body_timeout ${timeout};
+          client_header_timeout ${timeout};
+          send_timeout ${timeout};
         '';
 
         upstreams =

@@ -82,7 +82,6 @@ in
 
         files = [
           "/etc/machine-id"
-          "/var/lib/logrotate.status"
         ];
 
         users = cfg.users;

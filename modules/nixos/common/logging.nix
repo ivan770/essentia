@@ -34,12 +34,17 @@ in {
     };
   };
 
-  config.services.journald.extraConfig = ''
-    MaxLevelStore=warning
+  config.services = {
+    journald.extraConfig = ''
+      MaxLevelStore=warning
 
-    Storage=${cfg.flavor}
+      Storage=${cfg.flavor}
 
-    RuntimeMaxUse=${toString cfg.maxLogSize.volatile}M
-    SystemMaxUse=${toString cfg.maxLogSize.persistent}M
-  '';
+      RuntimeMaxUse=${toString cfg.maxLogSize.volatile}M
+      SystemMaxUse=${toString cfg.maxLogSize.persistent}M
+    '';
+
+    # journald has built-in log rotation capabilities
+    logrotate.enable = false;
+  };
 }

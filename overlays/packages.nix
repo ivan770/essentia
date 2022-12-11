@@ -5,7 +5,7 @@ with super.lib; let
     (
       name: type:
         if type == "directory"
-        then nameValuePair name (mkAttrsTree /${dir}/${name})
+        then nameValuePair name (mkPackageTree /${dir}/${name})
         else nameValuePair (removeSuffix ".nix" name) /${dir}/${name}
     )
     (

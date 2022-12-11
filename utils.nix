@@ -23,13 +23,6 @@ with lib; rec {
       (builtins.readDir dir)
     );
 
-  attrsTreeToList = attrs:
-    mapAttrsToList (_: v:
-      if isAttrs v
-      then attrsTreeToList v
-      else v)
-    attrs;
-
   mkOverlayTree = path:
     lib.mapAttrsRecursive (_: ovl: import ovl inputs) (mkAttrsTree path);
 
@@ -45,26 +38,22 @@ with lib; rec {
             nixpkgs = {
               inherit hostPlatform;
 
-              overlays = mkIf (inputs.self ? overlays) (
-                collect (a: !isAttrs a) inputs.self.overlays
-              );
+              overlays = collect (a: !isAttrs a) inputs.self.overlays;
             };
           }
           inputs.nur.nixosModules.nur
           inputs.sops-nix.nixosModules.sops
         ]
-        ++ flatten (attrsTreeToList inputs.self.nixosModules.nixos)
+        ++ (collect (a: !isAttrs a) inputs.self.nixosModules.nixos)
         ++ listNixFilesRecursive path;
 
-      specialArgs =
-        optionalAttrs (inputs.self ? nixosModules)
-        {
-          inherit (inputs.self) nixosModules;
-        }
-        // {inherit inputs;};
+      specialArgs = {
+        inherit inputs;
+        inherit (inputs.self) nixosModules;
+      };
     };
 
-  mkNixosConfigs = dir:
+  mkNixosConfigs = hosts:
     foldAttrs (confs: conf: confs // conf) {} (
       map
       (
@@ -72,10 +61,10 @@ with lib; rec {
           mapAttrs
           (
             host: type:
-              mkNixosConfig /${dir}/${arch}/${host} arch host
+              mkNixosConfig /${hosts}/${arch}/${host} arch host
           )
-          (builtins.readDir /${dir}/${arch})
+          (builtins.readDir /${hosts}/${arch})
       )
-      (attrNames (builtins.readDir dir))
+      (attrNames (builtins.readDir hosts))
     );
 }

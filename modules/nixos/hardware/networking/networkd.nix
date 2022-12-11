@@ -38,16 +38,24 @@ in {
       mkMerge [
         (mkIf cfg.wired.enable {
           "20-wired" = {
+            inherit networkConfig dhcpV4Config;
+
             enable = true;
             name = "en*";
-            inherit networkConfig dhcpV4Config;
           };
         })
         (mkIf cfg.wireless.enable {
           "20-wireless" = {
+            inherit dhcpV4Config;
+
             enable = true;
             name = "wl*";
-            inherit networkConfig dhcpV4Config;
+
+            networkConfig =
+              networkConfig
+              // {
+                IgnoreCarrierLoss = "5s";
+              };
           };
         })
       ];

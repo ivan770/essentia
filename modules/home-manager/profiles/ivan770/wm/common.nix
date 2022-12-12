@@ -65,7 +65,9 @@ in
       {
         "${modifier}+Return" = mkExec menu;
         "${modifier}+Shift+Return" = mkExec terminal;
+
         "${modifier}+Shift+q" = "kill";
+        "${modifier}+Shift+e" = "mode \"resize\"";
 
         "${modifier}+w" = mkExec "${pkgs.sway-overfocus}/bin/sway-overfocus split-us";
         "${modifier}+a" = mkExec "${pkgs.sway-overfocus}/bin/sway-overfocus split-ls";
@@ -84,10 +86,12 @@ in
         "${modifier}+f" = "fullscreen";
         "${modifier}+c" = "move scratchpad";
 
-        "${modifier}+x" = "mode \"resize\"";
-
         "${modifier}+Tab" = "layout toggle splitv splith tabbed";
+        # FIXME: Redesign split controls to use just one combination to toggle between vertical/horizontal/no splits.
+        # Currently, neither i3 nor Sway provide a command similar to "split toggle vertical horizontal none", and only Sway supports
+        # "split none" at all (https://github.com/i3/i3/issues/3808).
         "${modifier}+Shift+Tab" = "split toggle";
+        "${modifier}+Ctrl+Tab" = mkIf wayland "split none";
 
         "${modifier}+Delete" = mkExec (pkgs.writeShellScript "generate-powermenu.sh" (let
           systemctl = "${pkgs.systemd}/bin/systemctl";

@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   nixosModules,
   pkgs,
@@ -50,6 +51,8 @@
     initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
     kernelModules = ["kvm-amd"];
     kernelPackages = pkgs.linuxPackages_latest;
+    blacklistedKernelModules = ["rtw88_8821ce"];
+    extraModulePackages = [config.boot.kernelPackages.rtl8821ce];
   };
 
   fileSystems = {

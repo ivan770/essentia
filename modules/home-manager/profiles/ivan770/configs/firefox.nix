@@ -63,9 +63,6 @@
     # Disable all notification prompts
     "permissions.default.desktop-notification" = 2;
 
-    # Disable all camera prompts
-    "permissions.default.camera" = 2;
-
     # Disable about:config warning
     "browser.aboutConfig.showWarning" = false;
 

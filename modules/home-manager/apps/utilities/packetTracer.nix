@@ -9,6 +9,10 @@ with lib; {
   essentia.home-impermanence = {
     directories = mkOptionDefault [
       {
+        directory = ".cache/Cisco Packet Tracer";
+        mode = "0700";
+      }
+      {
         directory = ".local/share/Cisco Packet Tracer";
         mode = "0700";
       }

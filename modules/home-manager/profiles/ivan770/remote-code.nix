@@ -8,7 +8,7 @@
 }: {
   imports =
     builtins.attrValues {
-      inherit (nixosModules.home-manager.apps.editors) code-server;
+      inherit (nixosModules.home-manager.apps.editors) code-server helix;
       inherit (nixosModules.home-manager.apps.utilities) direnv git gpg;
     }
     ++ [
@@ -25,9 +25,6 @@
     gpg.sshKeys = [
       "4F1412E8D1942B3317A706884B7A0711B34A46D6"
     ];
-  };
-  programs.helix = {
-    enable = true;
-    settings = import ./configs/helix.nix;
+    helix.settings = import ./configs/helix.nix;
   };
 }

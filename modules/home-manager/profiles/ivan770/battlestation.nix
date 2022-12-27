@@ -9,7 +9,7 @@
   imports =
     builtins.attrValues {
       inherit (nixosModules.home-manager.apps.desktop) feh fonts i3 menu yambar;
-      inherit (nixosModules.home-manager.apps.editors) vscode;
+      inherit (nixosModules.home-manager.apps.editors) helix vscode;
       inherit (nixosModules.home-manager.apps.games) lunar-client steam;
       inherit (nixosModules.home-manager.apps.social) firefox discord tdesktop;
       inherit (nixosModules.home-manager.apps.utilities) deluge direnv git gpg packetTracer;
@@ -26,6 +26,7 @@
     gpg.sshKeys = [
       "4F1412E8D1942B3317A706884B7A0711B34A46D6"
     ];
+    helix.settings = import ./configs/helix.nix;
     i3 = {
       keyboard = {
         layout = "us,ru,ua";
@@ -47,14 +48,8 @@
       systemd.target = "i3";
     };
   };
-  programs = {
-    alacritty = {
-      enable = true;
-      settings = import ./configs/alacritty.nix;
-    };
-    helix = {
-      enable = true;
-      settings = import ./configs/helix.nix;
-    };
+  programs.alacritty = {
+    enable = true;
+    settings = import ./configs/alacritty.nix;
   };
 }

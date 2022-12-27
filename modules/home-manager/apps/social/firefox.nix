@@ -118,6 +118,10 @@ in
       };
 
       essentia.home-impermanence.directories = mkOptionDefault [
+        {
+          directory = ".cache/mozilla";
+          mode = "0700";
+        }
         ".mozilla"
       ];
     };

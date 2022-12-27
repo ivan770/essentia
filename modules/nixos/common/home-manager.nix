@@ -34,11 +34,16 @@ in {
               # Let impermanence module handle the typeck
               type = with types; listOf (either attrs str);
               default = [
-                # .*
+                # .cache
                 {
-                  directory = ".cache";
+                  directory = ".cache/dconf";
                   mode = "0700";
                 }
+                ".cache/fontconfig"
+                ".cache/mesa_shader_cache"
+                ".cache/nix"
+
+                # .*
                 {
                   directory = ".pki";
                   mode = "0700";

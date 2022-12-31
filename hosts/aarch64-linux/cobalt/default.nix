@@ -21,8 +21,11 @@
     server = {
       enable = true;
       code-server.enable = true;
-      containers.activatedConfigurations.hedgedoc = {
-        specialArgs.domain = "docs.elusive.space";
+      containers.activatedConfigurations = {
+        hedgedoc = {
+          specialArgs.domain = "docs.elusive.space";
+        };
+        postgresql = {};
       };
       firewall.enable = true;
       nginx.activatedUpstreams = {

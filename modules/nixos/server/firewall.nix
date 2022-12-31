@@ -82,6 +82,9 @@ in {
           # Accept correct connections and immediately drop invalid ones
           ct state vmap { established : accept, related : accept, invalid : drop }
 
+          # Forward cross-container packets
+          iifname "ve-*" oifname "ve-*" accept
+
           # Accept packets that interact with the forwarded interfaces
           ${mkForwardedInterfacesInputRule "accept"}
         }

@@ -31,7 +31,7 @@ in
               type = types.listOf types.str;
               default = {};
               description = ''
-                Container's public HTTP services.
+                Container's public services.
               '';
             };
           };
@@ -86,6 +86,14 @@ in
           serviceConfiguration = cfg.configurations.${name};
         })
         serviceConfigurations;
+
+      connectors = sender:
+        mapAttrs
+        (name: {networkConfiguration, ...}: {
+          address = networkConfiguration.localAddress;
+          services = networkConfiguration.exposedServices;
+        })
+        (filterAttrs (name: _: name != sender) intersectedConfigurations);
     in {
       assertions = [
         {
@@ -119,6 +127,7 @@ in
           config = attrs: (serviceConfiguration.config (attrs
             // {
               inherit (networkConfiguration) exposedServices localAddress;
+              connectors = connectors name;
             }
             // userConfiguration.specialArgs));
         })

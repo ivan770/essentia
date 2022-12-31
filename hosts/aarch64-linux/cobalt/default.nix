@@ -25,7 +25,22 @@
         hedgedoc = {
           specialArgs.domain = "docs.elusive.space";
         };
-        postgresql = {};
+        postgresql = {
+          specialArgs.settings = {
+            max_connections = 200;
+            shared_buffers = "3GB";
+            effective_cache_size = "9GB";
+            maintenance_work_mem = "768MB";
+            checkpoint_completion_target = 0.9;
+            wal_buffers = "16MB";
+            default_statistics_target = 100;
+            random_page_cost = 1.1;
+            effective_io_concurrency = 200;
+            work_mem = "7864kB";
+            min_wal_size = "1GB";
+            max_wal_size = "4GB";
+          };
+        };
       };
       firewall.enable = true;
       nginx.activatedUpstreams = {

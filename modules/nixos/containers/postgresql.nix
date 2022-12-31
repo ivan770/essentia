@@ -22,9 +22,13 @@ in
       dataDir = "/var/lib/postgresql";
       fullDatabaseName = name: database: "${name}_${database}";
     in {
-      config = {exposedServices, ...}: {
+      config = {
+        exposedServices,
+        settings ? {},
+        ...
+      }: {
         services.postgresql = {
-          inherit package;
+          inherit package settings;
 
           enable = true;
           dataDir = "${dataDir}/${package.psqlSchema}";
